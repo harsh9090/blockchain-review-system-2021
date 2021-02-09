@@ -31,7 +31,7 @@ loading=false;
 
 
 test(){
-  this.error.openDialog();
+  this.error.openDialog('error');
 }
 
 }
