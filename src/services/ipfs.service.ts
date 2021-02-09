@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as IPFS from 'ipfs-mini' 
+import { resolve } from 'path';
 import { Subject } from 'rxjs';
 import { EthercontractService } from './ethercontract.service';
 
@@ -49,7 +50,16 @@ export class IpfsService {
    addedone(){
     return this.addedProd;
   }
-  // async getdetails(name){}
+  async getdetails(number){
+    this.ethcontract.getProductDetail(number).then(data=>{
+      this.GetData(data).then(data=>{
+        return data;
+        
+      }).catch(error=>{
+        console.log(error);
+      })
+    })
+  }
 
   viewProductData(number){
        return this.allProducts[number];

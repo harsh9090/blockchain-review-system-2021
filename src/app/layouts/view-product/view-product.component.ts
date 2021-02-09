@@ -19,19 +19,24 @@ loading=false;
    this.route.queryParams.subscribe(value=>{
         this.product = this.ipfs.viewProductData(value.number)
         if(this.product==null){
-          this.product = this.products
-          
+         this.loading = false;
+         this.ipfs.getdetails(0).then(data=>{
+          this.product = data
+          setTimeout(()=>{
+            console.log(data)
+            this.loading=true;
+          },5000)
+         }).catch(error=>{
+           console.log(error)
+         });
+        
         }
    })
  }
-
- addReview(){
+addReview(){
    this.router.navigate(['add-review'],{queryParams:{name:this.product.title}})
  }
-
-
 test(){
   this.error.openDialog('error');
 }
-
 }

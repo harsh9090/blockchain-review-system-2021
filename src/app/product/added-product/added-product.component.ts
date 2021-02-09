@@ -15,6 +15,7 @@ export class AddedProductComponent implements OnInit {
   ngOnInit(): void {
   var dat = this.ipfs.addedone()
   if(dat){
+    this.load=false;
   this.data = JSON.parse(dat)
   }
   else{

@@ -39,7 +39,7 @@ contract MyContract{
         ipfs_length=_length;
     }
     
-    function getProductHash(uint index) public view returns(string){
+    function getProductHash(uint index) public view returns(string memory){
         return product_hash[products[index]];
     }
     

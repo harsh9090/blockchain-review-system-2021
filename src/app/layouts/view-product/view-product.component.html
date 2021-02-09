@@ -1,10 +1,13 @@
 <div class="container">
     <div class="card">
-        <div class="container-fliud">
+        <div *ngIf="!loading">
+            please wait
+        </div>
+        <div *ngIf="loading" class="container-fliud">
             <div class="wrapper row">
                 <div class="preview col-md-6">  
                     <div class="preview-pic tab-content">
-                      <div class="tab-pane active" id="pic-1"><img src="http://placekitten.com/400/123" /></div>
+                      <div class="tab-pane active" id="pic-1"><img src="{{product.productImage}}" /></div>
                       <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/400/123" /></div>
                       <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252" /></div>
                       <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252" /></div>

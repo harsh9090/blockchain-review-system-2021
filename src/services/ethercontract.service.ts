@@ -64,8 +64,7 @@ async getAllreviews(){
     
     paymentContract.deployed().then(function(instance) {
         return instance.addProduct({
-          from: acc,
-          value:100
+          from: acc
         });
       }).then(function(status) {
         if(status) {
@@ -85,9 +84,7 @@ async getAllreviews(){
     var promises =await new Promise((resolve, reject) => {
       var acc=this.account
       let paymentContract = TruffleContract(tokenAbi);
-     
       paymentContract.setProvider(this.web3Provider);
-      
       paymentContract.deployed().then(function(instance) {
           return instance.addProduct(title,data,{
             from: acc,
@@ -128,27 +125,26 @@ async getAllreviews(){
     });
     return promises;
   }
-  // async getProductDetail(name:string){
-  //   var promises =await new Promise((resolve, reject) => {
-      
-  //     var acc=this.account
-  //     let paymentContract = TruffleContract(tokenAbi);
+  async getProductDetail(number:number){
+    var promises =await new Promise((resolve, reject) => {
+      var acc=this.account
+      let paymentContract = TruffleContract(tokenAbi);
      
-  //     paymentContract.setProvider(this.web3Provider);
+      paymentContract.setProvider(this.web3Provider);
       
-  //     paymentContract.deployed().then(function(instance) {
-  //         return instance.getProductHash();
-  //       }).then(function(status) {
-  //         if(status) {
-  //           return resolve({status:true});
-  //         }
-  //       }).catch(function(error){
-  //         return reject('ProductDetail');
-  //       });
-  //   });
-  //   return promises;
+      paymentContract.deployed().then(function(instance) {
+          return instance.getProductHash(number);
+        }).then(function(status) {
+          if(status) {
+            return resolve(status);
+          }
+        }).catch(function(error){
+          return reject('ProductDetail');
+        });
+    });
+    return promises;
   
-  // }
+  }
 
 
 
