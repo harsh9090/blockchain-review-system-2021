@@ -15,17 +15,14 @@ loading=false;
   constructor(private route:ActivatedRoute,private ipfs:IpfsService,
     private router:Router,
     private error:ErrorServService){}
- ngOnInit(){
+ async ngOnInit(){
    this.route.queryParams.subscribe(value=>{
         this.product = this.ipfs.viewProductData(value.number)
-        if(this.product==null){
+       if(this.product==''){
          this.loading = false;
-         this.ipfs.getdetails(0).then(data=>{
-          this.product = data
-          setTimeout(()=>{
-            console.log(data)
+         this.ipfs.getdetails(0).then(info=>{
+          this.product = info
             this.loading=true;
-          },5000)
          }).catch(error=>{
            console.log(error)
          });

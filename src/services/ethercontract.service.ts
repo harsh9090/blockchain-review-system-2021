@@ -136,6 +136,7 @@ async getAllreviews(){
           return instance.getProductHash(number);
         }).then(function(status) {
           if(status) {
+            console.log(status)
             return resolve(status);
           }
         }).catch(function(error){
