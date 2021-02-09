@@ -1,0 +1,9 @@
+.img-preview {
+  float: left;
+  margin-left: 10px;
+}
+mat-dialog-content {
+  padding: 5px 10px;
+  border: 2px dashed black;
+  margin: 20px 5px;
+}

@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Crop image
+<input type="file" accept="Image/*" #file style="display: none;" (change)="fileChange($event)"/> </h2>
+<button type="button" mat-stroked-button (click)="file.click()">Upload pic</button>
+<mat-dialog-content fxLayout='row' fxLayoutGap='40px' *ngIf="show">
+  <image-cropper fxFlex="1 1 30%"
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="1"
+    [resizeToWidth]=600
+    [resizeToHeight]=600
+    format="png"
+    
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"
+></image-cropper>
+
+<img fxFlex="1 1 40%" [src]="croppedImage" />
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button *ngIf = "croppedImage" type="button" mat-button (click)="saveImage()">save</button>
+
+</mat-dialog-actions>

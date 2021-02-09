@@ -1,0 +1,100 @@
+<div style="padding: 10% 10%;">
+  
+<div class="container">
+
+    <div class="card">
+      <div class="card-header card-header-danger">
+          <div class="card-icon card-header-success">
+              <i class="material-icons">store</i>
+          </div>
+          <h3 class="card-title">Review Details > <b>Add Review</b></h3>
+      </div>
+      <div class="card-body">
+  
+    <div *ngIf = "show" class="spinner">
+      <mat-spinner strokeWidth='2' diameter='110' class="margin"></mat-spinner>
+      <div>
+        <h3 align=center>
+          Please wait... <br> It will take couple of seconds...<br> Adding the Review...</h3>
+      </div>       
+    </div>
+    <br>
+    <form *ngIf = "!show && !resProduct"
+      #form="ngForm"
+      (ngSubmit)="save(form.value)"
+      novalidate
+      [formGroup]="product">
+      <h2>Review:</h2>
+      <div
+        fxLayout="row"
+        fxLayout.sm="column"
+        fxLayout.md="row"
+        fxLayout.xs="column"
+        fxLayoutAlign="space-between none">
+  
+        <mat-form-field appearance="outline" class="half-width text">
+          <mat-label>Place name</mat-label>
+          <input type="text" matInput formControlName="title" [disabled]="false" />
+        </mat-form-field>
+  
+      </div>
+  
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Review</mat-label>
+        <textarea
+          name="des"
+          id=""
+          cols="30"
+          rows="4"
+          matInput
+          formControlName="review"></textarea>
+        <mat-error *ngIf="formErrors.review">
+          {{ formErrors.review }}
+        </mat-error>
+      </mat-form-field>
+      <h3>Place main image :</h3>
+      <button mat-button type="button" (click)="uploadMainImage()">
+        Upload image
+      </button>
+      <br>
+      <div *ngIf="product.controls['productImage'].value != ''">
+        <img
+          [src]="product.controls['productImage'].value"
+          style="width: 120px; height: auto; margin: auto"
+          alt=""
+        />
+    <button mat-icon-button (click)="deleteMainImage()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+      
+      <table >
+        <tbody>
+          <tr>
+            <th>
+              Rating:
+            </th>
+          </tr>
+          <tr *ngFor="let item of items">
+          
+            <td>
+              <app-rating [rating]='item.rating' [itemId]='item.id' (ratingClick)='ratingComponentClick($event)'></app-rating>
+            </td>
+            <td>
+              {{item.rating}} Stars
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="text-align: center;">
+      <button type="button" mat-raised-button [disabled]="form.invalid"
+        color="primary" (click)="save(form.value)">submit</button>
+      </div>
+    </form>
+    </div>
+  </div>
+  </div>
+  </div>
+  
+  

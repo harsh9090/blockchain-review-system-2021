@@ -1,0 +1,124 @@
+<div class="container" style="margin-bottom: 100px;">
+  <div class="card">
+    <div class="card-header card-header-danger">
+        <div class="card-icon card-header-success">
+            <i class="material-icons">store</i>
+        </div>
+        <h3 class="card-title">Place Details > <b>Add new Place</b></h3>
+    </div>
+    <div class="card-body">
+
+  <div *ngIf = "show" class="spinner">
+    <mat-spinner strokeWidth='2' diameter='110'></mat-spinner>
+    <div>
+      <h3>Please wait... <br> It will take couple of seconds...<br> Adding the Place...</h3>
+    </div>       
+  </div>
+  <br>
+  <form *ngIf = "!show && !resProduct"
+    #form="ngForm"
+    (ngSubmit)="save(form.value)"
+    novalidate
+    [formGroup]="product">
+    <h2>Place Details:</h2>
+    <div
+      fxLayout="row"
+      fxLayout.sm="column"
+      fxLayout.md="row"
+      fxLayout.xs="column"
+      fxLayoutAlign="space-between none">
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Place name</mat-label>
+        <input type="text" matInput formControlName="title" />
+        <mat-error *ngIf="formErrors.title">
+          {{ formErrors.title }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option
+            value="{{ category }}"
+            *ngFor="let category of categories">
+            {{ category }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formErrors.category">
+          {{ formErrors.category }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Short description</mat-label>
+      <textarea
+        name="des"
+        id=""
+        cols="30"
+        rows="2"
+        (focusout)="updateValue()"
+        (keyup)="calculateWords(desc.value)"
+        #desc
+        matInput
+        formControlName="shortDescription">
+      </textarea>
+      <mat-error *ngIf="formErrors.shortDescription">
+        {{ formErrors.shortDescription }}
+      </mat-error>
+      <br />
+      <span style="position: absolute; right: 0; padding: 10px">
+        {{ length }}/ 500</span>
+      <br />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Long description</mat-label>
+      <textarea
+        name="des"
+        id=""
+        cols="30"
+        rows="4"
+        matInput
+        formControlName="longDescription"></textarea>
+      <mat-error *ngIf="formErrors.longDescription">
+        {{ formErrors.longDescription }}
+      </mat-error>
+    </mat-form-field>
+
+    <h2>Upload images:</h2>
+    <h3>Place main image :</h3>
+    <button mat-button type="button" (click)="uploadMainImage()">
+      Upload Main image
+    </button>
+    <br /><br />
+    <div *ngIf="product.controls['productImage'].value != ''">
+      <img
+        [src]="product.controls['productImage'].value"
+        style="width: 120px; height: auto; margin: auto"
+        alt=""
+      />
+  <button mat-icon-button (click)="deleteMainImage()">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
+    <small *ngIf="product.controls['productImage'].value == ''" class="card-footer">Please upload Place main image</small>
+    <br />
+    <br />
+    <h3>Place side images :</h3>
+    <small class="class-footer" *ngIf = "imagecount != 5">Please upload all 5 images.</small>
+    <div fxLayout='row wrap' fxLayoutAlign='space-between none'>
+      <div *ngFor="let i of [0,1,2,3,4]" fxLayout='column'>
+          <img src="{{images[i]}}" class="image" alt="side image {{i+1}}">
+          <button style="width: 125px;" mat-button type="button" (click)="openCrop(i)">Select image {{i+1}}</button>
+      </div>
+    </div>
+    <br />
+    <br />
+    <button type="button" mat-raised-button style="float: right" [disabled]="form.invalid"
+      color="primary" (click)="save(form.value)">submit</button>
+  </form>
+  </div>
+</div>
+</div>

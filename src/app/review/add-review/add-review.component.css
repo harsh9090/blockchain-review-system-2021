@@ -1,0 +1,13 @@
+input[type="text"][disabled] {
+    color: black;
+ }
+
+.margin{
+    margin-left: 44%;
+}
+
+@media screen and (max-width:641px) {
+    .margin{
+        margin-left: 24%;
+    }
+}

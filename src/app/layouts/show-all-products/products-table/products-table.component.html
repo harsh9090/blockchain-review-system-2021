@@ -1,0 +1,80 @@
+
+<div fxLayout='row wrap'  fxLayoutAlign='space-between none' fxLayoutGap='10px' *ngIf="!show">
+
+  <mat-form-field (change)="filterCategory($event)" fxFlex='1 1 auto' appearance='outline' style="width: 150px;">
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="filterCategory($event.value)">
+      <mat-option value="All">All</mat-option>
+      <mat-option value='restaurant'>restaurant</mat-option>
+      <mat-option value="genral store">Genral store</mat-option>
+      <mat-option value="public place">public place</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-form-field fxFlex='1 1 auto' appearance='outline' style="width: 150px;">
+    <mat-label> <mat-icon>search</mat-icon> Find Place</mat-label>
+    <input matInput #filter (keyup)="applyFilter($event)" >
+  </mat-form-field>
+</div>
+  
+
+<div *ngIf = "show" class="spinner">
+  
+  <h2> <mat-spinner strokeWidth='5' diameter='100' stroke="#f44336"></mat-spinner>Loading... Please wait</h2>
+</div>
+<div  class="example-container mat-elevation-z8" *ngIf = "dataSource && !show">
+
+  <mat-table [dataSource]="dataSource"  matSort >
+    <ng-container matColumnDef="productImage">
+      <mat-header-cell *matHeaderCellDef> <b><font color=white>Image</font></b> </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="product image">
+        <img src={{row.productImage}} width="50px" alt="product image">
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> <b><font color=white> Place Name</font></b> </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="product name"> 
+        <div>
+          <h3 class="title">{{row.title}} </h3>
+         
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> <b><font color=white>catogary</font></b> </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="category" > 
+        {{row.category}}
+       </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="shortDescription">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> <b><font color=white>Short Description</font></b> </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="category" > 
+        {{(row.shortDescription.length>15)? (row.shortDescription | slice:0:15)+' ....':(row.shortDescription)}}
+       </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="longDescription">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> <b><font color=white>Long Description</font></b> </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="category"> 
+       {{(row.longDescription.length>15)? (row.longDescription | slice:0:15)+' ....':(row.longDescription)}}
+       </mat-cell>
+    </ng-container>
+
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No Place found</td>
+    </tr>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;let i=index" (click)="getRow(i)" >
+    </mat-row>
+  </mat-table>
+
+<font color=white>
+
+  <mat-paginator #paginator
+  [length]="dataSource?.data.length"
+  [pageSize]="5" [pageSizeOptions]="[1, 5, 10, 25, 100]"></mat-paginator>
+</font>
+</div>

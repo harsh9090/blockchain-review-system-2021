@@ -1,0 +1,50 @@
+<div
+  class="container"
+  fxFlex
+  fxLayout="column"
+  fxLayoutAlign="space-around none">
+  <h3>Place Details > <b>Add new Place</b></h3>
+  <div *ngIf = "load && !stop" class="spinner">
+    <mat-spinner strokeWidth='2' diameter='110'></mat-spinner>
+    <div>
+      <h3>Please wait...</h3>
+    </div>       
+  </div>
+  <div *ngIf = "stop" class="spinner">
+    <mat-spinner strokeWidth='2' diameter='110'></mat-spinner>
+    <div>
+     
+      <h3>Resources Not Available.... <br> Please Go to <a [routerLink]="['/dashboard']"> Home Page</a></h3>
+    </div>       
+  </div>
+  <div fxLayoutAlign='center center' fxLayout='column' *ngIf='!load'>
+    <img src="assets/tick.svg" width="100px" alt="">
+    
+    <h2>Place added successfully</h2>
+    <div class="details">
+      <table border="1">
+        <tr>
+          <td>Place name</td>
+          <td>{{data.title}}</td>
+        </tr>
+        <tr>
+          <td colspan="2">Place Details</td>          
+        </tr>
+        <tr>
+          <td>Category</td>
+          <td>{{data.category}}</td>
+        </tr>
+        <tr>
+          <td>Place short Description</td>
+          <td>{{(data.shortDescription.length>15)? (data.shortDescription | slice:0:15)+' ....':(data.shortDescription)}}</td>
+        </tr>
+        <tr>
+          <td>Place long Description</td>
+          <td>{{(data.longDescription.length>15)? (data.longDescription | slice:0:15)+' ....':(data.longDescription)}}</td>
+        </tr>
+       
+      </table>
+    </div>
+    <br>
+    </div>
+</div>

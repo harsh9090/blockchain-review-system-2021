@@ -1,0 +1,85 @@
+:host{
+  padding-top: 10%;
+}
+
+.container {
+    position: relative;
+    max-width: 750px;
+    margin: 5px auto;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  .half-width {
+    min-width: 320px;
+  }
+  
+  .quarter-width {
+    min-width: 80px;
+    margin: 0 1% 0 0;
+  }
+  .spec-width {
+    min-width: 320px;
+  }
+  .products {
+    border: 1px solid black;
+    padding: 0.4rem;
+    border-radius: 10px;
+    margin: 0.2rem;
+  }
+  .form {
+    border: 1px solid gray;
+  }
+  .deleteIcon {
+    position: relative;
+    opacity: 0;
+  }
+  .imageContainer {
+    position: relative;
+    width: 80px;
+  }
+  .images {
+    height: auto;
+  }
+  
+  img {
+    border: 1px solid black;
+    padding: 2px;
+  }
+  
+  .spinner {
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .mat-progress-spinner.mat-progress-spinner-indeterminate-animation[mode=indeterminate] {
+    
+    margin: 0 auto;
+  }
+  img {
+    border: none;
+    width: 150px;
+  }
+  table {
+    width: 320px;
+  }
+  td {
+    width: 140px;
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+  }
+  .imageContainer {
+    width: 130px; height: 175px; padding: 2px; margin: 10px 3px;
+  }
+  
+  .image {
+    width: 120px; height: 120px; border: 1px solid black;
+    border-radius: 10px;
+  }
+  
+  
