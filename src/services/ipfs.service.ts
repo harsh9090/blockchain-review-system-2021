@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import * as IPFS from 'ipfs-mini'
 import { Subject } from 'rxjs';
 import { EthercontractService } from './ethercontract.service';
@@ -8,7 +9,7 @@ import { EthercontractService } from './ethercontract.service';
   providedIn: 'root'
 })
 export class IpfsService {
-  constructor(private ethcontract:EthercontractService) { }
+  constructor(private ethcontract:EthercontractService,private router:Router) { }
   product = new Subject<[]>();
   productDetail = new Subject<[]>();
   allProducts = [];
@@ -51,10 +52,10 @@ export class IpfsService {
   }
   dataInfo;
   async getdetails(number:number){
-    await this.ethcontract.getProductDetail(number).then( async data=>{
+
+    await this.ethcontract.getProductDetail(number).then(async data=>{
       await this.GetData(data).then((information:string)=>{
         this.dataInfo=information;
-        console.log(this.dataInfo)
       }).catch(error=>{
         console.log(error);
       })
@@ -68,27 +69,32 @@ export class IpfsService {
   }
 
   async getReview(prname){
-    var data = []
-    await this.ethcontract.getReviewFile(prname).then(file=>{
+    var data=[];
+    await this.ethcontract.getReviewFile(prname).then(async file=>{
+      
       if(file[0]==""){
         return null;
       }
-      this.GetData(file[0]).then((data2)=>{
+     await this.GetData(file[0]).then((data2)=>{
        for(let i=0;i<data2.length;i++){
-         data.push(data2[i]);
+         data.push(data2[i]); 
        }
       });
+      return await data;
     });
-    return data;
+    return await data;
   }
 
   async addReview(prname:any,values,rating:number) {
     var allData=[];
     var oneValue =[];
     oneValue.push(values);
+    
     var stringValue = JSON.stringify(oneValue);
     await this.ethcontract.getReviewFile(prname).then(file=>{
+      
       if(file[0]!= ""){
+        console.log('old')
         this.GetData(file[0]).then(data=>{
           for(let i=0; i<data.length;i++)
           allData.push(data[i]);
@@ -97,8 +103,9 @@ export class IpfsService {
           this.ipfs.add(stringData)
           .then(hash1 => {
             this.ipfs.add(stringValue)
-          .then(hash2 => {
-            this.ethcontract.addReview(prname,rating,hash1,hash2).then(result=>{
+          .then(async hash2 => {
+          await  this.ethcontract.addReview(prname,rating,hash1,hash2).then(result=>{
+            console.log(result)
               return result;
             }).catch(error=>{
               return error;
@@ -111,11 +118,13 @@ export class IpfsService {
           })
         }
         else{
+          console.log('new')
           this.ipfs.add(stringValue)
           .then(hash1 => {
             this.ipfs.add(stringValue)
           .then(hash2 => {
             this.ethcontract.addReview(prname,rating,hash1,hash2).then(result=>{
+              console.log(result)
               return result;
             }).catch(error=>{
               return error;
@@ -128,7 +137,7 @@ export class IpfsService {
       ).catch(e=>{
         return e;
       });
-      return this.allProducts;
+      return await 'success'
     }
     
 

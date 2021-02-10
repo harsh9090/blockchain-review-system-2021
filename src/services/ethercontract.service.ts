@@ -117,7 +117,7 @@ async getAllreviews(){
           })
         }).then(function(status) {
           if(status) {
-            return resolve({status:true});
+            return resolve('success');
           }
         }).catch(function(error){
           return reject('AddReview');
@@ -126,6 +126,7 @@ async getAllreviews(){
     return promises;
   }
   async getProductDetail(number:number){
+
     var promises =await new Promise((resolve, reject) => {
       var acc=this.account
       let paymentContract = TruffleContract(tokenAbi);
@@ -136,7 +137,6 @@ async getAllreviews(){
           return instance.getProductHash(number);
         }).then(function(status) {
           if(status) {
-            console.log(status)
             return resolve(status);
           }
         }).catch(function(error){

@@ -7,10 +7,7 @@ import { ErrorServService } from 'services/error-serv.service';
   styleUrls: ['./show-all-products.component.css']
 })
 export class ShowAllProductsComponent implements AfterViewInit {
-  constructor(private serv:ErrorServService) { }
+  constructor() { }
   ngAfterViewInit(): void {
-  }
-  click(){
-    this.serv.openDialog('there is error');
   }
 }

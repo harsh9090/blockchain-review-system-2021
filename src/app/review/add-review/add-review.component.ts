@@ -115,8 +115,10 @@ this.ipfs.getProduct()
     this.show=true;
     this.formData = value;
     var data = JSON.stringify(this.formData)
-    await this.ipfs.addReview(this.title,data,this.rating).then(data=>{
-      var values = data;
+    await this.ipfs.addReview(this.title,data,this.rating).then(productData=>{
+      setTimeout(()=>{
+        this.router.navigate(['/dashboard']);
+      },10000)
     });
 }
   uploadMainImage() {
@@ -135,22 +137,7 @@ this.ipfs.getProduct()
     this.product.controls['productImage'].setValue('');
   }
   
-  images = ['','','','','']
-  imagecount = 0;
-  openCrop(index) {
-    this.dialog
-      .open(ImageCropDialogComponent, {
-        height: 'auto',
-        width: '600px',
-        disableClose: true,
-      })
-      .afterClosed()
-      .subscribe((data) => {
-        this.images[index] = data;
-        this.imagecount = 0;
-        this.product.setControl('otherImages', this.fb.array(this.images))
-      });
-  }
+  
 
 
   removeImage(ind) {

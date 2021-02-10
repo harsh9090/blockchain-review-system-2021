@@ -10,7 +10,7 @@ import { IpfsService } from 'services/ipfs.service';
 })
 export class ViewProductComponent implements OnInit {
 product;
-loading=false;
+loading=true;
   products={title:'xyz',catogery:'xyz',shortDescription:'xyz',longDescription:'xyz',productImage:'xyz'};
   constructor(private route:ActivatedRoute,private ipfs:IpfsService,
     private router:Router,
@@ -18,9 +18,10 @@ loading=false;
  async ngOnInit(){
    this.route.queryParams.subscribe(value=>{
         this.product = this.ipfs.viewProductData(value.number)
-       if(this.product==''){
+
+       if(this.product==null){        
          this.loading = false;
-         this.ipfs.getdetails(0).then(info=>{
+         this.ipfs.getdetails(value.number).then(info=>{
           this.product = info
             this.loading=true;
          }).catch(error=>{
