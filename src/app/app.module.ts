@@ -37,6 +37,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AdminLayoutComponent } from './layouts/admin-layout.component';
 import { Error404Component } from './error404/error404.component';
+import { ReviewShowComponent } from './review-show/review-show.component';
 
 @NgModule({
   imports: [
@@ -77,6 +78,7 @@ import { Error404Component } from './error404/error404.component';
     AppComponent,
     AdminLayoutComponent,
     Error404Component,
+    ReviewShowComponent,
 
   ],
   providers: [ EthercontractService, IpfsService],

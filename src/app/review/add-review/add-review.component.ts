@@ -136,9 +136,6 @@ this.ipfs.getProduct()
   deleteMainImage() {
     this.product.controls['productImage'].setValue('');
   }
-  
-  
-
 
   removeImage(ind) {
     const control = <FormArray>this.product.controls['otherImages'];

@@ -50,6 +50,9 @@ img5='';
    if(this.product.otherImage[5]!=null)
    this.img1=this.product.otherImage[5];
  }
+ viewReview(){
+   this.router.navigate(['view-review'],{queryParams:{name:this.product.title}});
+ }
 addReview(){
    this.router.navigate(['add-review'],{queryParams:{name:this.product.title}})
  }

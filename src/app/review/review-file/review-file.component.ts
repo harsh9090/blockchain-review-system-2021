@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ErrorServService } from 'services/error-serv.service';
 import { IpfsService } from 'services/ipfs.service';
 
 
@@ -55,9 +56,8 @@ export class ReviewFileComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<Post>;
-  constructor(private ipfs: IpfsService, private route: ActivatedRoute) {
+  constructor(private ipfs: IpfsService, private route: ActivatedRoute,private reivew:ErrorServService) {
     this.dataSource = new MatTableDataSource<Post>(this.myArray);
-    //  console.log('hello');
       this.dataSource.paginator = this.paginator;
       this.obs = this.dataSource.connect();
   }
@@ -70,7 +70,9 @@ export class ReviewFileComponent implements OnInit {
       })
     });
   }
-
+  showReview(i){
+    this.reivew.openReview(i)
+  }
   counter(i: number) {
     return new Array(i);
 }
