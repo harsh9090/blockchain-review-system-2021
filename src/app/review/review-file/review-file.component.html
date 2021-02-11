@@ -1,0 +1,53 @@
+
+<div  style="max-width:100vw;min-height: 100vh;">
+    <div fxFlex.gt-lg="25" fxFlex.gt-md="80" fxFlex.gt-xs="100" fxFlex="100" style="margin-bottom:15vh;margin-left: auto;margin-right: auto;margin-top: 100px;">
+  
+ <!-- <div fxLayout='row wrap'  fxLayoutGap='10px' *ngIf="!show" style="justify-content: center;">
+  
+    <mat-form-field (change)="filterCategory($event)" fxFlex='1 1 40' appearance='outline' style="width: 150px;justify-content: center;">
+      <mat-label>Category</mat-label>
+      <mat-select (selectionChange)="filterCategory($event.value)">
+        <mat-option value="All">All</mat-option>
+        <mat-option *ngFor='let Cate of myCate' [value]="Cate.id">{{Cate.data.label}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field fxFlex='1 1 40' appearance='outline' style="width: 150px;">
+      <mat-label> <mat-icon>search</mat-icon>search</mat-label>
+      <input matInput #filter (keyup)="applyFilter($event)" >
+    </mat-form-field>
+  </div> -->
+  
+  <div class="card-header card-header-danger" style="background-color: red;">
+    <div class="card-icon card-header-success" style="margin-top: -20px !important;background: linear-gradient(60deg, #66bb6a, #43a047); float: left;padding: 15px;border-radius: 3px;margin-right: 15px;">
+        <i class="material-icons" style="color: white;">store</i>
+    </div>
+    <h3 class="card-title" style="color: white;"><b>All Reviews</b></h3>
+</div>
+  <div class="flex-container" style="justify-content: center;min-height: 30vh;">
+  <!--  <div *ngIf = "show" class="spinner">
+      <div> <mat-spinner></mat-spinner>Loading... Please wait</div>
+    </div> -->
+  <mat-card class="example-card" *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize)' 
+  style=" height:40vh;">
+      <mat-card-header style="padding: 0 !important;padding-top:auto;flex:0;max-height:15vh;">
+        <img [src]="card.image" class="headimg" >
+      </mat-card-header>
+      <mat-card-content [innerHTML]="card.content.length>200? (card.content | slice:0:200)+'.....':(card.content)" style="font-size: 12px !important; margin-top: 5px; ;overflow: hidden;height:15vh;-webkit-box-orient: vertical;">
+      </mat-card-content>
+      <mat-card-actions style="bottom: 10%;margin-bottom: 10px;display:unset !important">
+        <button mat-button [matMenuTriggerFor]="option3">Read More</button>
+        <ngx-stars [readonly]="true" [maxStars]="5" [initialStars]="card.rating" [color]="'orange'"></ngx-stars>
+      </mat-card-actions>
+    <mat-menu #option3="matMenu">
+        <mat-card style="min-width: 36vw;">
+            <mat-card-content>
+                {{card.content}}
+            </mat-card-content>
+        </mat-card>
+    </mat-menu>
+</mat-card>
+  </div>
+    <mat-paginator #paginator [pageSizeOptions]="[3,6,10]" [length]="myArray.length"></mat-paginator>
+  </div>
+  </div>

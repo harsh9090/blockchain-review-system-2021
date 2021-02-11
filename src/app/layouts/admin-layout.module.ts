@@ -39,6 +39,9 @@ import { AddedProductComponent } from 'app/product/added-product/added-product.c
 import { AddReviewComponent } from 'app/review/add-review/add-review.component';
 import { RatingComponent } from 'app/review/rating/rating.component';
 import { ReviewFileComponent } from 'app/review/review-file/review-file.component';
+import { NgxStarsModule } from 'ngx-stars';
+
+
 
 @NgModule({
   imports: [
@@ -52,6 +55,7 @@ import { ReviewFileComponent } from 'app/review/review-file/review-file.componen
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    NgxStarsModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,

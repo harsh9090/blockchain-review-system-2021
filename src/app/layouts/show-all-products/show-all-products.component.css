@@ -3,9 +3,8 @@
   }
 
 .container {
-    max-width: 750px;
     height: auto;
     position: relative;
-    top: 10%;
+    top: 25%;
 }
 
