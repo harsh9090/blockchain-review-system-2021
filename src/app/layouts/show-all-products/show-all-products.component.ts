@@ -1,5 +1,4 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { ErrorServService } from 'services/error-serv.service';
 
 @Component({
   selector: 'app-show-all-products',
@@ -7,7 +6,6 @@ import { ErrorServService } from 'services/error-serv.service';
   styleUrls: ['./show-all-products.component.css']
 })
 export class ShowAllProductsComponent implements AfterViewInit {
-  constructor() { }
   ngAfterViewInit(): void {
   }
 }

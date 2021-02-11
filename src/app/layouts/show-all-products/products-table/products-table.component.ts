@@ -33,9 +33,10 @@ getRow(number){
   this.title = this.dataSource.data[number]
   this.router.navigate(['/view-product'],{queryParams:{number:number,name:this.title.title}})
 }
-
+allData;
 ngOnInit(){
   this.subscribe= this.ipfs.product.subscribe(dat=>{
+    this.allData = dat
     var res = dat
     this.dataSource = new MatTableDataSource(res);
     this.dataSource.paginator = this.paginator;
@@ -43,6 +44,14 @@ ngOnInit(){
     this.dataLength = res.length;
   })
   setTimeout(()=>{
+    if(this.allData==null){
+      console.log('this work')
+      this.allData = this.ipfs.allProducts;
+      this.dataSource = new MatTableDataSource(this.allData);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.dataLength = this.allData.length;
+    }
     this.show = false;
   },5500)
   }
