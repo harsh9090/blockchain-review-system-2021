@@ -116,9 +116,7 @@ this.ipfs.getProduct()
     this.formData = value;
     var data = JSON.stringify(this.formData)
     await this.ipfs.addReview(this.title,data,this.rating).then(productData=>{
-      setTimeout(()=>{
-        this.router.navigate(['/dashboard']);
-      },10000)
+     
     });
 }
   uploadMainImage() {

@@ -1,6 +1,9 @@
+import { state } from '@angular/animations';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 const Web3 = require('web3');
 import * as TruffleContract from 'truffle-contract';
+import { ErrorServService } from './error-serv.service';
 declare let require:any;
 declare let window:any;
 let tokenAbi = require('../../build/contracts/MyContract.json')
@@ -12,7 +15,7 @@ export class EthercontractService {
   private web3Provider:null;
   
   account:string;
-  constructor() {
+  constructor(private error:ErrorServService,private route:Router) {
     window.eth_requestAccounts;
     if (typeof window.web3 !== 'undefined') {
       this.web3Provider = window.web3.currentProvider;
@@ -106,7 +109,15 @@ async getAllreviews(){
       this.account = data2.fromAccount
     });
     window.ethereum.autoRefreshOnNetworkChange = false;
+    var state;
+    await this.checkUser(prname).then(data=>{
+      state = data;
+      console.log(state)
+    })
     var promises =await new Promise((resolve, reject) => {
+      console.log(state)
+    if(!state){
+      console.log('add')
       var acc = this.account
       let paymentContract = TruffleContract(tokenAbi);
       paymentContract.setProvider(this.web3Provider);
@@ -120,11 +131,40 @@ async getAllreviews(){
             return resolve('success');
           }
         }).catch(function(error){
+          this.error.openDialog(error);
+          this.route.navigate(['/view-product',{queryParams:{name:prname}}]);
           return reject('AddReview');
+        });
+      }
+      else{
+        this.error.openDialog('You Have Already Added Review');
+        this.route.navigate(['/dashboard']);
+      }
+    });
+    return promises;
+  }
+
+  async checkUser(prname:string){
+    var acc = this.account
+   
+    var promises =await new Promise((resolve, reject) => {
+      let paymentContract = TruffleContract(tokenAbi);
+      paymentContract.setProvider(this.web3Provider);
+      paymentContract.deployed().then(function(instance) {
+          return instance.checkIfAlreadyReviewed(prname,{
+            from : acc
+          })
+        }).then(function(status) {
+            return resolve(status);
+          }
+        ).catch(function(error){
+          return reject(error);
         });
     });
     return promises;
   }
+
+
   async getProductDetail(number:number){
 
     var promises =await new Promise((resolve, reject) => {

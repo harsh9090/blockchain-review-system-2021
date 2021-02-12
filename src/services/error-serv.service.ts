@@ -8,24 +8,22 @@ import { ReviewShowComponent } from '../app/review-show/review-show.component'
 export class ErrorServService {
   constructor(public dialog: MatDialog) {}
 
-  openReview(data:string){
+  openReview(data){
     const dialogRef = this.dialog.open(ReviewShowComponent,{
       data:{name:data}, height: '300px',
       width: '500px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
     });
   }
-  openDialog(data:string) {
+  async openDialog(data:string) {
     const dialogRef = this.dialog.open(Error404Component,{
       data:{name:data}, height: '150px',
       width: '370px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
     });
   }
 }

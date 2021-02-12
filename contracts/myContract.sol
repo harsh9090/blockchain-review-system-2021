@@ -12,6 +12,7 @@ contract MyContract{
     }
     
     string[] public products; //stores name of product in array
+    mapping(address => string) users; // stores hash of userdetails file with metmask address
     mapping(string => string) product_hash;
     address payable owner;
     mapping(string => reviewFile) reviewFileByProduct; //mapping from product to review
@@ -39,8 +40,8 @@ contract MyContract{
         ipfs_length=_length;
     }
     
-    function getProductHash(uint index) public view returns(string memory){
-        return product_hash[products[index]];
+    function getProductHash(string memory name) public view returns(string memory){
+        return product_hash[name];
     }
     
     function getBalance() public view returns(uint){
@@ -49,6 +50,14 @@ contract MyContract{
     
     function getProductLength() public view returns(uint){
         return products.length;
+    }
+    
+    function getUserProfile() public view returns(string memory){
+        return users[msg.sender];
+    }
+    
+    function setUserProfile(string memory userDetailFileHash) public {
+        users[msg.sender] = userDetailFileHash;
     }
     
     function setBalanceRequiredForProductOwner(uint value) public{

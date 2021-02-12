@@ -105,7 +105,6 @@ export class IpfsService {
             this.ipfs.add(stringValue)
           .then(async hash2 => {
           await  this.ethcontract.addReview(prname,rating,hash1,hash2).then(result=>{
-            console.log(result)
               return result;
             }).catch(error=>{
               return error;

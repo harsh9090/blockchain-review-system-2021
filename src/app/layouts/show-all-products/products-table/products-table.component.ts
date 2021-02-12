@@ -45,7 +45,6 @@ ngOnInit(){
   })
   setTimeout(()=>{
     if(this.allData==null){
-      console.log('this work')
       this.allData = this.ipfs.allProducts;
       this.dataSource = new MatTableDataSource(this.allData);
     this.dataSource.paginator = this.paginator;

@@ -12,6 +12,6 @@ export class ReviewShowComponent implements OnInit {
     this.dialogRef.close();
   }
   ngOnInit(){
-   
+   console.log(this.data)
   }
 }

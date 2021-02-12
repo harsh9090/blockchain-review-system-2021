@@ -14,6 +14,6 @@ export class Error404Component implements OnInit {
   ngOnInit(){
     setTimeout(()=>{
       this.close();
-    },7000)
+    },10000)
   }
 }
