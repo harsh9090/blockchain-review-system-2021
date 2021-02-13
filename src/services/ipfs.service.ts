@@ -51,9 +51,10 @@ export class IpfsService {
     return this.addedProd;
   }
   dataInfo;
-  async getdetails(number:number){
 
-    await this.ethcontract.getProductDetail(number).then(async data=>{
+
+  async getdetails(prname:string){
+    await this.ethcontract.getProductDetail(prname).then(async data=>{
       await this.GetData(data).then((information:string)=>{
         this.dataInfo=information;
       }).catch(error=>{
@@ -105,7 +106,8 @@ export class IpfsService {
             this.ipfs.add(stringValue)
           .then(async hash2 => {
           await  this.ethcontract.addReview(prname,rating,hash1,hash2).then(result=>{
-              return result;
+            this.router.navigate(['show-products']);  
+            return result;
             }).catch(error=>{
               return error;
             });
@@ -169,5 +171,10 @@ export class IpfsService {
       return error;
     })
     return this.data;
+  }
+  async account(){
+    this.ethcontract.getAccountInfo().then(data=>{
+
+    })
   }
 }

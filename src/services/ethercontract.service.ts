@@ -1,4 +1,3 @@
-import { state } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 const Web3 = require('web3');
@@ -34,12 +33,34 @@ export class EthercontractService {
         }).then(function(data) {
             return resolve(data);
         }).catch(function(error){
+
           return reject('ReviewFile');
         });
     });
     return promises;
   }
-  getAccountInfo() {
+  async getAccountInfo() {
+    if (window.ethereum) {
+    new Web3(window.ethereum);
+      try {
+        await window.ethereum.enable();
+        
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    else if (window.web3) {
+      window.web3;
+      console.log('Injected web3 detected.');
+      
+    }
+    else {
+      const provider = new Web3.providers.HttpProvider('http://127.0.0.1:9545');
+       new Web3(provider);
+      console.log('No web3 instance injected, using Local web3.');
+      
+    }
+   
     return new Promise((resolve, reject) => {
       window.web3.eth.getCoinbase(function(err, account) {
         if(err === null) {
@@ -57,29 +78,7 @@ export class EthercontractService {
       });
     });
   }
-async getAllreviews(){
-  var promises =await new Promise((resolve, reject) => {
-    
-    var acc=this.account
-    let paymentContract = TruffleContract(tokenAbi);
-   
-    paymentContract.setProvider(this.web3Provider);
-    
-    paymentContract.deployed().then(function(instance) {
-        return instance.addProduct({
-          from: acc
-        });
-      }).then(function(status) {
-        if(status) {
-          return resolve({status:true});
-        }
-      }).catch(function(error){
-        return reject('AllReview');
-      });
-  });
-  return promises;
 
-}
   async addDetails(data:any,title:string) {
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
@@ -98,7 +97,8 @@ async getAllreviews(){
             return resolve({status:true});
           }
         }).catch(function(error){
-        
+          this.error.openDialog('There is a problem in adding Review');
+          this.route.navigate(['/add-product']);
           return reject('AddProduct');
         });
     });
@@ -109,15 +109,12 @@ async getAllreviews(){
       this.account = data2.fromAccount
     });
     window.ethereum.autoRefreshOnNetworkChange = false;
-    var state;
-    await this.checkUser(prname).then(data=>{
+    var state=false;
+    await this.checkUser(prname).then((data:boolean)=>{
       state = data;
-      console.log(state)
     })
     var promises =await new Promise((resolve, reject) => {
-      console.log(state)
     if(!state){
-      console.log('add')
       var acc = this.account
       let paymentContract = TruffleContract(tokenAbi);
       paymentContract.setProvider(this.web3Provider);
@@ -165,21 +162,20 @@ async getAllreviews(){
   }
 
 
-  async getProductDetail(number:number){
-
+  async getProductDetail(prname:string){
     var promises =await new Promise((resolve, reject) => {
-      var acc=this.account
       let paymentContract = TruffleContract(tokenAbi);
-     
       paymentContract.setProvider(this.web3Provider);
-      
       paymentContract.deployed().then(function(instance) {
-          return instance.getProductHash(number);
+          return instance.getProductHash(prname);
         }).then(function(status) {
           if(status) {
             return resolve(status);
           }
         }).catch(function(error){
+          this.error.openDialog(`Sorry for inconvience!
+          there is some error in fatching details`);
+        this.route.navigate(['/show-products']);
           return reject('ProductDetail');
         });
     });
@@ -191,11 +187,9 @@ async getAllreviews(){
 
   async getProduct() {
     window.ethereum.autoRefreshOnNetworkChange = false;
-    var promises =await new Promise((resolve, reject) => {
-      
+    var promises =await new Promise((resolve, reject) => { 
       let paymentContract = TruffleContract(tokenAbi);
       paymentContract.setProvider(this.web3Provider);
-      
       paymentContract.deployed().then(function(instance) {
           return instance.getProducts()
         }).then(function(status) {
@@ -211,6 +205,8 @@ async getAllreviews(){
             return resolve(product);
           }
         }).catch(function(error){
+          this.error.openDialog('You Have Already Added Review');
+        this.route.navigate(['/dashboard']);
           return reject('AllProduct');
         });
     });

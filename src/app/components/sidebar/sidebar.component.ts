@@ -15,7 +15,8 @@ export const ROUTES: RouteInfo[] = [
     {path:'/view-product',title:'Place Details',icon:'library_books',class:''},
     {path:'/test',title:'test',icon:'library_books',class:''},
     {path:'/view-review',title:'All Reviews',icon:'library_books',class:''},
-    {path:'/add-review',title:'Add Reviews',icon:'library_books',class:''}
+    {path:'/add-review',title:'Add Reviews',icon:'library_books',class:''},
+    {path:'/user-data',title:'User Profile',icon:'library_books',class:''}
 ];
 
 @Component({

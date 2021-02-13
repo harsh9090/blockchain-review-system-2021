@@ -60,6 +60,7 @@ this.ipfs.getProduct()
   }
   formErrors = {
     review: '',
+    username:'',
     rating:0
   };
 
@@ -67,11 +68,15 @@ this.ipfs.getProduct()
     review: {
       required: 'Review details are reuqired',
     },
+    username: {
+      required: 'Username is reuqired',
+    },
   };
 
   createForm() {
     this.product = this.fb.group({
       title: [{value:this.title,disabled:true}],
+      username:['',Validators.required],
       review: ['', Validators.required],     
       productImage: ['']
     });

@@ -10,6 +10,7 @@ import { IpfsService } from 'services/ipfs.service';
 export class AppComponent implements OnInit {
   constructor(private ipfs:IpfsService){}
   ngOnInit(){
+    this.ipfs.account()
     this.ipfs.initialProduct().then(value=>{
     })
   }

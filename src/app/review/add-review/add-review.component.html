@@ -26,19 +26,24 @@
       [formGroup]="product">
       <h2>Review:</h2>
       <div
+      style="margin-left: 10%;margin-right: 10%;"
         fxLayout="row"
         fxLayout.sm="column"
         fxLayout.md="row"
         fxLayout.xs="column"
-        fxLayoutAlign="space-between none">
-  
+        fxLayoutAlign="space-between">
         <mat-form-field appearance="outline" class="half-width text">
           <mat-label>Place name</mat-label>
           <input type="text" matInput formControlName="title" [disabled]="false" />
         </mat-form-field>
-  
-      </div>
-  
+
+      <mat-form-field appearance="outline" class="half-width text">
+        <mat-label>Username</mat-label>
+        <input type="text" matInput formControlName="username" />
+      </mat-form-field>
+
+    </div>
+
   
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Review</mat-label>

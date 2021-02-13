@@ -20,35 +20,32 @@ img5='';
     private router:Router,
     private error:ErrorServService){}
  async ngOnInit(){
-   this.route.queryParams.subscribe(value=>{
+   this.route.queryParams.subscribe(async value=>{
         this.product = this.ipfs.viewProductData(value.number)
-
        if(this.product==null){        
          this.loading = false;
-         this.ipfs.getdetails(value.number).then(info=>{
+       await  this.ipfs.getdetails(value.name).then(info=>{
           this.product = info
-         
             this.loading=true;
          }).catch(error=>{
            console.log(error)
          });
-        
         }
+       
+       await this.sideImage();
    })
  }
  sideImage(){
-   if(this.product.otherImage!=null)
-   this.img1=this.product.otherImage[0];
-   if(this.product.otherImage[1]!=null)
-   this.img1=this.product.otherImage[1];
-   if(this.product.otherImage[2]!=null)
-   this.img1=this.product.otherImage[2];
-   if(this.product.otherImage[3]!=null)
-   this.img1=this.product.otherImage[3];
-   if(this.product.otherImage[4]!=null)
-   this.img1=this.product.otherImage[4];
-   if(this.product.otherImage[5]!=null)
-   this.img1=this.product.otherImage[5];
+   if(this.product.otherImages!='')
+   this.img1=this.product.otherImages[0];
+   if(this.product.otherImages[1]!='')
+   this.img2=this.product.otherImages[1];
+   if(this.product.otherImages[2]!='')
+   this.img3=this.product.otherImages[2];
+   if(this.product.otherImages[3]!='')
+   this.img4=this.product.otherImages[3];
+   if(this.product.otherImages[4]!='')
+   this.img5=this.product.otherImages[4];
  }
  viewReview(){
    this.router.navigate(['view-review'],{queryParams:{name:this.product.title}});

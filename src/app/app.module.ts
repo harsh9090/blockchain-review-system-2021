@@ -38,6 +38,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { AdminLayoutComponent } from './layouts/admin-layout.component';
 import { Error404Component } from './error404/error404.component';
 import { ReviewShowComponent } from './review-show/review-show.component';
+import { UserDataComponent } from './user-data/user-data.component';
 
 @NgModule({
   imports: [
@@ -79,6 +80,7 @@ import { ReviewShowComponent } from './review-show/review-show.component';
     AdminLayoutComponent,
     Error404Component,
     ReviewShowComponent,
+    UserDataComponent,
 
   ],
   providers: [ EthercontractService, IpfsService],
