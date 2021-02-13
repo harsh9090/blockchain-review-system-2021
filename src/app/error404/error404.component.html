@@ -1,10 +1,12 @@
 <div style="padding-left: 10%;">
 <p align=right>
-<button class="btn btn-danger" (click)="close()" style="font-size: small;">X</button><br>
-</p>
-<br>
-<p align=justify style="font-weight: bold;">
-{{data.name}}
+    <mat-icon style="color:red;font-size: 30px;cursor: pointer;position: fixed;" (click)="close()">cancel</mat-icon>
 </p>
 
-</div> 
+<p align=justify style="font-weight: bold;">
+{{data.name}} 
+</p>
+
+</div>
+
+<!-- <mat-icon>check</mat-icon> -->

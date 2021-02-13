@@ -43,15 +43,15 @@ export class EthercontractService {
     if (window.ethereum) {
     new Web3(window.ethereum);
       try {
-        await window.ethereum.enable();
-        
+       await window.ethereum.enable();
       } catch (error) {
         console.error(error);
       }
     }
     else if (window.web3) {
-      window.web3;
-      console.log('Injected web3 detected.');
+     const data = await window.web3;
+     console.log(data)
+     await console.log('Injected web3 detected.');
       
     }
     else {
@@ -73,6 +73,7 @@ export class EthercontractService {
           });
         }
         else{
+
           return err
         }
       });
@@ -104,11 +105,11 @@ export class EthercontractService {
     });
     return promises;
   }
+
   async addReview(prname:any,rating,hash1,hash2) {
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
     });
-    window.ethereum.autoRefreshOnNetworkChange = false;
     var state=false;
     await this.checkUser(prname).then((data:boolean)=>{
       state = data;
@@ -128,7 +129,8 @@ export class EthercontractService {
             return resolve('success');
           }
         }).catch(function(error){
-          this.error.openDialog(error);
+          this.error.openDialog(`There is some error in procedure
+          Please try again...`);
           this.route.navigate(['/view-product',{queryParams:{name:prname}}]);
           return reject('AddReview');
         });
@@ -143,7 +145,6 @@ export class EthercontractService {
 
   async checkUser(prname:string){
     var acc = this.account
-   
     var promises =await new Promise((resolve, reject) => {
       let paymentContract = TruffleContract(tokenAbi);
       paymentContract.setProvider(this.web3Provider);
@@ -160,8 +161,6 @@ export class EthercontractService {
     });
     return promises;
   }
-
-
   async getProductDetail(prname:string){
     var promises =await new Promise((resolve, reject) => {
       let paymentContract = TruffleContract(tokenAbi);
