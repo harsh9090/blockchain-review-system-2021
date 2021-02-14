@@ -16,8 +16,8 @@ import { IpfsService } from 'services/ipfs.service';
 
 
 export class ProductsTableComponent implements AfterViewInit, OnInit {
-  subscribe:Subscription=new Subscription();
-  @ViewChild('paginator', { static: false }) paginator: MatPaginator;
+  subscribe: Subscription = new Subscription();
+  @ViewChild('paginator') paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private ipfs:IpfsService,private router:Router) { }
@@ -35,7 +35,7 @@ getRow(number){
 }
 allData;
 ngOnInit(){
-  this.subscribe= this.ipfs.product.subscribe(dat=>{
+  this.subscribe = this.ipfs.product.subscribe(dat => {
     this.allData = dat
     var res = dat
     this.dataSource = new MatTableDataSource(res);
@@ -43,8 +43,8 @@ ngOnInit(){
     this.dataSource.sort = this.sort;
     this.dataLength = res.length;
   })
-  setTimeout(()=>{
-    if(this.allData==null){
+  setTimeout(() => {
+    if(this.allData == null){
       this.allData = this.ipfs.allProducts;
       this.dataSource = new MatTableDataSource(this.allData);
     this.dataSource.paginator = this.paginator;
@@ -52,7 +52,7 @@ ngOnInit(){
     this.dataLength = this.allData.length;
     }
     this.show = false;
-  },5500)
+  }, 5500)
   }
   ngAfterViewInit(): void { 
     this.dataSource.paginator = this.paginator; // For pagination
@@ -65,7 +65,7 @@ ngOnInit(){
 
 
   filterCategory(event) {
-    if(event !== "All")
+    if (event !== "All")
     this.dataSource.filter = event
     else
     this.dataSource.filter = ''
