@@ -140,6 +140,9 @@ this.length = 0;
   }
 
  async save(value) {
+   
+    let top = document.getElementById('top');
+    top.scrollIntoView();
     this.show=true;
     this.formData = value;
     var title=this.formData.title

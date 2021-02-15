@@ -1,5 +1,5 @@
 
-import { AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
+import { AfterViewInit, Component, ViewChild, OnInit, AfterViewChecked} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -15,9 +15,9 @@ import { IpfsService } from 'services/ipfs.service';
 })
 
 
-export class ProductsTableComponent implements AfterViewInit, OnInit {
-  subscribe: Subscription = new Subscription();
-  @ViewChild('paginator') paginator: MatPaginator;
+export class ProductsTableComponent implements AfterViewInit, OnInit, AfterViewChecked {
+  subscribe:Subscription=new Subscription();
+  @ViewChild('paginator', { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private ipfs:IpfsService,private router:Router) { }
@@ -35,29 +35,40 @@ getRow(number){
 }
 allData;
 ngOnInit(){
-  this.subscribe = this.ipfs.product.subscribe(dat => {
-    this.allData = dat
-    var res = dat
+  this.subscribe= this.ipfs.product.subscribe(dat=>{
+    this.allData = dat;
+    var res = dat;
+    console.log('Init');
     this.dataSource = new MatTableDataSource(res);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.dataLength = res.length;
   })
-  setTimeout(() => {
+  setTimeout(()=>{
     if(this.allData == null){
       this.allData = this.ipfs.allProducts;
+      console.log(this.ipfs.allProducts);
       this.dataSource = new MatTableDataSource(this.allData);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.dataLength = this.allData.length;
     }
     this.show = false;
-  }, 5500)
+  },5500); 
   }
   ngAfterViewInit(): void { 
-    this.dataSource.paginator = this.paginator; // For pagination
-    this.dataSource.sort = this.sort; // For sort
+    console.log(this.allData);
+    console.log('After');
+    setTimeout(() =>{
+
+        this.dataSource.paginator = this.paginator; // For pagination
+         this.dataSource.sort = this.sort; // For sort
+    }, 6000);
+  //  this.dataSource.paginator = this.paginator; // For pagination
+ //   this.dataSource.sort = this.sort; // For sort
   }
+
+  ngAfterViewChecked()	{
+  //  console.log(this.allData);
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -65,7 +76,7 @@ ngOnInit(){
 
 
   filterCategory(event) {
-    if (event !== "All")
+    if(event !== "All")
     this.dataSource.filter = event
     else
     this.dataSource.filter = ''

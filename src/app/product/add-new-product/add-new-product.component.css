@@ -2,6 +2,9 @@
   padding-top: 5%;
 }
 
+::ng-deep .mat-select-value{    
+  color: black !important;  }
+
 
 .container {
   position: relative;
