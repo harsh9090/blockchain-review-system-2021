@@ -47,7 +47,6 @@ ngOnInit(){
   setTimeout(()=>{
     if(this.allData == null){
       this.allData = this.ipfs.allProducts;
-      console.log(this.ipfs.allProducts);
       this.dataSource = new MatTableDataSource(this.allData);
     }
     this.show = false;
