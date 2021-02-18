@@ -1,5 +1,5 @@
 
-import { AfterViewInit, Component, ViewChild, OnInit, AfterViewChecked} from '@angular/core';
+import { AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -15,7 +15,7 @@ import { IpfsService } from 'services/ipfs.service';
 })
 
 
-export class ProductsTableComponent implements AfterViewInit, OnInit, AfterViewChecked {
+export class ProductsTableComponent implements AfterViewInit, OnInit {
   subscribe:Subscription=new Subscription();
   @ViewChild('paginator', { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -34,6 +34,7 @@ getRow(number){
   this.router.navigate(['/view-product'],{queryParams:{number:number,name:this.title.title}})
 }
 allData;
+
 ngOnInit(){
   this.subscribe= this.ipfs.product.subscribe(dat=>{
     this.allData = dat;
@@ -52,20 +53,14 @@ ngOnInit(){
     this.show = false;
   },5500); 
   }
+
   ngAfterViewInit(): void { 
     console.log(this.allData);
-    console.log('After');
     setTimeout(() =>{
-
         this.dataSource.paginator = this.paginator; // For pagination
          this.dataSource.sort = this.sort; // For sort
     }, 6000);
-  //  this.dataSource.paginator = this.paginator; // For pagination
- //   this.dataSource.sort = this.sort; // For sort
-  }
 
-  ngAfterViewChecked()	{
-  //  console.log(this.allData);
   }
 
   applyFilter(event: Event) {
