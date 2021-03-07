@@ -49,22 +49,25 @@ export class EthercontractService {
       }
     }
     else if (window.web3) {
-     const data = await window.web3;
-     console.log(data)
+
      await console.log('Injected web3 detected.');
       
     }
     else {
       const provider = new Web3.providers.HttpProvider('http://127.0.0.1:9545');
        new Web3(provider);
-      console.log('No web3 instance injected, using Local web3.');
-      
+         
     }
-   
     return new Promise((resolve, reject) => {
       window.web3.eth.getCoinbase(function(err, account) {
+        if(account == null){
+          return reject('account')
+        }
         if(err === null) {
           window.web3.eth.getBalance(account, function(err, balance) {
+            if(balance < 1000){
+              return reject('balance');
+            }
             if(err === null) {
               return resolve({fromAccount: account});
             } else {
@@ -73,7 +76,6 @@ export class EthercontractService {
           });
         }
         else{
-
           return err
         }
       });
@@ -83,6 +85,8 @@ export class EthercontractService {
   async addDetails(data:any,title:string) {
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
+    }).catch(e=>{
+      this.error.openDialog('you are not logged in to matamask')
     });
     var promises =await new Promise((resolve, reject) => {
       var acc=this.account
@@ -109,6 +113,13 @@ export class EthercontractService {
   async addReview(prname:any,rating,hash1,hash2) {
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
+      if(this.account==null){
+        this.error.openDialog('You are not logged in to Metamask.')
+      }
+    }).catch(e=>{
+      console.log(e)
+      this.error.openDialog('You are not logged in to system')
+      this.route.navigate(['/dashboard'])
     });
     var state=false;
     await this.checkUser(prname).then((data:boolean)=>{

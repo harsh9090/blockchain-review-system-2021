@@ -29,9 +29,17 @@ export class ProductsTableComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] =
   ['productImage','title', 'category', 'shortDescription','longDescription'];
 title;
-getRow(number){
-  this.title = this.dataSource.data[number]
-  this.router.navigate(['/view-product'],{queryParams:{number:number,name:this.title.title}})
+getRow(name:string){
+  this.title = name;
+
+  var alldata = []
+  alldata = this.dataSource.data
+  for(var i=0;i<this.dataSource.data.length;i++){
+    if(alldata[i].title == name){
+      var number = i;
+    }
+  }
+  this.router.navigate(['/view-product'],{queryParams:{number:number,name:this.title}})
 }
 allData;
 
@@ -39,27 +47,27 @@ ngOnInit(){
   this.subscribe= this.ipfs.product.subscribe(dat=>{
     this.allData = dat;
     var res = dat;
-    console.log('Init');
     this.dataSource = new MatTableDataSource(res);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.dataLength = res.length;
   })
-  setTimeout(()=>{
-    if(this.allData == null){
+  
+  setInterval(()=>{
+    if(this.allData==null){
       this.allData = this.ipfs.allProducts;
+      
       this.dataSource = new MatTableDataSource(this.allData);
     }
-    this.show = false;
   },5500); 
   }
 
   ngAfterViewInit(): void { 
-    console.log(this.allData);
-    setTimeout(() =>{
+    setInterval(() =>{
+      this.show = false;
         this.dataSource.paginator = this.paginator; // For pagination
          this.dataSource.sort = this.sort; // For sort
-    }, 6000);
+    }, 5500);
 
   }
 

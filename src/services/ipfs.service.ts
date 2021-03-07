@@ -95,7 +95,7 @@ export class IpfsService {
     await this.ethcontract.getReviewFile(prname).then(file=>{
       
       if(file[0]!= ""){
-        console.log('old')
+     
         this.GetData(file[0]).then(data=>{
           for(let i=0; i<data.length;i++)
           allData.push(data[i]);
@@ -119,13 +119,13 @@ export class IpfsService {
           })
         }
         else{
-          console.log('new')
+      
           this.ipfs.add(stringValue)
           .then(hash1 => {
             this.ipfs.add(stringValue)
           .then(hash2 => {
             this.ethcontract.addReview(prname,rating,hash1,hash2).then(result=>{
-              console.log(result)
+              
               return result;
             }).catch(error=>{
               return error;
@@ -147,8 +147,9 @@ export class IpfsService {
   async getProduct() {
     var product=[]
       await  this.ethcontract.getProduct().then((result:any)=>{
-          for(var i=0;i<result.length;i++){
-              this.GetData(result[i]).then(data=>{
+        
+          for(let numb=0;numb<result.length;numb++){
+              this.GetData(result[numb]).then(data=>{
                product.push(data) 
               }).catch(error=>{
                 return error;

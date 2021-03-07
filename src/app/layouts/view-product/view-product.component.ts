@@ -25,10 +25,11 @@ img5='';
        if(this.product==null){        
          this.loading = false;
        await  this.ipfs.getdetails(value.name).then(info=>{
+       
           this.product = info
             this.loading=true;
          }).catch(error=>{
-           console.log(error)
+          this.error.openDialog('error in fatching details');
          });
         }
        

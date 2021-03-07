@@ -19,8 +19,7 @@ export class ErrorServService {
   }
   async openDialog(data:string) {
     const dialogRef = this.dialog.open(Error404Component,{
-      data:{name:data}, height: '180px',
-      width: '470px',
+      data:{name:data}
     });
 
     dialogRef.afterClosed().subscribe(result => {

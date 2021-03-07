@@ -67,7 +67,7 @@
     </tr>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;let i=index" (click)="getRow(i)" >
+    <mat-row *matRowDef="let row; columns: displayedColumns;let i=index" (click)="getRow(row.title)" >
     </mat-row>
   </mat-table>
 

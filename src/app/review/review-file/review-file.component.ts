@@ -32,13 +32,14 @@ export class ReviewFileComponent implements OnInit {
   }
 noReview=false;
   ngOnInit(): void {
+    this.show=true;
     this.route.queryParams.subscribe(data => {
       this.ipfs.getReview(data.name).then( data1 => {
-
         for(let i=0;i<data1.length;i++){
-          var post= {image: '../../../assets/img/675016.jpg',content:''}
+          var post= {image: '../../../assets/img/675016.jpg',content:'',rating:3}
           var rev = JSON.parse(data1[i])
           post.content=rev.review
+          post.rating = rev.rating
           this.allReviews.push(post)
         }
         if(this.allReviews==null){
@@ -47,6 +48,7 @@ noReview=false;
         this.dataSource = new MatTableDataSource<any>(this.allReviews);
       this.dataSource.paginator = this.paginator;
       this.obs = this.dataSource.connect();
+      this.show=false;
       })
     });
   }
