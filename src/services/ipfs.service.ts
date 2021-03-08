@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as IPFS from 'ipfs-mini'
 import { Subject } from 'rxjs';
+import { ErrorServService } from './error-serv.service';
 import { EthercontractService } from './ethercontract.service';
 
 
@@ -9,7 +10,7 @@ import { EthercontractService } from './ethercontract.service';
   providedIn: 'root'
 })
 export class IpfsService {
-  constructor(private ethcontract:EthercontractService,private router:Router) { }
+  constructor(private ethcontract:EthercontractService,private router:Router,private error:ErrorServService) { }
   product = new Subject<[]>();
   productDetail = new Subject<[]>();
   allProducts = [];
@@ -90,10 +91,8 @@ export class IpfsService {
     var allData=[];
     var oneValue =[];
     oneValue.push(values);
-    
     var stringValue = JSON.stringify(oneValue);
     await this.ethcontract.getReviewFile(prname).then(file=>{
-      
       if(file[0]!= ""){
      
         this.GetData(file[0]).then(data=>{
@@ -103,9 +102,13 @@ export class IpfsService {
           var stringData = JSON.stringify(allData);
           this.ipfs.add(stringData)
           .then(hash1 => {
+           
             this.ipfs.add(stringValue)
           .then(async hash2 => {
+           
+
           await  this.ethcontract.addReview(prname,rating,hash1,hash2).then(result=>{
+           this.error.openDialog('Review Added Successfully')
             this.router.navigate(['show-products']);  
             return result;
             }).catch(error=>{
@@ -119,13 +122,15 @@ export class IpfsService {
           })
         }
         else{
-      
           this.ipfs.add(stringValue)
           .then(hash1 => {
+           
             this.ipfs.add(stringValue)
           .then(hash2 => {
+          
             this.ethcontract.addReview(prname,rating,hash1,hash2).then(result=>{
-              
+              this.error.openDialog('Review Added Successfully')
+              this.router.navigate(['show-products']); 
               return result;
             }).catch(error=>{
               return error;

@@ -36,19 +36,23 @@ noReview=false;
     this.route.queryParams.subscribe(data => {
       this.ipfs.getReview(data.name).then( data1 => {
         for(let i=0;i<data1.length;i++){
-          var post= {image: '../../../assets/img/675016.jpg',content:'',rating:3}
+          var post= {image: '../../../assets/img/675016.jpg',content:'',rating:3,username:'undefined'}
           var rev = JSON.parse(data1[i])
-          post.content=rev.review
+          if(rev.productImage!=''){
+            post.image = rev.productImage
+          }
+          post.username = rev.username
           post.rating = rev.rating
+          post.content=rev.review
           this.allReviews.push(post)
-        }
-        if(this.allReviews==null){
-          this.noReview =true;
-        }
+        } 
         this.dataSource = new MatTableDataSource<any>(this.allReviews);
       this.dataSource.paginator = this.paginator;
       this.obs = this.dataSource.connect();
       this.show=false;
+      if(this.allReviews.length == 0){   
+        this.noReview =true;
+      }
       })
     });
   }

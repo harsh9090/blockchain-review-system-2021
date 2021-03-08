@@ -1,10 +1,10 @@
 
 <div *ngIf="show">
- <h1 style="margin-left:10%; margin-top:10%"> Please wait reviews are loading
+ <h1 style="margin-left:10%; margin-top:10%"> Please wait reviews are being loaded
 </h1></div>
 
 <div *ngIf="!show">
-<div *ngIf="noReview"> No Review</div>
+<div *ngIf="noReview" style="margin-left:6%;margin-top: 20%;"> <h1>No Reviews Available</h1></div>
 <div *ngIf="!noReview" style="max-width:100vw;min-height: 100vh;">
     <div fxFlex.gt-lg="25" fxFlex.gt-md="80" fxFlex.gt-xs="100" fxFlex="100" style="margin-bottom:15vh;margin-left: auto;margin-right: auto;margin-top: 100px;">
 
@@ -21,8 +21,9 @@
       <mat-card-header style="padding: 0 !important;padding-top:auto;flex:0;max-height:15vh;">
         <img [src]="card.image" class="headimg" >
       </mat-card-header>
-      <mat-card-content [innerHTML]="card.content.length>200? (card.content | slice:0:200)+'.....':(card.content)" style="font-size: 12px !important; margin-top: 5px; ;overflow: hidden;height:15vh;-webkit-box-orient: vertical;">
-    
+      <mat-card-content [innerHTML]="card.content.length>200? (card.content+ '<br><b>rating:-<b> ' + card.Rating + ' Star' + '<br>By:- ' +card.username | slice:0:200)+'.....':(card.content+ '<br><b>Rating:-<b> ' + card.rating + ' Star'+ '<br>By:- ' +card.username)" style="font-size: 12px !important; margin-top: 5px; ;overflow: hidden;height:15vh;-webkit-box-orient: vertical;">
+    <br> 
+    Rating:- {{card.rating}}
       </mat-card-content>
       <mat-card-actions style="bottom: 10%;margin-bottom: 10px;display:unset !important">
         <button mat-button (click)="showReview(i)">Read More</button>

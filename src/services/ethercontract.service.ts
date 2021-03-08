@@ -130,7 +130,9 @@ export class EthercontractService {
       var acc = this.account
       let paymentContract = TruffleContract(tokenAbi);
       paymentContract.setProvider(this.web3Provider);
+      var err = this.error
       paymentContract.deployed().then(function(instance) {
+        
           return instance.addReview(prname,hash1,hash2,rating,{
               from: acc,
               value:0
@@ -140,9 +142,10 @@ export class EthercontractService {
             return resolve('success');
           }
         }).catch(function(error){
-          this.error.openDialog(`There is some error in procedure
+          console.log(error)
+          err.openDialog(`There is some error in procedure
           Please try again...`);
-          this.route.navigate(['/view-product',{queryParams:{name:prname}}]);
+          
           return reject('AddReview');
         });
       }

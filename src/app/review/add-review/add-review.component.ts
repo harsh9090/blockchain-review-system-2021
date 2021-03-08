@@ -41,10 +41,10 @@ export class AddReviewComponent {
   ratingComponentClick(clickObj: any): void {
     const item = this.items.find(((i: any) => i.id === clickObj.itemId));
     if (!!item) {
-      this.rating = item.rating;
+      
       item.rating = clickObj.rating;
       this.ratingClicked = clickObj.rating; 
-    
+      this.rating = item.rating;
     }
 
   }
@@ -119,7 +119,14 @@ this.ipfs.getProduct()
  async save(value) {
     this.show=true;
     this.formData = value;
-    var data = JSON.stringify(this.formData)
+    var data1 = {
+      username: this.formData.username,
+      review: this.formData.review,
+      productImage:this.formData.productImage,
+      rating:this.rating
+    }
+    
+    var data = JSON.stringify(data1)
     await this.ipfs.addReview(this.title,data,this.rating).then(productData=>{
      
     });
