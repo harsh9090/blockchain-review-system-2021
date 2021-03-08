@@ -122,9 +122,9 @@ export class EthercontractService {
       this.route.navigate(['/dashboard'])
     });
     var state=false;
-    await this.checkUser(prname).then((data:boolean)=>{
-      state = data;
-    })
+    // await this.checkUser(prname).then((data:boolean)=>{
+    //   state = data;
+    // })
     var promises =await new Promise((resolve, reject) => {
     if(!state){
       var acc = this.account
