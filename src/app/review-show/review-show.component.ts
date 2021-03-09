@@ -15,6 +15,5 @@ export class ReviewShowComponent implements OnInit {
   ratingComponentClick(clickObj: any): void {
   }
   ngOnInit(){
-   
   }
 }

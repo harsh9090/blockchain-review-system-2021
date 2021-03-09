@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { rejects } from 'assert';
 const Web3 = require('web3');
 import * as TruffleContract from 'truffle-contract';
 import { ErrorServService } from './error-serv.service';
@@ -28,12 +29,13 @@ export class EthercontractService {
     var promises =await new Promise((resolve, reject) => {
       let paymentContract = TruffleContract(tokenAbi);
       paymentContract.setProvider(this.web3Provider);
+      var err = this.error
       paymentContract.deployed().then(function(instance) {
           return instance.getProductReviewFile(productName)
         }).then(function(data) {
             return resolve(data);
         }).catch(function(error){
-
+          err.openDialog('Error in fetching reviews')
           return reject('ReviewFile');
         });
     });
@@ -45,11 +47,10 @@ export class EthercontractService {
       try {
        await window.ethereum.enable();
       } catch (error) {
-        console.error(error);
+        console.log(error)
       }
     }
     else if (window.web3) {
-
      await console.log('Injected web3 detected.');
       
     }
@@ -61,12 +62,12 @@ export class EthercontractService {
     return new Promise((resolve, reject) => {
       window.web3.eth.getCoinbase(function(err, account) {
         if(account == null){
-          return reject('account')
+          return reject('Account')
         }
         if(err === null) {
           window.web3.eth.getBalance(account, function(err, balance) {
-            if(balance < 1000){
-              return reject('balance');
+            if(balance < 1000000000000000){
+              return reject('Balance');
             }
             if(err === null) {
               return resolve({fromAccount: account});
@@ -111,16 +112,27 @@ export class EthercontractService {
   }
 
   async addReview(prname:any,rating,hash1,hash2) {
+    var check=true;
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
       if(this.account==null){
         this.error.openDialog('You are not logged in to Metamask.')
       }
     }).catch(e=>{
+      check=false;
       console.log(e)
+      if(e=='Balance'){
+        this.error.openDialog('Low Balance in your account');
+      }
+      if(e=='Account'){
       this.error.openDialog('You are not logged in to system')
+      }
       this.route.navigate(['/dashboard'])
+      return;
     });
+    if(!check){
+      return;
+    }
     var state=false;
     // await this.checkUser(prname).then((data:boolean)=>{
     //   state = data;
@@ -131,6 +143,7 @@ export class EthercontractService {
       let paymentContract = TruffleContract(tokenAbi);
       paymentContract.setProvider(this.web3Provider);
       var err = this.error
+      var route = this.route
       paymentContract.deployed().then(function(instance) {
         
           return instance.addReview(prname,hash1,hash2,rating,{
@@ -139,13 +152,15 @@ export class EthercontractService {
           })
         }).then(function(status) {
           if(status) {
+            err.openDialog('Review Added Successfully')
+            route.navigate(['show-products']);  
             return resolve('success');
           }
         }).catch(function(error){
           console.log(error)
           err.openDialog(`There is some error in procedure
           Please try again...`);
-          
+          route.navigate(['show-products']); 
           return reject('AddReview');
         });
       }

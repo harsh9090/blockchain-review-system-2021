@@ -108,8 +108,7 @@ export class IpfsService {
            
 
           await  this.ethcontract.addReview(prname,rating,hash1,hash2).then(result=>{
-           this.error.openDialog('Review Added Successfully')
-            this.router.navigate(['show-products']);  
+          
             return result;
             }).catch(error=>{
               return error;

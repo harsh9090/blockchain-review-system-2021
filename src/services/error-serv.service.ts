@@ -10,8 +10,8 @@ export class ErrorServService {
 
   openReview(data){
     const dialogRef = this.dialog.open(ReviewShowComponent,{
-      data:{name:data}, height: '300px',
-      width: '500px',
+      data:{name:data}, height: '450px',
+      width: '700px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
