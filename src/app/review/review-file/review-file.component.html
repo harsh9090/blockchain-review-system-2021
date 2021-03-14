@@ -14,9 +14,9 @@
     </div>
     <h3 class="card-title" style="color: white;"><b>All Reviews</b></h3>
 </div>
-  <div class="flex-container" style="justify-content: center;min-height: 30vh;">
+  <div class="flex-container" style="justify-content: center;min-height: 30vh;margin: 5vh 5vh 0vh 5vh;">
   
-  <mat-card class="example-card" *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index' 
+  <!-- <mat-card class="example-card" *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index' 
   style=" height:40vh;">
       <mat-card-header style="padding: 0 !important;padding-top:auto;flex:0;max-height:15vh;">
         <img [src]="card.image" class="headimg" >
@@ -28,7 +28,25 @@
       <mat-card-actions style="bottom: 10%;margin-bottom: 10px;display:unset !important">
         <button mat-button (click)="showReview(i)">Read More</button>
         </mat-card-actions>
-</mat-card>
+</mat-card> -->
+<div class="row" style="width:fit-content;">
+  <div class="col-lg-6 mx-auto" *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index'
+  style=" height:40vh;" >
+
+      <!-- CUSTOM BLOCKQUOTE -->
+
+      <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+          <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+          <div class="row">
+            <div class="col-sm-4"><img [src]="card.image" class="headimg"></div>
+          <p class="mb-0 mt-2 font-italic" [innerHTML]="card.content.length>200? (card.content+ '<br>rating:- ' + card.Rating + ' Star' + '<br>By:- ' +card.username | slice:0:200)+'.....':(card.content+ '<br>Rating:- ' + card.rating + ' Star'+ '<br>By:- ' +card.username)"></p> </div>
+          <footer class="blockquote-footer pt-4 mt-4 border-top">Rating:- {{card.rating}}
+            <button mat-button (click)="showReview(i)">Read More</button>
+          </footer>
+      </blockquote><!-- END -->
+
+  </div>
+</div>
   </div>
     <mat-paginator #paginator [pageSizeOptions]="[6,9]" [length]="allReviews.length"></mat-paginator>
   </div>
