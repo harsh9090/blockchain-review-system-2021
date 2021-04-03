@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ErrorServService } from 'services/error-serv.service';
 
 @Component({
   selector: 'app-user-data',
@@ -7,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDataComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private serv:ErrorServService) { }
+  editForm(){
+    this.serv.editDetails();
+  }
   ngOnInit(): void {
   }
 

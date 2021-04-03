@@ -4,6 +4,7 @@ import { AddNewProductComponent } from 'app/product/add-new-product/add-new-prod
 import { AddedProductComponent } from 'app/product/added-product/added-product.component';
 import { AddReviewComponent } from 'app/review/add-review/add-review.component';
 import { ReviewFileComponent } from 'app/review/review-file/review-file.component';
+import { AddDetailsComponent } from 'app/user-data/add-details/add-details.component';
 import { UserDataComponent } from 'app/user-data/user-data.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { ShowAllProductsComponent } from './show-all-products/show-all-products.component';
@@ -17,5 +18,6 @@ export const AdminLayoutRoutes: Routes = [
     {path:'view-review',component:ReviewFileComponent},
     {path:'add-review',component:AddReviewComponent},
     {path:'error',component:Error404Component},
-    {path:'user-data',component:UserDataComponent}
+    {path:'user-data',component:UserDataComponent},
+    {path:'add-user',component:AddDetailsComponent}
 ];

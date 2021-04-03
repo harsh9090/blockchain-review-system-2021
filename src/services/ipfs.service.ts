@@ -105,10 +105,7 @@ export class IpfsService {
            
             this.ipfs.add(stringValue)
           .then(async hash2 => {
-           
-
           await  this.ethcontract.addReview(prname,rating,hash1,hash2).then(result=>{
-          
             return result;
             }).catch(error=>{
               return error;
@@ -181,5 +178,17 @@ export class IpfsService {
     this.ethcontract.getAccountInfo().then(data=>{
 
     })
+  }
+  async addUser(data:any) {
+    var uData = JSON.stringify(data)
+    await this.ipfs.add(uData)
+      .then(async result1 => {
+       await this.ethcontract.addUser(result1).then(result=>{
+         return result;
+        }).catch(error=>{
+          return error;
+        });
+        return result1;
+      })
   }
 }

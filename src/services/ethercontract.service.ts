@@ -134,9 +134,9 @@ export class EthercontractService {
       return;
     }
     var state=false;
-    // await this.checkUser(prname).then((data:boolean)=>{
-    //   state = data;
-    // })
+    await this.checkUser(prname).then((data:boolean)=>{
+      state = data;
+    })
     var promises =await new Promise((resolve, reject) => {
     if(!state){
       var acc = this.account
@@ -190,6 +190,33 @@ export class EthercontractService {
     });
     return promises;
   }
+
+  async addUser(data:any){
+    await this.getAccountInfo().then((data2:any)=>{
+      this.account = data2.fromAccount
+    }).catch(e=>{
+      this.error.openDialog('you are not logged in to matamask')
+    });
+    var promises =await new Promise((resolve, reject) => {
+      var acc=this.account
+      let paymentContract = TruffleContract(tokenAbi);
+      paymentContract.setProvider(this.web3Provider);
+      paymentContract.deployed().then(function(instance) {
+          return instance.setUserProfile(data,{
+            from: acc
+          });
+        }).then(function(status) {
+          if(status) {
+            return resolve({status:true});
+          }
+        }).catch(function(error){
+          this.error.openDialog('There is a problem in adding details');
+          return reject('AddProduct');
+        });
+    });
+    return promises;
+  }
+
   async getProductDetail(prname:string){
     var promises =await new Promise((resolve, reject) => {
       let paymentContract = TruffleContract(tokenAbi);

@@ -32,19 +32,16 @@
         fxLayout.md="row"
         fxLayout.xs="column"
         fxLayoutAlign="space-between">
-        <mat-form-field appearance="outline" class="half-width text">
+        <mat-form-field appearance="outline" class="text" fxFlex=45>
           <mat-label>Place name</mat-label>
           <input type="text" matInput formControlName="title" [disabled]="false" />
         </mat-form-field>
 
-      <mat-form-field appearance="outline" class="half-width text">
+      <mat-form-field appearance="outline" class="text" fxFlex=45>
         <mat-label>Username</mat-label>
         <input type="text" matInput formControlName="username" />
       </mat-form-field>
-
     </div>
-
-  
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Review</mat-label>
         <textarea

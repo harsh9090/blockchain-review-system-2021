@@ -7,7 +7,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./error404.component.css']
 })
 export class Error404Component implements OnInit {
-  width;
+  
   @ViewChild('ref') value:ElementRef;
   constructor(private dialogRef: MatDialogRef<Error404Component>,@Inject(MAT_DIALOG_DATA) public data: {name:string}) { }
   close() {

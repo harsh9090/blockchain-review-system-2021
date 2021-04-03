@@ -39,6 +39,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout.component';
 import { Error404Component } from './error404/error404.component';
 import { ReviewShowComponent } from './review-show/review-show.component';
 import { UserDataComponent } from './user-data/user-data.component';
+import { AddDetailsComponent } from './user-data/add-details/add-details.component';
 
 @NgModule({
   imports: [
@@ -81,6 +82,7 @@ import { UserDataComponent } from './user-data/user-data.component';
     Error404Component,
     ReviewShowComponent,
     UserDataComponent,
+    AddDetailsComponent,
 
   ],
   providers: [ EthercontractService, IpfsService],
