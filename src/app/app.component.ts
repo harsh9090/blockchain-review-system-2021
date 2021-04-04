@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { EthercontractService } from 'services/ethercontract.service';
 import { IpfsService } from 'services/ipfs.service';
 
 
@@ -8,10 +9,18 @@ import { IpfsService } from 'services/ipfs.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private ipfs:IpfsService){}
+  constructor(private ipfs:IpfsService,private eth:EthercontractService){}
   ngOnInit(){
     this.ipfs.account()
+    this.eth.totalReview().then(data=>{
+      
+    })
     this.ipfs.initialProduct().then(value=>{
     })
+    this.ipfs.getLastProduct().then(value=>{
+    })
+     this.ipfs.getLastReviews().then(data=>{
+  
+     })
   }
 }

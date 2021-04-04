@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
+import { EthercontractService } from 'services/ethercontract.service';
+import { IpfsService } from 'services/ipfs.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +10,11 @@ import * as Chartist from 'chartist';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eth:EthercontractService,private ipfs:IpfsService) { }
+  products;
+  reviews;
+
+
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
       seq = 0;
@@ -65,7 +71,32 @@ export class DashboardComponent implements OnInit {
 
       seq2 = 0;
   };
+  review;
+  products;
   ngOnInit() {
+    this.review = '--';
+    this.products = '--';
+    this.eth.totalReview().then(data=>{
+    this.review=data;
+    if(data==null){
+      this.review = 10;
+    }  
+  })
+  this.eth.totalProduct().then(data=>{
+    this.products=data;
+    if(data==null){
+      this.products = 10;
+    }  
+  })
+  this.products= this.ipfs.lastProducts;
+  this.reviews = this.ipfs.lastReviews;
+  this.ipfs.LastFiveProducts.subscribe(data=>{
+   this.products = data;
+   
+  })
+  this.ipfs.LastFiveReviews.subscribe(data=>{
+    this.reviews = data;
+  })
       const dataDailySalesChart: any = {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
           series: [

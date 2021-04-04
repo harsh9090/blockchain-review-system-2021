@@ -77,7 +77,8 @@ this.ipfs.getProduct()
     this.product = this.fb.group({
       title: [{value:this.title,disabled:true}],
       username:['',Validators.required],
-      review: ['', Validators.required],     
+      review: ['', Validators.required],
+      time: [new Date()], 
       productImage: ['']
     });
    
@@ -121,9 +122,11 @@ this.ipfs.getProduct()
     this.formData = value;
     var data1 = {
       username: this.formData.username,
+      productName: this.title,
       review: this.formData.review,
       productImage:this.formData.productImage,
-      rating:this.rating
+      rating:this.rating,
+      time:new Date()
     }
     
     var data = JSON.stringify(data1)

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { rejects } from 'assert';
 const Web3 = require('web3');
 import * as TruffleContract from 'truffle-contract';
 import { ErrorServService } from './error-serv.service';
@@ -13,7 +12,6 @@ let tokenAbi = require('../../build/contracts/MyContract.json')
 })
 export class EthercontractService {
   private web3Provider:null;
-  
   account:string;
   constructor(private error:ErrorServService,private route:Router) {
     window.eth_requestAccounts;
@@ -47,7 +45,6 @@ export class EthercontractService {
       try {
        await window.ethereum.enable();
       } catch (error) {
-        console.log(error)
       }
     }
     else if (window.web3) {
@@ -120,7 +117,6 @@ export class EthercontractService {
       }
     }).catch(e=>{
       check=false;
-      console.log(e)
       if(e=='Balance'){
         this.error.openDialog('Low Balance in your account');
       }
@@ -157,7 +153,7 @@ export class EthercontractService {
             return resolve('success');
           }
         }).catch(function(error){
-          console.log(error)
+          
           err.openDialog(`There is some error in procedure
           Please try again...`);
           route.navigate(['show-products']); 
@@ -206,9 +202,8 @@ export class EthercontractService {
             from: acc
           });
         }).then(function(status) {
-          if(status) {
-            return resolve({status:true});
-          }
+          
+            return resolve(status);
         }).catch(function(error){
           this.error.openDialog('There is a problem in adding details');
           return reject('AddProduct');
@@ -216,7 +211,61 @@ export class EthercontractService {
     });
     return promises;
   }
-
+  async getUserDetail(){
+    await this.getAccountInfo().then((data2:any)=>{
+      this.account = data2.fromAccount
+    }).catch(e=>{
+      this.error.openDialog('you are not logged in to matamask')
+    });
+    var promises =await new Promise((resolve, reject) => {
+      var acc=this.account
+      let paymentContract = TruffleContract(tokenAbi);
+      paymentContract.setProvider(this.web3Provider);
+      paymentContract.deployed().then(function(instance) {
+          return instance.getUserProfile({
+            from: acc
+          });
+        }).then(function(status) {
+          console.log("data=" +status)
+            return resolve(status);
+        }).catch(function(error){
+          this.error.openDialog('There is a problem in adding details');
+          return reject('AddProduct');
+        });
+    });
+    return promises;
+  }
+  async totalReview(){
+    var promises =await new Promise((resolve, reject) => {
+      let paymentContract = TruffleContract(tokenAbi);
+      paymentContract.setProvider(this.web3Provider);
+      paymentContract.deployed().then(function(instance) {
+          return instance.totalReview()
+        }).then(function(status) {
+            return resolve(status.words[0]);
+        }).catch(function(error){
+          return reject('ProductDetail');
+        });
+    });
+    return promises;
+  
+  }
+  async totalProduct(){
+    var promises =await new Promise((resolve, reject) => {
+      let paymentContract = TruffleContract(tokenAbi);
+      paymentContract.setProvider(this.web3Provider);
+      paymentContract.deployed().then(function(instance) {
+          return instance.totalProduct()
+        }).then(function(status) {
+            return resolve(status.words[0]);
+        }).catch(function(error){
+          return reject('ProductDetail');
+        });
+    });
+    return promises;
+  
+  }
+  
   async getProductDetail(prname:string){
     var promises =await new Promise((resolve, reject) => {
       let paymentContract = TruffleContract(tokenAbi);
@@ -238,8 +287,62 @@ export class EthercontractService {
   
   }
 
-
-
+  async getLastProducts(){
+      window.ethereum.autoRefreshOnNetworkChange = false;
+      var promises =await new Promise((resolve, reject) => { 
+        let paymentContract = TruffleContract(tokenAbi);
+        paymentContract.setProvider(this.web3Provider);
+        paymentContract.deployed().then(function(instance) {
+            return instance.getLatest5Products()
+          }).then(function(status) {
+            var product = []
+            status.forEach(element => {
+              var result = "";
+            for(var i = 0; i < element.length; ++i){
+              result+= (String.fromCharCode(element[i]));
+            }
+            product.push(result);
+            });
+            if(product) {
+              
+              return resolve(product);
+            }
+          }).catch(function(error){
+            this.error.openDialog('You Have Already Added Review');
+          this.route.navigate(['/dashboard']);
+            return reject('AllProduct');
+          });
+      });
+      return promises;
+    }
+    async getLastReviews(){
+      window.ethereum.autoRefreshOnNetworkChange = false;
+      var promises =await new Promise((resolve, reject) => { 
+        let paymentContract = TruffleContract(tokenAbi);
+        paymentContract.setProvider(this.web3Provider);
+        paymentContract.deployed().then(function(instance) {
+            return instance.getLatest5Reviews()
+          }).then(function(status) {
+            var product = []
+            status.forEach(element => {
+              var result = "";
+            for(var i = 0; i < element.length; ++i){
+              result+= (String.fromCharCode(element[i]));
+            }
+            product.push(result);
+            });
+            if(product) {
+            
+              return resolve(product);
+            }
+          }).catch(function(error){
+            this.error.openDialog('You Have Already Added Review');
+          this.route.navigate(['/dashboard']);
+            return reject('AllProduct');
+          });
+      });
+      return promises;
+    }
   async getProduct() {
     window.ethereum.autoRefreshOnNetworkChange = false;
     var promises =await new Promise((resolve, reject) => { 
@@ -248,6 +351,7 @@ export class EthercontractService {
       paymentContract.deployed().then(function(instance) {
           return instance.getProducts()
         }).then(function(status) {
+          
           var product = []
           status.forEach(element => {
             var result = "";
@@ -257,6 +361,7 @@ export class EthercontractService {
           product.push(result);
           });
           if(product) {
+            
             return resolve(product);
           }
         }).catch(function(error){

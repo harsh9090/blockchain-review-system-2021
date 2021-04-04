@@ -131,6 +131,7 @@ contract MyContract{
         products.push(_product_name);
         product_hash[_product_name]=_ipfs_hash;
         addProductHashToLatest5(_ipfs_hash);
+        totalProduct++;
     }
     
     function deleteProduct(string memory ipfs_hash) public onlyOwner{
@@ -186,6 +187,7 @@ contract MyContract{
         points[msg.sender] += pointsPerReview;
         reviewerToProduct[msg.sender].push(_product_name);
         reviewerToReview[msg.sender].push(_review_hash);
+        totalReview++;
         emit Reviewstored("Review stored");
     }
     

@@ -64,13 +64,13 @@ this.length = 0;
       category: ['', Validators.required],
       shortDescription: ['', Validators.required],
       longDescription: ['', Validators.required],
-     
       productImage: ['', Validators.required],
       otherImages: this.fb.array(
         [],
-
         [Validators.minLength(0), Validators.maxLength(5)]
       ),
+      time: [new Date()],
+      username:['xyz'],
       status: [true],
     });
    
@@ -140,11 +140,11 @@ this.length = 0;
   }
 
  async save(value) {
-   
     let top = document.getElementById('top');
     top.scrollIntoView();
     this.show=true;
     this.formData = value;
+    this.formData.time = new Date();
     var title=this.formData.title
     delete this.formData.color;
     var values= JSON.stringify(this.formData);

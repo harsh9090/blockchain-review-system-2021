@@ -12,12 +12,16 @@ import { EthercontractService } from './ethercontract.service';
 export class IpfsService {
   constructor(private ethcontract:EthercontractService,private router:Router,private error:ErrorServService) { }
   product = new Subject<[]>();
+  lastProducts;
+  lastReviews;
   productDetail = new Subject<[]>();
   allProducts = [];
   result=''
   data=''
   interval;
   addedProd='';
+  LastFiveReviews= new Subject<any>();
+  LastFiveProducts= new Subject<any>();
   ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001,protocol: 'https'});
   async UploadData(values:string,title:string) {
     this.addedProd = values;
@@ -59,7 +63,6 @@ export class IpfsService {
       await this.GetData(data).then((information:string)=>{
         this.dataInfo=information;
       }).catch(error=>{
-        console.log(error);
       })
       return await this.dataInfo;
     })
@@ -179,6 +182,7 @@ export class IpfsService {
 
     })
   }
+  userResult;
   async addUser(data:any) {
     var uData = JSON.stringify(data)
     await this.ipfs.add(uData)
@@ -188,7 +192,67 @@ export class IpfsService {
         }).catch(error=>{
           return error;
         });
+        this.userResult = result1;
         return result1;
       })
+      return this.userResult;
   }
+  async getUser(){
+    await this.ethcontract.getUserDetail().then(async data=>{
+      await this.GetData(data).then((information:string)=>{
+       
+        this.dataInfo=information;
+      }).catch(error=>{
+      })
+      return await this.dataInfo;
+    })
+    return await this.dataInfo
+  }
+  async getLastProduct() {
+      var data=[];
+      await this.ethcontract.getLastProducts().then(async (file:any)=>{
+        if(file[0]=="  "){
+          return null;
+        }
+        else{
+         for(var i=0;i<file.length;i++){
+           if(file[i]=="  "){
+             return null;
+           }
+       await this.GetData(file[i]).then((data2)=>{
+         data.push(data2)
+        });
+      }
+      return await data;
+    }
+});
+this.lastProducts=data;
+this.LastFiveProducts.next(data);
+return await data;
+}
+
+  async getLastReviews() {
+      var data=[];
+      await this.ethcontract.getLastReviews().then(async (file:any)=>{
+        if(file[0]=="  "){
+          return null;
+        }
+        else{
+         for(var i=0;i<file.length;i++){
+           if(file[i]=="  "){
+             return null;
+           }
+       await this.GetData(file[i]).then((data2)=>{
+         var final = JSON.parse(data2)
+         console.log(final)
+         data.push(final)
+        });
+      }
+      return await data;
+    }
+});
+this.lastReviews = data;
+this.LastFiveReviews.next(data);
+return await data;
+}
 }
