@@ -8,13 +8,16 @@ import { IpfsService } from 'services/ipfs.service';
   styleUrls: ['./user-data.component.css']
 })
 export class UserDataComponent implements OnInit {
+  name: string;
 
   constructor(private serv:ErrorServService,private ipfs:IpfsService) { }
   editForm(){
     this.serv.editDetails();
   }
   ngOnInit(): void {
-    this.ipfs.getUser().then(value=>{
+    this.ipfs.getUser().then(value => {
+      console.log(value);
+      this.name = value.name;
     })
   }
 
