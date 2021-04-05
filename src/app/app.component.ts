@@ -22,5 +22,8 @@ export class AppComponent implements OnInit {
      this.ipfs.getLastReviews().then(data=>{
   
      })
+     this.eth.getUserReviews().then(data=>{
+       
+     })
   }
 }

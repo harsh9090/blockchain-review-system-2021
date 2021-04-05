@@ -211,6 +211,9 @@ export class EthercontractService {
     });
     return promises;
   }
+
+
+
   async getUserDetail(){
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
@@ -343,6 +346,32 @@ export class EthercontractService {
       });
       return promises;
     }
+
+    async getUserReviews(){
+      await this.getAccountInfo().then((data2:any)=>{
+        this.account = data2.fromAccount
+      }).catch(e=>{
+        this.error.openDialog('you are not logged in to matamask')
+      });
+      var promises =await new Promise((resolve, reject) => {
+        var acc=this.account
+        let paymentContract = TruffleContract(tokenAbi);
+        paymentContract.setProvider(this.web3Provider);
+        paymentContract.deployed().then(function(instance) {
+            return instance.getAllReviewsGivenByUser({
+              from: acc
+            });
+          }).then(function(status) {
+            console.log("data=" +status)
+              return resolve(status);
+          }).catch(function(error){
+            this.error.openDialog('There is a problem in adding details');
+            return reject('AddProduct');
+          });
+      });
+      return promises;
+    }
+
   async getProduct() {
     window.ethereum.autoRefreshOnNetworkChange = false;
     var promises =await new Promise((resolve, reject) => { 
