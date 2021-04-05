@@ -11,30 +11,33 @@
           </div>
           <div class="card-body">
       
-      <!--  <div *ngIf = "show" class="spinner">
+       <div *ngIf = "show" class="spinner">
           <mat-spinner strokeWidth='2' diameter='110' class="margin"></mat-spinner>
           <div>
             <h3 align=center>
-              Please wait... <br> It will take couple of seconds...<br> Adding the Review...</h3>
+              Please wait... <br> It will take couple of seconds...<br> Adding the Details...</h3>
           </div>       
-        </div> -->
+        </div>
         <br>
         <form
-          #form="ngForm"
-          novalidate>
-            
-    
-          <mat-form-field appearance="outline" class="full-width text" >
-            <mat-label>Username</mat-label>
-            <input type="text" matInput />
-          </mat-form-field>
+        #form="ngForm"
+        (ngSubmit)="save(form.value)"
+        novalidate
+        [formGroup]="product">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Username</mat-label>
+          <input type="text" matInput formControlName="title" />
+          <mat-error *ngIf="formErrors.title">
+            {{ formErrors.title }}
+          </mat-error>
+        </mat-form-field>
 
           <h3>User Profile image :</h3>
           <button mat-button type="button" (click)="uploadMainImage()">
             Upload image
           </button>
-          <br>
-       <!--   <div *ngIf="product.controls['productImage'].value != ''">
+          <br /><br />
+          <div *ngIf="product.controls['productImage'].value != ''">
             <img
               [src]="product.controls['productImage'].value"
               style="width: 120px; height: auto; margin: auto"
@@ -43,12 +46,10 @@
         <button mat-icon-button (click)="deleteMainImage()">
               <mat-icon>cancel</mat-icon>
             </button>
-          </div>-->
-          
-         
+          </div>
           <div style="text-align: center;">
-          <button type="button" mat-raised-button [disabled]="form.invalid"
-            color="primary">submit</button>
+            <button type="submit" mat-raised-button [disabled]="form.invalid"
+            color="primary" (click)="save(form.value)">submit</button>
           </div>
         </form>
         </div>

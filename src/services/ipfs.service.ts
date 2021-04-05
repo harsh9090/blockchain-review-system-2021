@@ -244,7 +244,7 @@ return await data;
            }
        await this.GetData(file[i]).then((data2)=>{
          var final = JSON.parse(data2)
-         console.log(final)
+     
          data.push(final)
         });
       }

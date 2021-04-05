@@ -229,7 +229,6 @@ export class EthercontractService {
             from: acc
           });
         }).then(function(status) {
-          console.log("data=" +status)
             return resolve(status);
         }).catch(function(error){
           this.error.openDialog('There is a problem in adding details');
@@ -362,7 +361,7 @@ export class EthercontractService {
               from: acc
             });
           }).then(function(status) {
-            console.log("data=" +status)
+          
               return resolve(status);
           }).catch(function(error){
             this.error.openDialog('There is a problem in adding details');

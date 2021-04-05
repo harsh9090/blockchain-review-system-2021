@@ -16,8 +16,8 @@ export class UserDataComponent implements OnInit {
   }
   ngOnInit(): void {
     this.ipfs.getUser().then(value => {
-      console.log(value);
-      this.name = value.name;
+      console.log(value)
+      this.name = value.title;
     })
   }
 
