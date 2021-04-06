@@ -208,6 +208,18 @@ export class IpfsService {
     })
     return await this.dataInfo
   }
+  
+  async username(){
+    var userData;
+    await this.getUser().then(data=>{
+      userData = data;
+      
+      localStorage.setItem("userData",JSON.stringify(data));
+    
+    return data;
+   })
+   return await userData;
+  }
   async getLastProduct() {
       var data=[];
       await this.ethcontract.getLastProducts().then(async (file:any)=>{

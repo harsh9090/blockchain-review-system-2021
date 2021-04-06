@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ImageCropDialogComponent } from 'app/product/image-crop-dialog/image-crop-dialog.component';
+import { ErrorServService } from 'services/error-serv.service';
 import { IpfsService } from 'services/ipfs.service';
 
 interface ICompany {
@@ -35,6 +36,7 @@ export class AddReviewComponent {
     private dialog: MatDialog,
     private snackbar: MatSnackBar,
     private ipfs:IpfsService,
+    private err:ErrorServService,
     private router:Router
   ) {}
   rating:number;
@@ -49,8 +51,16 @@ export class AddReviewComponent {
 
   }
  
-
   ngOnInit(): void {
+   setTimeout(()=>{
+    var name = localStorage.getItem("userData");
+    
+    if(!name){
+      this.err.openDialog('Please login to the system')
+      this.router.navigate(['/dashboard']);
+    }
+    
+   },4000)
     this.route.queryParams.subscribe(value=>{
       this.title = value.name;
     })
@@ -74,9 +84,11 @@ this.ipfs.getProduct()
   };
 
   createForm() {
+    var name = localStorage.getItem("userData");
+    var user = JSON.parse(name);
     this.product = this.fb.group({
       title: [{value:this.title,disabled:true}],
-      username:['',Validators.required],
+      username:[{value:'--',disabled:true}],
       review: ['', Validators.required],
       time: [new Date()], 
       productImage: ['']

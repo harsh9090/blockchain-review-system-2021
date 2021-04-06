@@ -25,5 +25,8 @@ export class AppComponent implements OnInit {
      this.eth.getUserReviews().then(data=>{
        
      })
+     this.ipfs.username().then(data=>{
+       
+     })
   }
 }
