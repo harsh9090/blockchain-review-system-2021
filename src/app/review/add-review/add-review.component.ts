@@ -54,13 +54,13 @@ export class AddReviewComponent {
   ngOnInit(): void {
    setTimeout(()=>{
     var name = localStorage.getItem("userData");
-    
+
     if(!name){
       this.err.openDialog('Please login to the system')
       this.router.navigate(['/dashboard']);
     }
     
-   },4000)
+   },7000)
     this.route.queryParams.subscribe(value=>{
       this.title = value.name;
     })
