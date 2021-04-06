@@ -11,9 +11,8 @@ import { IpfsService } from 'services/ipfs.service';
 export class DashboardComponent implements OnInit {
 
   constructor(private eth:EthercontractService,private ipfs:IpfsService) { }
-  products;
-  reviews;
-
+  totalProducts;
+  totalReviews;
 
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
@@ -71,21 +70,21 @@ export class DashboardComponent implements OnInit {
 
       seq2 = 0;
   };
-  review;
+  reviews;
   products;
   ngOnInit() {
-    this.review = '--';
-    this.products = '--';
+    this.totalReviews = '--';
+    this.totalProducts = '--';
     this.eth.totalReview().then(data=>{
-    this.review=data;
+    this.totalReviews=data;
     if(data==null){
-      this.review = 10;
+      this.totalReviews = 10;
     }  
   })
   this.eth.totalProduct().then(data=>{
-    this.products=data;
+    this.totalProducts=data;
     if(data==null){
-      this.products = 10;
+      this.totalProducts = 10;
     }  
   })
   this.products= this.ipfs.lastProducts;

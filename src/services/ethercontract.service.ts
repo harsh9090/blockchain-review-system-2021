@@ -40,6 +40,8 @@ export class EthercontractService {
     return promises;
   }
   async getAccountInfo() {
+    const items = { ...localStorage };
+    console.log(items)
     if (window.ethereum) {
     new Web3(window.ethereum);
       try {
@@ -259,6 +261,7 @@ export class EthercontractService {
       paymentContract.deployed().then(function(instance) {
           return instance.totalProduct()
         }).then(function(status) {
+          console.log(status.words[0])
             return resolve(status.words[0]);
         }).catch(function(error){
           return reject('ProductDetail');
