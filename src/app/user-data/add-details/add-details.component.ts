@@ -77,10 +77,12 @@ openSnackbar(message, duration: number) {
     horizontalPosition: 'center',
   });
 }
-
+waiting= false;
  async save(value) {
+   this.waiting = true;
   this.formData = value;
   this.ipfs.addUser(value).then(data=>{
+    this.close();
     this.router.navigate(['/dashboard']);
   })
 }

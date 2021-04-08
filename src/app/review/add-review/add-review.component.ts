@@ -55,6 +55,13 @@ export class AddReviewComponent {
    setTimeout(()=>{
     var name = localStorage.getItem("userData");
     var arr = JSON.parse(name);
+    if(name){
+      this.product.get('username').setValue(arr.title)
+    }
+   },100)
+   setTimeout(()=>{
+    var name = localStorage.getItem("userData");
+    var arr = JSON.parse(name);
     if(!name){
       
       this.err.openDialog('Please login to the system')

@@ -11,7 +11,7 @@
           </div>
           <div class="card-body">
       
-       <div *ngIf = "show" class="spinner">
+       <div *ngIf = "waiting" class="spinner">
           <mat-spinner strokeWidth='2' diameter='110' class="margin"></mat-spinner>
           <div>
             <h3 align=center>
@@ -19,6 +19,7 @@
           </div>       
         </div>
         <br>
+        <div *ngIf="!waiting">
         <form
         #form="ngForm"
         (ngSubmit)="save(form.value)"
@@ -52,6 +53,7 @@
             color="primary" (click)="save(form.value)">submit</button>
           </div>
         </form>
+        </div>
         </div>
       </div>
       </div>

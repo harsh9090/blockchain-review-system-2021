@@ -188,6 +188,7 @@ export class IpfsService {
     await this.ipfs.add(uData)
       .then(async result1 => {
        await this.ethcontract.addUser(result1).then(result=>{
+         localStorage.setItem('userData',uData);
          return result;
         }).catch(error=>{
           return error;

@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
      this.ipfs.getLastReviews().then(data=>{
   
      })
-     this.eth.getUserReviews().then(data=>{
+     this.eth.getUserReviewAll().then(data=>{
        
      })
      this.ipfs.username().then(data=>{

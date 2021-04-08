@@ -15,8 +15,19 @@ export class UserDataComponent implements OnInit {
     this.serv.editDetails();
   }
   ngOnInit(): void {
+    var name = localStorage.getItem('userData');
+    if(name){
+      var arr = JSON.parse(name);
+      this.name = arr.title;
+      if(arr.productImage)
+      this.image = arr. productImage;
+    }
   this.ipfs.username().then(data=>{
+    if(!data){
+      this.serv.editDetails();
+    }
     this.name = data.title;
+    if(data.productImage)
     this.image = data.productImage;
   })
   this.ipfs.getUserReviews().then(data=>{

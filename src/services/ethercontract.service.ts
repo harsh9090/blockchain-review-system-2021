@@ -215,10 +215,13 @@ export class EthercontractService {
 
 
   async getUserDetail(){
+    var k=0;
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
     }).catch(e=>{
+      if(e == 'Account'){
       this.error.openDialog('Please login to metamask')
+      }
     });
     var promises =await new Promise((resolve, reject) => {
       var acc=this.account
@@ -350,7 +353,7 @@ export class EthercontractService {
       await this.getAccountInfo().then((data2:any)=>{
         this.account = data2.fromAccount
       }).catch(e=>{
-        this.error.openDialog('Please login to metamask')
+        this.error.openDialog('Please login to metamask or check your balance')
       });
       var promises =await new Promise((resolve, reject) => {
         var acc=this.account
