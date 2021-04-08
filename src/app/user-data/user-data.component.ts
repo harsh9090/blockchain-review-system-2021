@@ -9,16 +9,15 @@ import { IpfsService } from 'services/ipfs.service';
 })
 export class UserDataComponent implements OnInit {
   name: string;
-
+  image:string="./assets/img/img1.jpg";
   constructor(private serv:ErrorServService,private ipfs:IpfsService) { }
   editForm(){
     this.serv.editDetails();
   }
   ngOnInit(): void {
-    this.ipfs.getUser().then(value => {
-   
-      this.name = value.title;
-    })
+  this.ipfs.username().then(data=>{
+    this.name = data.title;
+    this.image = data.productImage;
+  })
   }
-
 }
