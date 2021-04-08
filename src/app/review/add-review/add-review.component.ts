@@ -54,13 +54,16 @@ export class AddReviewComponent {
   ngOnInit(): void {
    setTimeout(()=>{
     var name = localStorage.getItem("userData");
-
+    var arr = JSON.parse(name);
     if(!name){
+      
       this.err.openDialog('Please login to the system')
       this.router.navigate(['/dashboard']);
     }
-    
-   },7000)
+    else{
+      this.product.get('username').setValue(arr.title)
+    }
+   },5000)
     this.route.queryParams.subscribe(value=>{
       this.title = value.name;
     })
@@ -133,7 +136,7 @@ this.ipfs.getProduct()
     this.show=true;
     this.formData = value;
     var data1 = {
-      username: this.formData.username,
+      username: this.product.get('username').value,
       productName: this.title,
       review: this.formData.review,
       productImage:this.formData.productImage,
