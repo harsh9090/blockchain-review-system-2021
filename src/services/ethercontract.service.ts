@@ -325,7 +325,7 @@ export class EthercontractService {
         paymentContract.deployed().then(function(instance) {
             return instance.getLatest5Reviews()
           }).then(function(status) {
-            var product = []
+            var product = [];
             status.forEach(element => {
               var result = "";
             for(var i = 0; i < element.length; ++i){

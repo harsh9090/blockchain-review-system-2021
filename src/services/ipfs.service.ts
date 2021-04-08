@@ -245,6 +245,7 @@ return await data;
 
   async getLastReviews() {
       var data=[];
+      
       await this.ethcontract.getLastReviews().then(async (file:any)=>{
         if(file[0]=="  "){
           return null;
