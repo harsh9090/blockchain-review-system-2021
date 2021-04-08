@@ -197,6 +197,36 @@ export class IpfsService {
       })
       return this.userResult;
   }
+
+  async getUserReviews() {
+    var data=[];
+    
+    
+    await this.ethcontract.getUserReviews().then(async (file:any)=>{
+      
+      if(file[0]=="  "){
+        return null;
+      }
+      else{
+       for(var i=0;i<file.length;i++){
+         if(file[i]=="  "){
+           return null;
+         }
+     await this.GetData(file[i]).then((data2)=>{
+       var final = JSON.parse(data2)
+       data.push(final)
+      });
+    }
+    await console.log(data)
+    return await data;
+  }
+});
+this.lastReviews = data;
+this.LastFiveReviews.next(data);
+return await data;
+}
+
+
   async getUser(){
     await this.ethcontract.getUserDetail().then(async data=>{
       await this.GetData(data).then((information:string)=>{

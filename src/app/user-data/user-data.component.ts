@@ -19,5 +19,8 @@ export class UserDataComponent implements OnInit {
     this.name = data.title;
     this.image = data.productImage;
   })
+  this.ipfs.getUserReviews().then(data=>{
+    console.log(data)
+  })
   }
 }

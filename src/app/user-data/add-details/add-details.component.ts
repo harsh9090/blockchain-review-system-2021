@@ -79,11 +79,9 @@ openSnackbar(message, duration: number) {
 }
 
  async save(value) {
-   
   this.formData = value;
-  console.log(this.formData)
   this.ipfs.addUser(value).then(data=>{
-    console.log(data)
+    this.router.navigate(['/dashboard']);
   })
 }
 uploadMainImage() {

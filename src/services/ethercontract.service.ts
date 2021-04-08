@@ -350,7 +350,7 @@ export class EthercontractService {
       await this.getAccountInfo().then((data2:any)=>{
         this.account = data2.fromAccount
       }).catch(e=>{
-        this.error.openDialog('you are not logged in to matamask')
+        this.error.openDialog('Please login to metamask')
       });
       var promises =await new Promise((resolve, reject) => {
         var acc=this.account
@@ -361,7 +361,7 @@ export class EthercontractService {
               from: acc
             });
           }).then(function(status) {
-          
+            console.log("working")
               return resolve(status);
           }).catch(function(error){
             this.error.openDialog('There is a problem in adding details');
