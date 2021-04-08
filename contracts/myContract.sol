@@ -47,6 +47,7 @@ contract MyContract{
             last5ReviewRank[i]=5;
             last5ProductRank[i]=5;
        }
+       pointsPerReview = 25;
     }
     
     function change_ipfs_length(uint8 _length) public {
@@ -73,15 +74,15 @@ contract MyContract{
         users[msg.sender] = userDetailFileHash;
     }
     
-    function setBalanceRequiredForProductOwner(uint value) public{
+    function setBalanceRequiredForProductOwner(uint value) public{ //access modifier need to be set onlyOwner
         balanceRequiredForProductOwner = value;
     }
     
-    function setBalanceRequiredForReviewr(uint value) public{
+    function setBalanceRequiredForReviewr(uint value) public{ //access modifier need to be set onlyOwner
         balanceRequiredForReviewr = value;
     }
     
-    function setPointsPerReview(uint8 value) public{
+    function setPointsPerReview(uint8 value) public{ //access modifier need to be set onlyOwner
         pointsPerReview = value;
     }
     
@@ -226,6 +227,10 @@ contract MyContract{
     
     function getLatest5Reviews() public view returns(byte[46][5] memory){
        return latest5Reviews; 
+    }
+    
+    function getPointsOfUser() public view returns(uint){
+        return points[msg.sender];
     }
     
     function redeemPrice() public returns(string memory){

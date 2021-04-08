@@ -200,9 +200,7 @@ export class IpfsService {
 
   async getUserReviews() {
     var data=[];
-    
-    
-    await this.ethcontract.getUserReviews().then(async (file:any)=>{
+    await this.ethcontract.getUserReviewAll().then(async (file:any)=>{
       
       if(file[0]=="  "){
         return null;
@@ -217,7 +215,6 @@ export class IpfsService {
        data.push(final)
       });
     }
-    await console.log(data)
     return await data;
   }
 });

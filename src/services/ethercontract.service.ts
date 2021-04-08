@@ -346,7 +346,7 @@ export class EthercontractService {
       return promises;
     }
 
-    async getUserReviews(){
+    async getUserReviewAll(){
       await this.getAccountInfo().then((data2:any)=>{
         this.account = data2.fromAccount
       }).catch(e=>{
@@ -361,7 +361,7 @@ export class EthercontractService {
               from: acc
             });
           }).then(function(status) {
-            console.log("working")
+            
               return resolve(status);
           }).catch(function(error){
             this.error.openDialog('There is a problem in adding details');

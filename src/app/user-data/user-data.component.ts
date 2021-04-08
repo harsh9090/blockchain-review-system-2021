@@ -20,7 +20,6 @@ export class UserDataComponent implements OnInit {
     this.image = data.productImage;
   })
   this.ipfs.getUserReviews().then(data=>{
-    console.log(data)
   })
   }
 }
