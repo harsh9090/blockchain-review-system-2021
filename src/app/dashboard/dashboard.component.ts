@@ -95,6 +95,8 @@ export class DashboardComponent implements OnInit {
   })
   this.ipfs.LastFiveReviews.subscribe(data=>{
     this.reviews = data;
+    console.log('reviews checking');
+   
   })
       const dataDailySalesChart: any = {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
