@@ -14,7 +14,7 @@
     </div>
     <h3 class="card-title" style="color: white;"><b>All Reviews</b></h3>
 </div>
-  <div class="flex-container" style="justify-content: center;min-height: 60vh;margin: 5vh 5vh 0vh 5vh;">
+  <div class="flex-container" style="justify-content: center;min-height: 40vh;margin: 5vh 5vh 0vh 5vh;">
   
   <!-- <mat-card class="example-card" *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index' 
   style=" height:40vh;">
@@ -29,19 +29,30 @@
         <button mat-button (click)="showReview(i)">Read More</button>
         </mat-card-actions>
 </mat-card> -->
-<div class="row" style="width:fit-content;min-width: 30vw;">
+<div class="row" style="width:fit-content;min-width: 50vw;">
   <div class="col-lg-6 mx-auto" *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index'
-  style=" height:40vh;" >
+  style=" height:30vh;" >
 
       <!-- CUSTOM BLOCKQUOTE -->
 
       <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
           <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
           <div class="row">
-            <div class="col-sm-4"><img [src]="card.image" class="headimg"></div>
-          <p class="mb-0 mt-2 font-italic" [innerHTML]="card.content.length>200? (card.content+ '<br>rating:- ' + card.Rating + ' Star' + '<br>By:- ' +card.username | slice:0:200)+'.....':(card.content+ '<br>Rating:- ' + card.rating + ' Star'+ '<br>By:- ' +card.username)"></p> </div>
-          <footer class="blockquote-footer pt-4 mt-4 border-top">Rating:- {{card.rating}}
-            <button mat-button (click)="showReview(i)">Read More</button>
+            <div class="col-sm-4 mr-2"><img [src]="card.image" class="headimg"></div>
+          <p class="mb-0 mt-2 font-italic" [innerHTML]="card.content.length>200? (card.content | slice:0:200)+ '<br><br><br><sub><i><small>By:- ' +card.username + '</small></i></sub>'+'.....':(card.content+ '<br><br><br><sub><i>By:- ' +card.username + '</i></sub>') "></p> </div>
+          <footer class="blockquote-footer pt-4 mt-4 border-top">Rating:-
+            <i class="fa fa-star" *ngIf="card.rating >= 1" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
+            <i class="fa fa-star" *ngIf="card.rating >= 2" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
+            <i class="fa fa-star" *ngIf="card.rating >= 3" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
+            <i class="fa fa-star" *ngIf="card.rating >= 4" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
+            <i class="fa fa-star" *ngIf="card.rating >= 5" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
+            <i class="fa fa-star" *ngIf="card.rating < 1" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
+            <i class="fa fa-star" *ngIf="card.rating < 2" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
+            <i class="fa fa-star" *ngIf="card.rating < 3" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
+            <i class="fa fa-star" *ngIf="card.rating < 4" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
+            <i class="fa fa-star" *ngIf="card.rating < 5" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
+            <br>
+          <button style="float: right;" mat-button (click)="showReview(i)">Read More</button>
           </footer>
       </blockquote><!-- END -->
 

@@ -72,6 +72,7 @@ export class DashboardComponent implements OnInit {
   };
   reviews;
   products;
+  showproduct= false;
   ngOnInit() {
     this.totalReviews = '--';
     this.totalProducts = '--';
@@ -90,13 +91,15 @@ export class DashboardComponent implements OnInit {
   this.products= this.ipfs.lastProducts;
   this.reviews = this.ipfs.lastReviews;
   this.ipfs.LastFiveProducts.subscribe(data=>{
+    this.showproduct = true;
    this.products = data;
    
   })
   this.ipfs.LastFiveReviews.subscribe(data=>{
     this.reviews = data;
-   console.log(this.reviews)
+   console.log(this.reviews);
   })
+
       const dataDailySalesChart: any = {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
           series: [
