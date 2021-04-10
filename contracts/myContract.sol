@@ -214,7 +214,7 @@ contract MyContract{
     
     function getAllReviewsGivenByUser() public view returns(byte[46][] memory){
         address sender = msg.sender;
-        string[] memory temp = reviewerToProduct[sender];
+        string[] memory temp = reviewerToReview[sender];
         uint length=temp.length;
         byte[46][] memory reviewsOfUser = new byte[46][](length);
         for(uint i=0;i<length;i++){
