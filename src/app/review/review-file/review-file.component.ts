@@ -31,6 +31,11 @@ export class ReviewFileComponent implements OnInit {
     
   }
 noReview=false;
+fakeArray(length: number): Array<any> {
+  if (length >= 0) {
+    return new Array(length);
+  }
+}
   ngOnInit(): void {
     this.show=true;
     this.route.queryParams.subscribe(data => {

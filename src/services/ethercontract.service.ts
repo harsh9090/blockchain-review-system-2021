@@ -376,7 +376,18 @@ export class EthercontractService {
               from: acc
             });
           }).then(function(status) {
+            var product = [];
+            status.forEach(element => {
+              var result = "";
+            for(var i = 0; i < element.length; ++i){
+              result+= (String.fromCharCode(element[i]));
+            }
+            product.push(result);
+            });
+            if(product) {
             
+              return resolve(product);
+            }
               return resolve(status);
           }).catch(function(error){
             this.error.openDialog('There is a problem in adding details');

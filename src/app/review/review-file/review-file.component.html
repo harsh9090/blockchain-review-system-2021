@@ -41,7 +41,10 @@
             <div class="col-sm-4 mr-2"><img [src]="card.image" class="headimg"></div>
           <p class="mb-0 mt-2 font-italic" [innerHTML]="card.content.length>200? (card.content | slice:0:200)+ '<br><br><br><sub><i><small>By:- ' +card.username + '</small></i></sub>'+'.....':(card.content+ '<br><br><br><sub><i>By:- ' +card.username + '</i></sub>') "></p> </div>
           <footer class="blockquote-footer pt-4 mt-4 border-top">Rating:-
-            <i class="fa fa-star" *ngIf="card.rating >= 1" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
+             <i class="fa fa-star" *ngFor="let item of fakeArray(card.rating);" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
+            <i class="fa fa-star" *ngFor="let item of fakeArray(5-card.rating);" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
+                         
+            <!-- <i class="fa fa-star" *ngIf="card.rating >= 1" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
             <i class="fa fa-star" *ngIf="card.rating >= 2" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
             <i class="fa fa-star" *ngIf="card.rating >= 3" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
             <i class="fa fa-star" *ngIf="card.rating >= 4" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
@@ -50,7 +53,7 @@
             <i class="fa fa-star" *ngIf="card.rating < 2" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
             <i class="fa fa-star" *ngIf="card.rating < 3" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
             <i class="fa fa-star" *ngIf="card.rating < 4" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
-            <i class="fa fa-star" *ngIf="card.rating < 5" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
+            <i class="fa fa-star" *ngIf="card.rating < 5" id="1fa5" aria-hidden="true" style="color: grey !important;"></i> -->
             <br>
           <button style="float: right;" mat-button (click)="showReview(i)">Read More</button>
           </footer>

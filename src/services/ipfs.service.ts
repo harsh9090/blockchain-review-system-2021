@@ -57,6 +57,14 @@ export class IpfsService {
   }
   dataInfo;
 
+  async ratingOfProduct(pname:string){
+    var ratings;
+await this.ethcontract.getReviewFile(pname).then(data=>{
+  ratings = data[1].words[0]
+  return ratings;
+})
+return await ratings;
+  }
 
   async getdetails(prname:string){
     await this.ethcontract.getProductDetail(prname).then(async data=>{
@@ -199,11 +207,11 @@ export class IpfsService {
       })
       return this.userResult;
   }
-
+  userReviews = new Subject<any>();
+userAllReview;
   async getUserReviews() {
     var data=[];
     await this.ethcontract.getUserReviewAll('sec').then(async (file:any)=>{
-      
       if(file[0]=="  "){
         return null;
       }
@@ -217,6 +225,7 @@ export class IpfsService {
        data.push(final)
       });
     }
+    await this.userReviews.next(data);
     return await data;
   }
 });

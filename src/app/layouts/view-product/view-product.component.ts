@@ -18,13 +18,25 @@ img2='';
 img3='';
 img4='';
 img5='';
+rating;
   constructor(private route:ActivatedRoute,private ipfs:IpfsService,
     private router:Router,
     private error:ErrorServService){}
+    fakeArray(length: number): Array<any> {
+      if (length >= 0) {
+        return new Array(length);
+      }
+    }
  async ngOnInit(){
    this.route.queryParams.subscribe(async value=>{
+     
         this.product = this.ipfs.viewProductData(value.number)
-       if(this.product==null){        
+        this.ipfs.ratingOfProduct(value.name).then(data=>{
+          console.log(data)
+         this.rating = data;
+        })
+        if(this.product==null){
+
          this.loading = false;
        await  this.ipfs.getdetails(value.name).then(info=>{
        
@@ -40,7 +52,7 @@ img5='';
           this.error.openDialog('error in fatching details');
          });
         }
-       
+      
        await this.sideImage();
    })
  }

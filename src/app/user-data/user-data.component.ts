@@ -22,13 +22,18 @@ export class UserDataComponent implements OnInit {
       if(arr.productImage)
       this.image = arr. productImage;
     }
+    if(this.ipfs.userAllReview){
+      console.log(this.ipfs.userAllReview)
+      //user all reviews
+    }
   this.ipfs.username('sec').then(data=>{
-    
     this.name = data.title;
     if(data.productImage)
     this.image = data.productImage;
   })
-  this.ipfs.getUserReviews().then(data=>{
+  this.ipfs.userReviews.subscribe(data=>{
+    console.log(data);
+    //user all data
   })
   }
 }
