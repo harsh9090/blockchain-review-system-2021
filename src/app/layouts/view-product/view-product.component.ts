@@ -22,8 +22,6 @@ img5='';
     private router:Router,
     private error:ErrorServService){}
  async ngOnInit(){
-
-  console.log(this.today.getTime());
    this.route.queryParams.subscribe(async value=>{
         this.product = this.ipfs.viewProductData(value.number)
        if(this.product==null){        
@@ -32,13 +30,11 @@ img5='';
        
           this.product = info
             this.loading=true;
-            console.log(typeof this.product.time);
+            
             const past = new Date(this.product.time);
-            console.log(past);
+            
             const diff = Math.abs(this.today.getTime() - past.getTime());
             this.diffdays = Math.ceil(diff / (1000 * 3600 * 24));
-            console.log(this.diffdays);
-
 
          }).catch(error=>{
           this.error.openDialog('error in fatching details');

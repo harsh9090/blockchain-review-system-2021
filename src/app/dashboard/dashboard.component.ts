@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
       });
 
       seq = 0;
-  };
+  }
   startAnimationForBarChart(chart){
       let seq2: any, delays2: any, durations2: any;
 
@@ -69,13 +69,22 @@ export class DashboardComponent implements OnInit {
       });
 
       seq2 = 0;
-  };
+  }
   reviews;
   products;
   showproduct= false;
+  showReview = false;
   ngOnInit() {
     this.totalReviews = '--';
     this.totalProducts = '--';
+    this.products= this.ipfs.lastProducts;
+  this.reviews = this.ipfs.lastReviews;
+  if(this.products){
+    this.showproduct = true;
+  }
+  if(this.reviews){
+    this.showReview = true;
+  }
     this.eth.totalReview().then(data=>{
     this.totalReviews=data;
     if(data==null){
@@ -96,8 +105,8 @@ export class DashboardComponent implements OnInit {
    
   })
   this.ipfs.LastFiveReviews.subscribe(data=>{
+    this.showReview = true;
     this.reviews = data;
-   console.log(this.reviews);
   })
 
       const dataDailySalesChart: any = {
