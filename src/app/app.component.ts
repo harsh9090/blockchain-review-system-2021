@@ -11,7 +11,9 @@ import { IpfsService } from 'services/ipfs.service';
 export class AppComponent implements OnInit {
   constructor(private ipfs:IpfsService,private eth:EthercontractService){}
   ngOnInit(){
-    this.ipfs.account()
+    this.ipfs.account().then(data=>{
+
+    })
     this.eth.totalReview().then(data=>{
       
     })
@@ -22,10 +24,10 @@ export class AppComponent implements OnInit {
      this.ipfs.getLastReviews().then(data=>{
   
      })
-     this.eth.getUserReviewAll().then(data=>{
+     this.eth.getUserReviewAll('main').then(data=>{
        
      })
-     this.ipfs.username().then(data=>{
+     this.ipfs.username('main').then(data=>{
        
      })
   }

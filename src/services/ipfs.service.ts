@@ -188,6 +188,7 @@ export class IpfsService {
     await this.ipfs.add(uData)
       .then(async result1 => {
        await this.ethcontract.addUser(result1).then(result=>{
+      
          localStorage.setItem('userData',uData);
          return result;
         }).catch(error=>{
@@ -201,7 +202,7 @@ export class IpfsService {
 
   async getUserReviews() {
     var data=[];
-    await this.ethcontract.getUserReviewAll().then(async (file:any)=>{
+    await this.ethcontract.getUserReviewAll('sec').then(async (file:any)=>{
       
       if(file[0]=="  "){
         return null;
@@ -223,27 +224,29 @@ this.lastReviews = data;
 this.LastFiveReviews.next(data);
 return await data;
 }
-
-
-  async getUser(){
-    await this.ethcontract.getUserDetail().then(async data=>{
+userInfo;
+  async getUser(str:string){
+    await this.ethcontract.getUserDetail(str).then(async data=>{
+      if(data){
       await this.GetData(data).then((information:string)=>{
-       
-        this.dataInfo=information;
+        this.userInfo=information;
       }).catch(error=>{
       })
-      return await this.dataInfo;
+    }
+    else{
+      this.userInfo = '';
+    }
+      return await this.userInfo;
     })
-    return await this.dataInfo
+
+    return await this.userInfo;
   }
   
-  async username(){
+  async username(str:string){
     var userData;
-    await this.getUser().then(data=>{
-      userData = data;
-      
+    await this.getUser(str).then(data=>{
+    userData = data;
       localStorage.setItem("userData",JSON.stringify(data));
-    
     return data;
    })
    return await userData;

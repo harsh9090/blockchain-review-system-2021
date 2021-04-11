@@ -22,10 +22,8 @@ export class UserDataComponent implements OnInit {
       if(arr.productImage)
       this.image = arr. productImage;
     }
-  this.ipfs.username().then(data=>{
-    if(!data){
-      this.serv.editDetails();
-    }
+  this.ipfs.username('sec').then(data=>{
+    
     this.name = data.title;
     if(data.productImage)
     this.image = data.productImage;

@@ -202,7 +202,6 @@ export class EthercontractService {
             from: acc
           });
         }).then(function(status) {
-          
             return resolve(status);
         }).catch(function(error){
           this.error.openDialog('There is a problem in adding details');
@@ -214,14 +213,18 @@ export class EthercontractService {
 
 
 
-  async getUserDetail(){
-    var k=0;
+  async getUserDetail(str:string){
+    var error = this.error;
+    var open = false;
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
     }).catch(e=>{
+      if(str!='main'){
       if(e == 'Account'){
+        open=true;
       this.error.openDialog('Please login to metamask')
       }
+    }
     });
     var promises =await new Promise((resolve, reject) => {
       var acc=this.account
@@ -232,9 +235,13 @@ export class EthercontractService {
             from: acc
           });
         }).then(function(status) {
+          if(!status && str=='sec' && !open){
+            error.editDetails();
+          }
+          else
             return resolve(status);
         }).catch(function(error){
-          this.error.openDialog('There is a problem in adding details');
+          this.error.openDialog('There is a problem in getting details');
           return reject('AddProduct');
         });
     });
@@ -328,6 +335,7 @@ export class EthercontractService {
         paymentContract.deployed().then(function(instance) {
             return instance.getLatest5Reviews()
           }).then(function(status) {
+            
             var product = [];
             status.forEach(element => {
               var result = "";
@@ -349,11 +357,15 @@ export class EthercontractService {
       return promises;
     }
 
-    async getUserReviewAll(){
+    async getUserReviewAll(str:string){
       await this.getAccountInfo().then((data2:any)=>{
         this.account = data2.fromAccount
       }).catch(e=>{
-        this.error.openDialog('Please login to metamask or check your balance')
+        if(str!='main'){
+        if(e=='Account'){
+          this.error.openDialog('You are not logged in to system')
+          }
+        }
       });
       var promises =await new Promise((resolve, reject) => {
         var acc=this.account
