@@ -1,3 +1,6 @@
+img{
+  border-radius: 3px;
+}
 
   .preview {
     display: -webkit-box;
@@ -13,6 +16,7 @@
   
   .preview-pic {
     -webkit-box-flex: 1;
+    
     -webkit-flex-grow: 1;
         -ms-flex-positive: 1;
             flex-grow: 1; }
@@ -54,7 +58,10 @@
   
   .product-title, .price, .sizes, .colors {
     text-transform: UPPERCASE;
-    font-weight: bold; }
+    font-weight: bold;
+    text-align: center;
+    
+   }
   
   .checked, .price span {
     color: #ff9f1a; }
@@ -100,4 +107,55 @@
       opacity: 1;
       -webkit-transform: scale(1);
               transform: scale(1); } }
-  
+
+
+
+h1 { color: black; font-family: 'Bentham', serif; font-size: 32px; font-weight: 300; line-height: 32px; margin: 0 0 8px; }
+
+h2 {
+  margin: 0 0 0 0;
+  font-size: 13px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #4b4848fd;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+
+h4{
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+p {
+  margin: 0 0 0 38px;
+  font-family: 'Playfair Display', serif;
+  color: #8d8d8d;
+  line-height: 1.7em;
+  font-size: 15px;
+  font-weight: lighter;
+}
+
+.mtcontainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.mtline {
+  flex: 1;
+}
+
+.mttext {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+
+

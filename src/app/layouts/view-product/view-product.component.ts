@@ -9,6 +9,8 @@ import { IpfsService } from 'services/ipfs.service';
   styleUrls: ['./view-product.component.css']
 })
 export class ViewProductComponent implements OnInit {
+  today = new Date();
+  diffdays: number;
 product;
 loading=true;
 img1='';
@@ -20,6 +22,8 @@ img5='';
     private router:Router,
     private error:ErrorServService){}
  async ngOnInit(){
+
+  console.log(this.today.getTime());
    this.route.queryParams.subscribe(async value=>{
         this.product = this.ipfs.viewProductData(value.number)
        if(this.product==null){        
@@ -28,6 +32,14 @@ img5='';
        
           this.product = info
             this.loading=true;
+            console.log(typeof this.product.time);
+            const past = new Date(this.product.time);
+            console.log(past);
+            const diff = Math.abs(this.today.getTime() - past.getTime());
+            this.diffdays = Math.ceil(diff / (1000 * 3600 * 24));
+            console.log(this.diffdays);
+
+
          }).catch(error=>{
           this.error.openDialog('error in fatching details');
          });
@@ -48,12 +60,15 @@ img5='';
    if(this.product.otherImages[4]!='')
    this.img5=this.product.otherImages[4];
  }
+
  viewReview(){
    this.router.navigate(['view-review'],{queryParams:{name:this.product.title}});
  }
+
 addReview(){
    this.router.navigate(['add-review'],{queryParams:{name:this.product.title}})
  }
+
 test(){
   this.error.openDialog('error');
 }
