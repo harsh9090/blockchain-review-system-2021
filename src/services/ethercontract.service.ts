@@ -80,6 +80,36 @@ export class EthercontractService {
     });
   }
 
+
+  async getPoints(){
+    await this.getAccountInfo().then((data2:any)=>{
+      this.account = data2.fromAccount
+    }).catch(e=>{
+      this.error.openDialog('you are not logged in to matamask')
+    });
+    var promises =await new Promise((resolve, reject) => {
+      var acc=this.account
+      let paymentContract = TruffleContract(tokenAbi);
+      paymentContract.setProvider(this.web3Provider);
+      paymentContract.deployed().then(function(instance) {
+          return instance.getPointsOfUser({
+            from: acc
+          });
+        }).then(function(status) {
+          if(status) {
+            return resolve(status);
+          }
+        }).catch(function(error){
+          this.error.openDialog('There is a problem in adding Review');
+          this.route.navigate(['/add-product']);
+          return reject('AddProduct');
+        });
+    });
+    return promises;
+  }
+
+
+
   async addDetails(data:any,title:string) {
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount

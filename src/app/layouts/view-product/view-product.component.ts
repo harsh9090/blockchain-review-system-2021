@@ -32,7 +32,7 @@ rating;
      
         this.product = this.ipfs.viewProductData(value.number)
         this.ipfs.ratingOfProduct(value.name).then(data=>{
-          console.log(data)
+        
          this.rating = data;
         })
         if(this.product==null){

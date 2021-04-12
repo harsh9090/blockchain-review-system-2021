@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ErrorServService } from 'services/error-serv.service';
+import { EthercontractService } from 'services/ethercontract.service';
 import { IpfsService } from 'services/ipfs.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { IpfsService } from 'services/ipfs.service';
 export class UserDataComponent implements OnInit {
   name: string;
   image:string="./assets/img/img1.jpg";
-  constructor(private serv:ErrorServService,private ipfs:IpfsService) { }
+  constructor(private serv:ErrorServService,private ipfs:IpfsService,private eth:EthercontractService) { }
   editForm(){
     this.serv.editDetails();
   }
@@ -35,5 +36,11 @@ export class UserDataComponent implements OnInit {
     console.log(data);
     //user all data
   })
+
+  this.eth.getPoints().then(data=>{
+  })
+
+
   }
+  datavalue;
 }
