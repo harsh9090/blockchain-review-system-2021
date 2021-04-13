@@ -27,8 +27,8 @@ export class AppComponent implements OnInit {
      this.ipfs.getUserReviews().then(data=>{
        
      })
-     this.ipfs.username('main').then(data=>{
+    //  this.ipfs.username('main').then(data=>{
        
-     })
+    //  })
   }
 }

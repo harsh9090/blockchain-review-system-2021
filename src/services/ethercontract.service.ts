@@ -85,7 +85,8 @@ export class EthercontractService {
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
     }).catch(e=>{
-      this.error.openDialog('you are not logged in to matamask')
+      console.log(e)
+      // this.error.openDialog('you are not logged in to matamask')
     });
     var promises =await new Promise((resolve, reject) => {
       var acc=this.account
