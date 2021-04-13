@@ -77,8 +77,12 @@ return await ratings;
     return await this.dataInfo
   }
 
-  viewProductData(number){
-       return this.allProducts[number];
+  viewProductData(name:string){
+    for(var i=0;i<this.allProducts.length;i++){
+      if(name == this.allProducts[i].title){
+        return this.allProducts[i];
+      }
+    }
   }
 
   async getReview(prname){

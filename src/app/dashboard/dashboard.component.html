@@ -61,7 +61,7 @@
                             <th>Category</th>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let card of this.products; let i = index ">
+                            <tr *ngFor="let card of this.products; let i = index " (click)="viewProduct(i);" style="cursor: pointer;">
                                 <td>{{i+1}}</td>
                                 <td>{{card.title}}</td>
                                 <td>{{card.shortDescription}}</td>
@@ -89,7 +89,7 @@
                               <th>product</th>   
                           </thead>
                           <tbody >
-                            <tr *ngFor="let card of this.reviews; let i = index">
+                            <tr *ngFor="let card of this.reviews; let i = index" (click)="viewReview(i);">
                                 <td>{{i+1}}</td>
                                 <td>{{card.username}}</td>
                                 <td>{{card.productName}}</td>

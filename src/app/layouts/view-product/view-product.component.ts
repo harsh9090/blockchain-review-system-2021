@@ -30,7 +30,7 @@ rating;
  async ngOnInit(){
    this.route.queryParams.subscribe(async value=>{
      
-        this.product = this.ipfs.viewProductData(value.number)
+        this.product = this.ipfs.viewProductData(value.name)
         this.ipfs.ratingOfProduct(value.name).then(data=>{
         
          this.rating = data;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as Chartist from 'chartist';
 import { EthercontractService } from 'services/ethercontract.service';
 import { IpfsService } from 'services/ipfs.service';
@@ -10,9 +11,17 @@ import { IpfsService } from 'services/ipfs.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private eth:EthercontractService,private ipfs:IpfsService) { }
+  constructor(private eth:EthercontractService,private ipfs:IpfsService,private router:Router) { }
   totalProducts;
   totalReviews;
+
+  viewReview(number){
+    console.log(this.reviews[number])
+  }
+  viewProduct(num){
+    console.log(this.products[num].title)
+    this.router.navigate(['/view-product'],{queryParams:{number:num,name:this.products[num].title}})
+  }
 
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
