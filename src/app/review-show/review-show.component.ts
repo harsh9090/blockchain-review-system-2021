@@ -8,7 +8,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ReviewShowComponent implements OnInit {
   rating:number;
-  constructor(private dialogRef: MatDialogRef<ReviewShowComponent>,@Inject(MAT_DIALOG_DATA) public data: {name}) { }
+  constructor(private dialogRef: MatDialogRef<ReviewShowComponent>,@Inject(MAT_DIALOG_DATA) public data: {name}) {
+    console.log(data);
+   }
+
+   fakeArray(length: number): Array<any> {
+    if (length >= 0) {
+      return new Array(length);
+    }
+  }
+  
   close() {
     this.dialogRef.close();
   }

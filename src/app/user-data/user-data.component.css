@@ -13,3 +13,106 @@ body {
     background: linear-gradient(to right, #e96443, #904e95);
     min-height: 100vh
 }
+
+::ng-deep
+.mat-paginator{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  margin-top: 5vh;
+  color:#ffffff;
+  background-color: #1975e2;
+}
+
+.col-lg-16{
+    padding: 0px 140px;
+}
+
+.headimg{
+    height:inherit;
+    width:5vw;
+  }
+  
+  .title-txt{
+    margin-top: 0vh;
+    margin-bottom: 10vh;
+  }
+  
+  h1 {
+    color:   #ffffff;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+    text-shadow: 2px 1px #1e88e5;
+  }
+  
+  .flex-container{
+    display: flex;
+      flex-direction: row;
+      flex-flow:row wrap;
+  }
+  
+  .blockquote-custom {
+    position: relative;
+    font-size: 1.1rem;
+  }
+  
+  .blockquote-custom-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -25px;
+    left: 50px;
+  }
+  
+  h4{
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+  
+  p {
+  
+    font-family: 'Playfair Display', serif;
+    color: #8d8d8d;
+    line-height: 1.7em;
+    font-size: 15px;
+    font-weight: lighter;
+  }
+  
+  
+  
+  @media (max-width: 800px){
+    .flex-container {
+      display: flex;
+      flex-direction: column;
+      flex-flow:column wrap;
+    }
+
+    .col-lg-16{
+        padding: 0px 20px;
+    }
+  
+   :host ,::ng-deep
+  .mat-card {
+      height:fit-content;
+      width: initial;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 12px;
+  }
+  
+  .headimg{
+    height:inherit;
+    width:80vw;
+  }
+  
+  }

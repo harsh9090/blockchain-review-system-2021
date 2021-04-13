@@ -38,8 +38,13 @@
       <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
           <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
           <div class="row">
-            <div class="col-sm-4 mr-2"><img [src]="card.image" class="headimg"></div>
-          <p class="mb-0 mt-2 font-italic" [innerHTML]="card.content.length>200? (card.content | slice:0:200)+ '<br><br><br><sub><i><small>By:- ' +card.username + '</small></i></sub>'+'.....':(card.content+ '<br><br><br><sub><i>By:- ' +card.username + '</i></sub>') "></p> </div>
+            <div class="col-sm-4 mr-2 mt-4"><img [src]="card.image" class="headimg"></div>
+            <div class="col-sm-4 mr-2">
+              <h4><b>{{card.username}}</b></h4>
+              <br>
+          <p class="font-italic" [innerHTML]="card.content.length>200? (card.content | slice:0:200) :(card.content) "></p> 
+        </div>
+        </div>
           <footer class="blockquote-footer pt-4 mt-4 border-top">Rating:-
              <i class="fa fa-star" *ngFor="let item of fakeArray(card.rating);" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
             <i class="fa fa-star" *ngFor="let item of fakeArray(5-card.rating);" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>

@@ -1,10 +1,24 @@
-<div style="padding-left: 10%;">
+<div>
     <p align=right>
     <button class="btn btn-danger" (click)="close()" style="font-size: small;">X</button><br>
     </p>
-    Details:- <br>
-    <img src="{{data.name.image}}" height="200" width="300"><br>
-    <b>Username:- </b>{{data.name.username}}<br>
-    <b>Review:-</b> {{data.name.content}}<br>
-    <b>Rating:-</b> {{data.name.rating}}
-    </div> 
+    <div class="row">
+    <div class="preview col-sm-6">  
+    <img src="{{data.name.image}}" style="margin-left: -24px;overflow: visible;" height="300" width="300"><br>
+    </div>
+    <div class=" col-sm-6">
+
+        <h4><b>{{data.name.username}}</b></h4>
+        <blockquote>
+            <br>
+        <p> {{data.name.content}} </p>
+        <br>
+    </blockquote>
+        <br>
+        <div class="rating"> 
+            Rating:-
+            <i class="fa fa-star" *ngFor="let item of fakeArray(data.name.rating);" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
+            <i class="fa fa-star" *ngFor="let item of fakeArray(5-data.name.rating);" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
+</div>
+</div>
+    </div>  

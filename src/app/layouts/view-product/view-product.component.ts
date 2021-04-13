@@ -52,6 +52,12 @@ rating;
           this.error.openDialog('error in fatching details');
          });
         }
+        else{
+          const past = new Date(this.product.time);
+            
+            const diff = Math.abs(this.today.getTime() - past.getTime());
+            this.diffdays = Math.ceil(diff / (1000 * 3600 * 24));
+        }
       
        await this.sideImage();
    })

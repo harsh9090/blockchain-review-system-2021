@@ -103,6 +103,22 @@ h1 {
   left: 50px;
 }
 
+h4{
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+p {
+
+  font-family: 'Playfair Display', serif;
+  color: #8d8d8d;
+  line-height: 1.7em;
+  font-size: 15px;
+  font-weight: lighter;
+}
+
 
 
 @media (max-width: 800px){
