@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as Chartist from 'chartist';
+import { ErrorServService } from 'services/error-serv.service';
 import { EthercontractService } from 'services/ethercontract.service';
 import { IpfsService } from 'services/ipfs.service';
 
@@ -11,12 +12,13 @@ import { IpfsService } from 'services/ipfs.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private eth:EthercontractService,private ipfs:IpfsService,private router:Router) { }
+  constructor(private eth:EthercontractService,private ipfs:IpfsService,
+    private router:Router,private view:ErrorServService) { }
   totalProducts;
   totalReviews;
 
   viewReview(number){
-    console.log(this.reviews[number])
+    this.view.openReview(this.reviews[number])
   }
   viewProduct(num){
     console.log(this.products[num].title)
