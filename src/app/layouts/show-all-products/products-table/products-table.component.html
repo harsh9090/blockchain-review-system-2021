@@ -5,9 +5,9 @@
     <mat-label>Category</mat-label>
     <mat-select (selectionChange)="filterCategory($event.value)">
       <mat-option value="All">All</mat-option>
-      <mat-option value='restaurant'>restaurant</mat-option>
-      <mat-option value="genral store">Genral store</mat-option>
-      <mat-option value="public place">public place</mat-option>
+      <mat-option value='restaurant'>Restaurant</mat-option>
+      <mat-option value="general store">General store</mat-option>
+      <mat-option value="public place">Public Place</mat-option>
     </mat-select>
   </mat-form-field>
   
@@ -43,7 +43,7 @@
     </ng-container>
 
     <ng-container matColumnDef="category">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> <b><font color=white>catogary</font></b> </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> <b><font color=white>Category</font></b> </mat-header-cell>
       <mat-cell *matCellDef="let row" data-label="category" > 
         {{row.category}}
        </mat-cell>

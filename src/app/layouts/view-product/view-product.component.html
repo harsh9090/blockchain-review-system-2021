@@ -1,4 +1,4 @@
-<div class="container" style="margin-top: 120px;">
+<div class="container" style="margin-top: 120px;min-height: 100vh;">
     <div class="card" style="padding: 0;">
         <div class="card-header card-header-danger">
             <div class="card-icon card-header-success">
@@ -16,7 +16,7 @@
         </div> 
         </div>
         <div *ngIf="loading" class="container-fliud">
-            <div class="wrapper row">
+            <div class="row">
                 <div class="preview col-md-5">  
                     <div class="preview-pic tab-content">
                       <div class="tab-pane active" id="pic-1"><img src="{{product.productImage}}" /></div>
@@ -35,7 +35,7 @@
                     </div>
               
                 </div>
-                <div class=" col-md-6">
+                <div class=" col-md-6 mb-2">
                     <h1 class="product-title">{{product.title}}</h1>
                     <h2 style="text-transform: uppercase;"> {{product.shortDescription}} </h2>
                     <br>
@@ -56,21 +56,12 @@
                         Rating:-
                         <i class="fa fa-star" *ngFor="let item of fakeArray(rating);" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
                         <i class="fa fa-star" *ngFor="let item of fakeArray(5-rating);" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
-                           
-                        <!-- <div class="stars">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="review-no"> (41 reviews)</span>
-                        </div> -->
                     </div>
                     <br>
-                 <!--   <p class="vote"><strong>91%</strong> of customers enjoyed this product! <strong>(87 votes)</strong></p> --> 
-                 &nbsp;&nbsp;
+                    &nbsp;&nbsp;
                     <button mat-raised-button style="background-color: #66bb6a;" (click)="addReview()" color="primary">Add Review</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button mat-raised-button (click)="viewReview()" color="success">View All Review</button>
+                    <br>
                       </div>
             </div>
         </div></div>

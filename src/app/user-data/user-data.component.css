@@ -88,7 +88,11 @@ body {
     font-weight: lighter;
   }
   
-  
+  .container {
+    min-height: 100vh;
+    height: auto;
+    margin-top: 5%;
+  }
   
   @media (max-width: 800px){
     .flex-container {
@@ -99,6 +103,7 @@ body {
 
     .col-lg-16{
         padding: 0px 20px;
+        margin-left: -15px;
     }
   
    :host ,::ng-deep
@@ -111,8 +116,8 @@ body {
   }
   
   .headimg{
-    height:inherit;
-    width:80vw;
+    height:140px;
+    width:140px;
   }
   
   }

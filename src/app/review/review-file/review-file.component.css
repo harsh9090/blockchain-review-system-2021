@@ -126,6 +126,21 @@ p {
     display: flex;
     flex-direction: column;
     flex-flow:column wrap;
+    min-height: 60vh !important;
+  }
+
+  .headimg{
+    height:140px;
+    width:140px;
+  }
+
+  h1{
+    margin-top: 20% !important;
+  }
+
+  blockquote{
+    margin-top: 14px !important;
+    height: 70vh !important;
   }
 
  :host ,::ng-deep
@@ -137,10 +152,11 @@ p {
     font-size: 12px;
 }
 
-.headimg{
-  height:inherit;
-  width:80vw;
+.col-lg-6{
+  height: auto  !important;
 }
+
+
 
 }
 

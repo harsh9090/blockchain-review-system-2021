@@ -1,9 +1,9 @@
 
-<div *ngIf="show">
+<div *ngIf="show" style="min-height: 100vh;">
  <h1 style="margin-left:10%; margin-top:10%"> Please wait reviews are being loaded
 </h1></div>
 
-<div *ngIf="!show">
+<div *ngIf="!show" style="min-height: 100vh;">
 <div *ngIf="noReview" style="margin-left:6%;margin-top: 20%;"> <h1>No Reviews Available</h1></div>
 <div *ngIf="!noReview" style="max-width:100vw;min-height: 100vh;">
     <div fxFlex.gt-lg="25" fxFlex.gt-md="80" fxFlex.gt-xs="100" fxFlex="100" style="margin-bottom:15vh;margin-left: auto;margin-right: auto;margin-top: 100px;min-height: 80vh;">
@@ -29,20 +29,19 @@
         <button mat-button (click)="showReview(i)">Read More</button>
         </mat-card-actions>
 </mat-card> -->
-<div class="row" style="width:fit-content;min-width: 50vw;">
+<div class="row" style="width:fit-content;min-width: 60vw;">
   <div class="col-lg-6 mx-auto" *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index'
-  style=" height:30vh;" >
+  style="height:42vh;" >
 
       <!-- CUSTOM BLOCKQUOTE -->
 
-      <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+      <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded" style="height: 38vh;">
           <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
           <div class="row">
             <div class="col-sm-4 mr-2 mt-4"><img [src]="card.image" class="headimg"></div>
-            <div class="col-sm-4 mr-2">
+            <div class="col-sm-7 mr-2">
               <h4><b>{{card.username}}</b></h4>
-              <br>
-          <p class="font-italic" [innerHTML]="card.content.length>200? (card.content | slice:0:200) :(card.content) "></p> 
+          <p class="font-italic" [innerHTML]="card.content.length>70? (card.content | slice:0:70) + '...' :(card.content) "></p> 
         </div>
         </div>
           <footer class="blockquote-footer pt-4 mt-4 border-top">Rating:-
@@ -67,7 +66,7 @@
   </div>
 </div>
   </div>
-    <mat-paginator #paginator [pageSizeOptions]="[6,9]" [length]="allReviews.length"></mat-paginator>
+    <mat-paginator #paginator [pageSizeOptions]="[6,9]" [length]="allReviews.length" style="bottom: 0px;position: relative;"></mat-paginator>
   </div>
   </div>
 </div>

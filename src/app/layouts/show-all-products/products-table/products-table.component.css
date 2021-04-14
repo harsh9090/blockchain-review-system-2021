@@ -72,6 +72,11 @@ color: white;
 
 
 @media screen and (max-width: 768px) {
+
+.mat-header-cell {
+  font-size:  8px;
+
+  }
   
   .mat-table .mat-row {
     border-bottom: 5px solid #ddd;

@@ -6,6 +6,11 @@ input[type="text"][disabled] {
     margin-left: 44%;
 }
 
+.container{
+    min-height: 100vh;
+    height: auto;
+}
+
 @media screen and (max-width:641px) {
     .margin{
         margin-left: 24%;
