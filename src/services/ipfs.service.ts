@@ -222,9 +222,9 @@ export class IpfsService {
   }
   userReviews = new Subject<any>();
 userAllReview;
-  async getUserReviews() {
+  async getUserReviews(str) {
     var data = [];
-    await this.ethcontract.getUserReviewAll('sec').then(async (file: any) => {
+    await this.ethcontract.getUserReviewAll(str).then(async (file: any) => {
       if (file[0] == "  "){
         return null;
       }

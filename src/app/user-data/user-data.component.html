@@ -12,16 +12,17 @@
             </div>
             <div class="px-4 py-3">   
             </div>
+            <br><Br>
             <div class="py-4 px-4">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <h3 class="mb-0">Recent Reviews</h3>
                 </div>
                 <div class="row" style="width:fit-content;min-width: 30vw;justify-content: center;">
-                    <div class="col-lg-16" *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index'>
+                    <div class="col-lg-16"  *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index'>
                   
                         <!-- CUSTOM BLOCKQUOTE -->
                   
-                        <blockquote class="blockquote blockquote-custom bg-white p-5 mt-3 shadow rounded">
+                        <blockquote class="blockquote blockquote-custom p-5 mt-3 shadow rounded" style="background-color: lightblue;">
                             <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
                             <div class="row">
                               <div class="col-lg-5 mr-2 mt-4"><img [src]="card.productImage" class="headimg"></div>
@@ -34,17 +35,6 @@
                             <footer class="blockquote-footer pt-4 mt-4 border-top">Rating:-
                                <i class="fa fa-star" *ngFor="let item of fakeArray(card.rating);" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
                               <i class="fa fa-star" *ngFor="let item of fakeArray(5-card.rating);" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
-                                           
-                              <!-- <i class="fa fa-star" *ngIf="card.rating >= 1" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
-                              <i class="fa fa-star" *ngIf="card.rating >= 2" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
-                              <i class="fa fa-star" *ngIf="card.rating >= 3" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
-                              <i class="fa fa-star" *ngIf="card.rating >= 4" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
-                              <i class="fa fa-star" *ngIf="card.rating >= 5" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
-                              <i class="fa fa-star" *ngIf="card.rating < 1" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
-                              <i class="fa fa-star" *ngIf="card.rating < 2" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
-                              <i class="fa fa-star" *ngIf="card.rating < 3" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
-                              <i class="fa fa-star" *ngIf="card.rating < 4" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
-                              <i class="fa fa-star" *ngIf="card.rating < 5" id="1fa5" aria-hidden="true" style="color: grey !important;"></i> -->
                               <br>
                             <button style="float: right;" mat-button (click)="showReview(i)">Read More</button>
                             </footer>
