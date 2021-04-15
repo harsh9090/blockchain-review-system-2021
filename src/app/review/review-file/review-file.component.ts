@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { async } from '@angular/core/testing';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
@@ -21,7 +22,7 @@ export interface Post {
 export class ReviewFileComponent implements OnInit {
  
   show = true;
-  allReviews = [];
+  allReviews:any = [];
   searchText: string;
   length: number;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -39,7 +40,7 @@ fakeArray(length: number): Array<any> {
   ngOnInit(): void {
     this.show=true;
     this.route.queryParams.subscribe(data => {
-      this.ipfs.getReview(data.name).then( data1 => {
+      this.ipfs.getReview(data.name).then( async data1 => {
         for(let i=0;i<data1.length;i++){
           var post= {image: '../../../assets/img/im1.jpg',content:'',rating:3,username:'undefined'}
           var rev = JSON.parse(data1[i])
@@ -51,13 +52,16 @@ fakeArray(length: number): Array<any> {
           post.content=rev.review
           this.allReviews.push(post)
         }
-        this.dataSource = new MatTableDataSource<any>(this.allReviews);
-      this.dataSource.paginator = this.paginator;
-      this.obs = this.dataSource.connect();
-      this.show=false;
+        console.log(this.allReviews)
+       this.dataSource = new MatTableDataSource<any>(this.allReviews);
+       this.dataSource.paginator = this.paginator;
+       this.obs = this.dataSource.connect();
+       this.show=false;
       if(this.allReviews.length == 0){   
         this.noReview =true;
       }
+      }).catch(e=>{
+        console.log(e)
       })
     });
   }

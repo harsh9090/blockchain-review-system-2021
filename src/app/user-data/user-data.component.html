@@ -21,8 +21,6 @@
                 <div class="row mt-5 ml-2" style="width:fit-content;min-width: 40vw;justify-content: center;">
                     <div class="col-lg-16"  *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index' style="height: 280px;margin-bottom: 15px;">
                   
-                        <!-- CUSTOM BLOCKQUOTE -->
-                  
                         <blockquote class="blockquote blockquote-custom bg-white pt-4 pl-4 pr-4 shadow rounded" style="height: 260px;width: auto;min-width:450px;max-width: 40vw;">
                             <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
                             <div class="row">
