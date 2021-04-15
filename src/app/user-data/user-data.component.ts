@@ -12,7 +12,7 @@ import { IpfsService } from 'services/ipfs.service';
   styleUrls: ['./user-data.component.css']
 })
 export class UserDataComponent implements OnInit {
-  allreviews: [];
+  allreviews: any;
   name: string;
   image:string="./assets/img/img1.jpg";
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -67,4 +67,16 @@ export class UserDataComponent implements OnInit {
 
   } 
   datavalue;
+  showReview(card){
+    var data;
+    for(var i=0;i<this.allreviews.length;i++){
+      if(card.productName == this.allreviews[i].productName){
+        if(card.review == this.allreviews[i].review){
+          data = this.allreviews[i];
+        }
+      }
+    }
+    
+    this.serv.openReview(data);
+  }
 }

@@ -25,7 +25,7 @@
                         <blockquote class="blockquote blockquote-custom p-5 mt-3 shadow rounded" style="background-color: #b9b5f2;">
                             <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
                             <div class="row">
-                              <div class="col-lg-5 mr-2 mt-4"><img [src]="card.productImage" class="headimg"></div>
+                              <div class="col-lg-5 mr-2 mt-4"><img height="auto" width="auto" [src]="card.productImage" class="headimg"></div>
                               <div class="col-lg-6 mr-2">
                                 <h4><b>{{card.productName}}</b></h4>
                                 <br>
@@ -36,7 +36,7 @@
                                <i class="fa fa-star" *ngFor="let item of fakeArray(card.rating);" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
                               <i class="fa fa-star" *ngFor="let item of fakeArray(5-card.rating);" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
                               <br>
-                            <button style="float: right;" mat-button (click)="showReview(i)">Read More</button>
+                            <button style="float: right;" mat-button (click)="showReview(card)">Read More</button>
                             </footer>
                         </blockquote><!-- END -->
                   
