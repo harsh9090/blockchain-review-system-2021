@@ -42,6 +42,11 @@ export class UserDataComponent implements OnInit {
     if(this.ipfs.userAllReview){
       var data = this.ipfs.userAllReview
       this.allreviews = data;
+      for(var i=0;i<this.allreviews.length;i++){
+        if(!this.allreviews[i].productImage){
+          this.allreviews[i].productImage = '../../../assets/img/im1.jpg';
+        }
+      }
       this.dataSource = new MatTableDataSource<any>(data);
       this.dataSource.paginator = this.paginator;
       this.obs = this.dataSource.connect();
@@ -54,6 +59,11 @@ export class UserDataComponent implements OnInit {
   })
   this.ipfs.userReviews.subscribe(data=>{
     this.allreviews = data;
+    for(var i=0;i<this.allreviews.length;i++){
+      if(!this.allreviews[i].productImage){
+        this.allreviews[i].productImage = '../../../assets/img/im1.jpg';
+      }
+    }
     this.dataSource = new MatTableDataSource<any>(data);
     this.dataSource.paginator = this.paginator;
     this.obs = this.dataSource.connect();
@@ -76,7 +86,15 @@ export class UserDataComponent implements OnInit {
         }
       }
     }
-    
-    this.serv.openReview(data);
+    if(!data.productImage){
+      data.productImage = '../../../assets/img/im1.jpg';
+    }
+   var sub = {
+     content : data.review,
+     image: data.productImage,
+     rating : card.rating,
+     username: this.name
+   }
+    this.serv.openReview(sub);
   }
 }

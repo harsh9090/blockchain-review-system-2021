@@ -21,7 +21,6 @@ export class DashboardComponent implements OnInit {
     this.view.openReview(this.reviews[number])
   }
   viewProduct(num){
-    console.log(this.products[num].title)
     this.router.navigate(['/view-product'],{queryParams:{number:num,name:this.products[num].title}})
   }
 
