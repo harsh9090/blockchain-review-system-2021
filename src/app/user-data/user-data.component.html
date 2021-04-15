@@ -1,5 +1,5 @@
-<div class="row py-5 px-4 container">
-    <div class="col-md-8 mx-auto">
+<div class="row py-5 container">
+    <div class="col-lg-12" style="margin-left: 5vw;">
         <div class="bg-white shadow rounded overflow-hidden">
             <div class="px-4 pt-0 pb-4 cover">
                 <div class="media align-items-end profile-head">
@@ -16,20 +16,21 @@
             <div class="py-4 px-4">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <h3 class="mb-0">Recent Reviews</h3>
+                    
                 </div>
-                <div class="row" style="width:fit-content;min-width: 30vw;justify-content: center;">
-                    <div class="col-lg-16"  *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index'>
+                <div class="row mt-5 ml-2" style="width:fit-content;min-width: 40vw;justify-content: center;">
+                    <div class="col-lg-16"  *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index' style="height: 280px;margin-bottom: 15px;">
                   
                         <!-- CUSTOM BLOCKQUOTE -->
                   
-                        <blockquote class="blockquote blockquote-custom p-5 mt-3 shadow rounded" style="background-color: #b9b5f2;">
+                        <blockquote class="blockquote blockquote-custom bg-white pt-4 pl-4 pr-4 shadow rounded" style="height: 260px;width: auto;min-width:450px;max-width: 40vw;">
                             <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
                             <div class="row">
                               <div class="col-lg-5 mr-2 mt-4"><img height="auto" width="auto" [src]="card.productImage" class="headimg"></div>
                               <div class="col-lg-6 mr-2">
                                 <h4><b>{{card.productName}}</b></h4>
                                 <br>
-                        <p class="font-italic" [innerHTML]="card.review.length>70? (card.review | slice:0:70) + '...' :(card.review) "></p> 
+                        <p class="font-italic" [innerHTML]="card.review.length>50? (card.review | slice:0:50) + '...' :(card.review) "></p> 
                           </div>
                           </div>
                             <footer class="blockquote-footer pt-4 mt-4 border-top">Rating:-

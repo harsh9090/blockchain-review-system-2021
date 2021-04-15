@@ -1,59 +1,62 @@
 
 <div *ngIf="show" style="min-height: 100vh;">
- <h1 style="margin-left:10%; margin-top:10%"> Please wait reviews are being loaded
-</h1></div>
-
-<div *ngIf="!show" style="min-height: 100vh;">
-<div *ngIf="noReview" style="margin-left:6%;margin-top: 20%;"> <h1>No Reviews Available</h1></div>
-<div *ngIf="!noReview" style="max-width:100vw;min-height: 100vh;">
-    <div fxFlex.gt-lg="25" fxFlex.gt-md="80" fxFlex.gt-xs="100" fxFlex="100" style="margin-bottom:15vh;margin-left: auto;margin-right: auto;margin-top: 100px;min-height: 80vh;">
-
-  <div class="card-header card-header-danger" style="background-color: red;">
-    <div class="card-icon card-header-success" style="margin-top: -20px !important;background: linear-gradient(60deg, #66bb6a, #43a047); float: left;padding: 15px;border-radius: 3px;margin-right: 15px;">
-        <i class="material-icons" style="color: white;">store</i>
-    </div>
-    <h3 class="card-title" style="color: white;"><b>All Reviews</b></h3>
-</div>
-  <div class="flex-container" style="justify-content: center;min-height: 40vh;margin: 5vh 5vh 0vh 5vh;">
-  
-<div class="row" style="min-width: 60vw;">
-  <div class="col-lg-6 mx-auto" *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index'
-  style="height:46vh;" >
-
-      <!-- CUSTOM BLOCKQUOTE -->
-
-      <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded" style="height: 38vh;">
-          <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
-          <div class="row">
-            <div class="col-sm-4 mr-2 mt-4"><img [src]="card.image" class="headimg"></div>
-            <div class="col-sm-7 mr-2">
-              <h4><b>{{card.username}}</b></h4>
-          <p class="font-italic" [innerHTML]="card.content.length>70? (card.content | slice:0:70) + '...' :(card.content) "></p> 
-        </div>
-        </div>
-          <footer class="blockquote-footer pt-4 mt-4 border-top">Rating:-
-             <i class="fa fa-star" *ngFor="let item of fakeArray(card.rating);" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
-            <i class="fa fa-star" *ngFor="let item of fakeArray(5-card.rating);" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
-                         
-            <!-- <i class="fa fa-star" *ngIf="card.rating >= 1" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
-            <i class="fa fa-star" *ngIf="card.rating >= 2" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
-            <i class="fa fa-star" *ngIf="card.rating >= 3" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
-            <i class="fa fa-star" *ngIf="card.rating >= 4" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
-            <i class="fa fa-star" *ngIf="card.rating >= 5" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
-            <i class="fa fa-star" *ngIf="card.rating < 1" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
-            <i class="fa fa-star" *ngIf="card.rating < 2" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
-            <i class="fa fa-star" *ngIf="card.rating < 3" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
-            <i class="fa fa-star" *ngIf="card.rating < 4" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
-            <i class="fa fa-star" *ngIf="card.rating < 5" id="1fa5" aria-hidden="true" style="color: grey !important;"></i> -->
-            <br>
-          <button style="float: right;" mat-button (click)="showReview(i)">Read More</button>
-          </footer>
-      </blockquote><!-- END -->
-
-  </div>
-</div>
-  </div>
-    <mat-paginator #paginator [pageSizeOptions]="[6,9]" [length]="allReviews.length" style="bottom: 0px;position: relative;"></mat-paginator>
-  </div>
-  </div>
-</div>
+  <h1 style="margin-left:10%; margin-top:10%"> Please wait reviews are being loaded
+ </h1></div>
+ 
+ <div *ngIf="!show" style="min-height: 100vh;">
+ <div *ngIf="noReview" style="margin-left:6%;margin-top: 20%;"> <h1>No Reviews Available</h1></div>
+ <div *ngIf="!noReview" style="max-width:100vw;min-height: 100vh;">
+     <div fxFlex.gt-lg="25" fxFlex.gt-md="80" fxFlex.gt-xs="100" fxFlex="100" style="margin-bottom:15vh;margin-left: auto;margin-right: auto;margin-top: 100px;min-height: 80vh;">
+ 
+   <div class="card-header card-header-danger" style="background-color: red;">
+     <div class="card-icon card-header-success" style="margin-top: -20px !important;background: linear-gradient(60deg, #66bb6a, #43a047); float: left;padding: 15px;border-radius: 3px;margin-right: 15px;">
+         <i class="material-icons" style="color: white;">store</i>
+     </div>
+     <h3 class="card-title" style="color: white;"><b>All Reviews</b></h3>
+ </div>
+   <div class="flex-container" style="justify-content: center;min-height: 40vh;margin: 5vh 5vh 0vh 5vh;">
+   
+   <!-- <mat-card class="example-card" *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index' 
+   style=" height:40vh;">
+       <mat-card-header style="padding: 0 !important;padding-top:auto;flex:0;max-height:15vh;">
+         <img [src]="card.image" class="headimg" >
+       </mat-card-header>
+       <mat-card-content [innerHTML]="card.content.length>200? (card.content+ '<br><b>rating:-<b> ' + card.Rating + ' Star' + '<br>By:- ' +card.username | slice:0:200)+'.....':(card.content+ '<br><b>Rating:-<b> ' + card.rating + ' Star'+ '<br>By:- ' +card.username)" style="font-size: 12px !important; margin-top: 5px; ;overflow: hidden;height:15vh;-webkit-box-orient: vertical;">
+     <br> 
+     Rating:- {{card.rating}}
+       </mat-card-content>
+       <mat-card-actions style="bottom: 10%;margin-bottom: 10px;display:unset !important">
+         <button mat-button (click)="showReview(i)">Read More</button>
+         </mat-card-actions>
+ </mat-card> -->
+ <div class="row" style="width:fit-content;min-width: 60vw;">
+   <div class="col-lg-6 mx-auto" *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index'
+   style="height:280px;margin-bottom: 15px;" >
+ 
+       <!-- CUSTOM BLOCKQUOTE -->
+ 
+       <blockquote class="blockquote blockquote-custom bg-white pt-5 pl-4 pr-4  shadow rounded" style="height: 260px;width: auto;min-width:450px;max-width: 40vw;">
+           <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+           <div class="row">
+             <div class="col-sm-4 mt-4"><img [src]="card.image" class="headimg"></div>
+             <div class="col-sm-7">
+               <h4><b>{{card.username}}</b></h4>
+           <p class="font-italic" [innerHTML]="card.content.length>65? (card.content | slice:0:65) + '...' :(card.content) "></p> 
+         </div>
+         </div>
+           <footer class="blockquote-footer pt-4 mt-4 border-top">Rating:-
+              <i class="fa fa-star" *ngFor="let item of fakeArray(card.rating);" id="1fa5" aria-hidden="true" style="color: orange !important;"></i>
+             <i class="fa fa-star" *ngFor="let item of fakeArray(5-card.rating);" id="1fa5" aria-hidden="true" style="color: grey !important;"></i>
+                          
+            
+           <button style="float: right;" mat-button (click)="showReview(i)">Read More</button>
+           </footer>
+       </blockquote><!-- END -->
+ 
+   </div>
+ </div>
+   </div>
+     <mat-paginator #paginator [pageSizeOptions]="[6,9]" [length]="allReviews.length" style="bottom: 0px;position: relative;"></mat-paginator>
+   </div>
+   </div>
+ </div>
