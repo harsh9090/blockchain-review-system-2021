@@ -8,11 +8,6 @@
     background-repeat: no-repeat
 }
 
-body {
-    background: #654ea3;
-    background: linear-gradient(to right, #e96443, #904e95);
-    min-height: 100vh
-}
 
 ::ng-deep
 .mat-paginator{
@@ -21,11 +16,11 @@ body {
   max-width: 1200px;
   margin-top: 5vh;
   color:#ffffff;
-  background-color: #1975e2;
+  background-color: red;
 }
 
 .col-lg-16{
-    padding: 0px 140px;
+    padding: 0px 20px;
 }
 
 .headimg{
