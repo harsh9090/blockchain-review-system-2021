@@ -49,6 +49,10 @@
       flex-direction: row;
       flex-flow:row wrap;
   }
+
+  blockquote{
+    height: 260px;width: auto;min-width:450px;max-width: 40vw;
+  }
   
   .blockquote-custom {
     position: relative;
@@ -113,6 +117,13 @@
   .headimg{
     height:140px;
     width:140px;
+  }
+
+  blockquote{
+    margin-top: 14px !important;
+    height: 70vh !important;
+    min-width: 70vw !important;
+    max-width: 80vw !important;
   }
   
   }

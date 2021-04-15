@@ -29,13 +29,13 @@
          <button mat-button (click)="showReview(i)">Read More</button>
          </mat-card-actions>
  </mat-card> -->
- <div class="row" style="width:fit-content;min-width: 60vw;">
+ <div fxLayout="row wrap" style="width:fit-content;min-width: 60vw;">
    <div class="col-lg-6 mx-auto" *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index'
    style="height:280px;margin-bottom: 15px;" >
  
        <!-- CUSTOM BLOCKQUOTE -->
  
-       <blockquote class="blockquote blockquote-custom bg-white pt-5 pl-4 pr-4  shadow rounded" style="height: 260px;width: auto;min-width:450px;max-width: 40vw;">
+       <blockquote class="blockquote blockquote-custom bg-white pt-5 pl-4 pr-4  shadow rounded">
            <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
            <div class="row">
              <div class="col-sm-4 mt-4"><img [src]="card.image" class="headimg"></div>
