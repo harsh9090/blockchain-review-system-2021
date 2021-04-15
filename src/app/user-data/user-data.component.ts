@@ -40,7 +40,11 @@ export class UserDataComponent implements OnInit {
       this.image = arr. productImage;
     }
     if(this.ipfs.userAllReview){
-      console.log(this.ipfs.userAllReview)
+      var data = this.ipfs.userAllReview
+      this.allreviews = data;
+      this.dataSource = new MatTableDataSource<any>(data);
+      this.dataSource.paginator = this.paginator;
+      this.obs = this.dataSource.connect();
       //user all reviews
     }
   this.ipfs.username('sec').then(data=>{
@@ -49,7 +53,6 @@ export class UserDataComponent implements OnInit {
     this.image = data.productImage;
   })
   this.ipfs.userReviews.subscribe(data=>{
-    console.log(data);
     this.allreviews = data;
     this.dataSource = new MatTableDataSource<any>(data);
     this.dataSource.paginator = this.paginator;
@@ -58,6 +61,7 @@ export class UserDataComponent implements OnInit {
   })
 
   this.eth.getPoints().then(data=>{
+    console.log(data)
   })
 
 

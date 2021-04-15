@@ -242,8 +242,8 @@ userAllReview;
     return await data;
   }
 });
-this.lastReviews = data;
-this.LastFiveReviews.next(data);
+this.userAllReview = data;
+this.userReviews.next(data);
 return await data;
 }
 userInfo;
