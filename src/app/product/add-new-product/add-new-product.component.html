@@ -107,7 +107,7 @@
     <br />
     <br />
     <h3>Place side images :</h3>
-    <small class="class-footer" *ngIf = "imagecount != 5">Please upload all 5 images.</small>
+    <small class="class-footer" *ngIf = "imagecount != 5">Please upload images if required.</small>
     <div fxLayout='row wrap' fxLayoutAlign='space-between none'>
       <div *ngFor="let i of [0,1,2,3,4]" fxLayout='column'>
           <img src="{{images[i]}}" class="image" alt="side image {{i+1}}">

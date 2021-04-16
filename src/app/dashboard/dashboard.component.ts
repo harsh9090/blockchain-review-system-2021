@@ -18,7 +18,16 @@ export class DashboardComponent implements OnInit {
   totalReviews;
 
   viewReview(number){
-    this.view.openReview(this.reviews[number])
+    var review = {
+      username: this.reviews[number].username,
+      content: this.reviews[number].review,
+      image: this.reviews[number].productImage,
+      rating : this.reviews[number].rating
+    }
+    if(!review.image){
+      review.image  = '../../../assets/img/im1.jpg';
+    }
+    this.view.openReview(review)
   }
   viewProduct(num){
     this.router.navigate(['/view-product'],{queryParams:{number:num,name:this.products[num].title}})

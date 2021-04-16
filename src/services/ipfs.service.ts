@@ -35,6 +35,7 @@ export class IpfsService {
         this.result = result;
        await this.ethcontract.addDetails(result, title).then(result => {
           this.initialProduct();
+          this.getLastProduct()
           return result;
         }).catch(error => {
           return error;
@@ -130,6 +131,9 @@ export class IpfsService {
             this.ipfs.add(stringValue)
           .then(async hash2 => {
           await  this.ethcontract.addReview(prname, rating, hash1, hash2).then(result => {
+            this.error.openDialog('Review Added Successfully')
+            this.getLastReviews();
+              this.router.navigate(['dashboard']);
             return result;
             }).catch(error => {
               return error;
@@ -150,7 +154,8 @@ export class IpfsService {
 
             this.ethcontract.addReview(prname, rating, hash1, hash2).then(result => {
               this.error.openDialog('Review Added Successfully')
-              this.router.navigate(['show-products']); 
+              this.getLastReviews();
+              this.router.navigate(['dashboard']); 
               return result;
             }).catch(error => {
               return error;
