@@ -109,7 +109,44 @@ export class EthercontractService {
     return promises;
   }
 
+  async getReward(){
+    await this.getAccountInfo().then((data2:any)=>{
+      this.account = data2.fromAccount
+    }).catch(e=>{
+      console.log(e)
+      // this.error.openDialog('you are not logged in to matamask')
+    });
+    var promises =await new Promise((resolve, reject) => {
+      var acc=this.account
+      let paymentContract = TruffleContract(tokenAbi);
+      paymentContract.setProvider(this.web3Provider);
+      paymentContract.deployed().then(function(instance) {
+          return instance.redeemPrice({
+            from: acc
+          });
+        }).then(function(status) {
+          console.log(status)
+         var data = this.makeid()
+         console.log(data)
+          return data;
+        }).catch(function(error){
+          this.error.openDialog('There is a problem in getting rewards');
+          this.route.navigate(['/add-product']);
+          return reject('AddProduct');
+        });
+    });
+    return promises;
+  }
 
+makeid() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < 5; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
 
   async addDetails(data:any,title:string) {
     await this.getAccountInfo().then((data2:any)=>{

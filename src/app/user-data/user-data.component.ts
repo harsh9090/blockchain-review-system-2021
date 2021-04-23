@@ -70,12 +70,18 @@ export class UserDataComponent implements OnInit {
     //user all data
   })
 
-  this.eth.getPoints().then(data=>{
-    console.log(data)
+  this.eth.getPoints().then((data:number)=>{
+    this.userPoint = data;
   })
 
-
   } 
+  cutPoint(){
+    console.log("click")
+    this.eth.getReward().then(data=>{
+      console.log(data)
+    })
+  }
+  userPoint:number=0;
   datavalue;
   showReview(card){
     var data;

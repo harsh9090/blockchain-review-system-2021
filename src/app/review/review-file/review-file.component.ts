@@ -52,7 +52,6 @@ fakeArray(length: number): Array<any> {
           post.content=rev.review
           this.allReviews.push(post)
         }
-        console.log(this.allReviews)
        this.dataSource = new MatTableDataSource<any>(this.allReviews);
        this.dataSource.paginator = this.paginator;
        this.obs = this.dataSource.connect();
