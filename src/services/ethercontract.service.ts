@@ -216,8 +216,6 @@ makeid() {
           })
         }).then(function(status) {
           if(status) {
-            err.openDialog('Review Added Successfully')
-            route.navigate(['show-products']);  
             return resolve('success');
           }
         }).catch(function(error){

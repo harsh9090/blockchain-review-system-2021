@@ -39,6 +39,7 @@ export class UserDataComponent implements OnInit {
       if(arr.productImage)
       this.image = arr. productImage;
     }
+    console.log(this.ipfs.userAllReview)
     if(this.ipfs.userAllReview){
       var data = this.ipfs.userAllReview
       this.allreviews = data;

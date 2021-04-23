@@ -52,9 +52,12 @@ ngOnInit(){
     this.dataSource.sort = this.sort;
     this.dataLength = res.length;
   })
-  if(this.ipfs.allProducts){
+  if(this.ipfs.allProducts.length != 0){
     this.allData = this.ipfs.allProducts
     this.dataSource = new MatTableDataSource(this.allData);
+    this.show = false;
+    this.dataSource.paginator = this.paginator; // For pagination
+     this.dataSource.sort = this.sort; // For sort
   }
   setInterval(()=>{
     if(this.allData==null){

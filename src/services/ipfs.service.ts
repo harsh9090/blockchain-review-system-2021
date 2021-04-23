@@ -133,6 +133,7 @@ export class IpfsService {
           await  this.ethcontract.addReview(prname, rating, hash1, hash2).then(result => {
             this.error.openDialog('Review Added Successfully')
             this.getLastReviews();
+            this.userAllReview();
               this.router.navigate(['dashboard']);
             return result;
             }).catch(error => {
@@ -155,6 +156,7 @@ export class IpfsService {
             this.ethcontract.addReview(prname, rating, hash1, hash2).then(result => {
               this.error.openDialog('Review Added Successfully')
               this.getLastReviews();
+              this.userAllReview();
               this.router.navigate(['dashboard']); 
               return result;
             }).catch(error => {

@@ -101,7 +101,7 @@ this.length = 0;
   selectedFile = null;
   categories: string[] = [
     'restaurant',
-    'genral store',
+    'general store',
     'public place'
   ];
 

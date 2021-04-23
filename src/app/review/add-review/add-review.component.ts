@@ -55,16 +55,17 @@ export class AddReviewComponent {
    setTimeout(()=>{
     var name = localStorage.getItem("userData");
     var arr = JSON.parse(name);
-    if(name){
+    if(arr){
       this.product.get('username').setValue(arr.title)
     }
    },100)
    setTimeout(()=>{
     var name = localStorage.getItem("userData");
     var arr = JSON.parse(name);
-    if(!name){
-      
-      this.err.openDialog('Please login to the system')
+    if(!arr){
+      this.err.openDialog(`Please Create Profile
+             OR
+       Login to MataMask`)
       this.router.navigate(['/dashboard']);
     }
     else{
@@ -142,6 +143,9 @@ this.ipfs.getProduct()
  async save(value) {
     this.show=true;
     this.formData = value;
+    if(this.product.get('username').value == ''){
+      this.err.openDialog('Please Create Your Profile<BR><p align=center> OR</p><BR> Login to MataMask')
+    }
     var data1 = {
       username: this.product.get('username').value,
       productName: this.title,
