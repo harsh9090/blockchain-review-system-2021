@@ -125,9 +125,9 @@ export class EthercontractService {
         }).then(function(status) {
           console.log(status)
          var data = this.makeid()
+       
          console.log(data)
-         console.log(data)
-          return data;
+          return resolve(data);
         }).catch(function(error){
           this.error.openDialog('There is a problem in getting rewards');
           this.route.navigate(['/add-product']);

@@ -241,7 +241,6 @@ userAllReview = [];
            return null;
          }
      await this.GetData(file[i]).then((data2) => {
-       console.log(data2)
        var final = JSON.parse(data2)
        data.push(final)
       });

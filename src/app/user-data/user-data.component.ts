@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ErrorServService } from 'services/error-serv.service';
 import { EthercontractService } from 'services/ethercontract.service';
@@ -19,7 +20,7 @@ export class UserDataComponent implements OnInit {
   obs: Observable<any>;
   dataSource: MatTableDataSource<any>;
 
-  constructor(private serv:ErrorServService,private ipfs:IpfsService,private eth:EthercontractService) { }
+  constructor(private serv:ErrorServService,private ipfs:IpfsService,private eth:EthercontractService,private router:Router) { }
 
   shoRev = true;
   shoPro = false;
@@ -76,12 +77,11 @@ setTimeout(() => {
   })
 
   if(this.ipfs.userAllProducts.length != 0){
-    this.ipfs.userAllProducts = this.products;
+    this.products = this.ipfs.userAllProducts
   }
   else{
     this.ipfs.getUserProdcts().then(data=>{
       this.products = data;
-      console.log(this.products)
     })
   }
 
@@ -98,7 +98,9 @@ setTimeout(() => {
   })
 
 } 
-
+showProductDetail(str){
+  this.router.navigate(['/view-product'],{queryParams:{name:str}})
+}
 viewReview(){
 this.shoRev = true;
 this.shoPro = false;
@@ -109,8 +111,10 @@ viewProduct(){
 }
 
   cutPoint(){
-    this.eth.getReward().then(data=>{
-    })
+    console.log('cut')
+    // this.eth.getReward().then(data=>{
+
+    // })
   }
 
 

@@ -6,10 +6,12 @@
                     <div class="profile mr-3"><img src="{{image}}" alt="..." width="130" class="rounded mb-2 img-thumbnail"><a (click)="editForm()" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a></div>
                     <div class="media-body mb-5 text-white">
                         <h4 class="mt-0 mb-0" style="color: white; font-weight: 600; font-size: large;">{{this.name}}</h4>
-                       <B> <h4 style="color:white;" align=right>Total Points: - {{userPoint}}</h4>
-                       </B> 
-                       <B> <h4 style="color:white;" align=right><button (click)="cutPoint()">Reedem Points</button></h4>
-                       </B> </div>
+                        <nav><h4 style="color:white;">Total Points: - {{userPoint}}</h4>
+                        </nav>
+                        <article align=right>
+                            <a *ngIf="shoRev" class="btn btn-dark example_e" (click)="cutPoint()">Reedem Points</a>
+                        </article>
+                        </div>
                 </div>
             </div>
             <div class="px-4 py-3">   
@@ -61,6 +63,7 @@
                                 </thead>
                                 <tbody>
                                     <tr  *ngFor="let card of this.products; let i = index " 
+                                    (click)="showProductDetail(card.title)"
                                      style="cursor: pointer;">
                                         <td>{{i+1}}</td>
                                         <td>{{card.title}} </td>
