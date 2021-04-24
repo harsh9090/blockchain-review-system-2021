@@ -17,9 +17,11 @@
             <br><Br>
             <div class="py-4 px-4">
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h3 class="mb-0">Recent Reviews    Added Products</h3> 
+                    <h3 class="mb-0"><a *ngIf="shoRev" class="btn btn-dark ">Recent Reviews</a><a (click)="viewReview()" *ngIf="!shoRev" class="btn btn-outline-dark ">Recent Reviews</a> 
+                        <a *ngIf="shoPro" class="btn btn-dark">Added Products</a><a (click)="viewProduct()" *ngIf="!shoPro" class="btn btn-outline-dark">Added Products</a></h3> 
                 </div>
-                <div class="flex-container" style="justify-content: center;">
+                <div *ngIf="shoRev">
+                <div  class="flex-container" style="justify-content: center;">
                 <div class="row mt-5 ml-2" style="width:fit-content;min-width: 40vw;justify-content: center;">
                     <div class="col-lg-16"  *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index' style="height: 280px;margin-bottom: 15px;">
                   
@@ -44,9 +46,33 @@
                   
                     </div>
                   </div> 
-                  </div>
+                </div>
                   <mat-paginator #paginator [pageSizeOptions]="[5,10]"></mat-paginator>
-            </div>
+                  </div>
+                  <div *ngIf="shoPro">
+                    <div  class="flex-container" style="justify-content: center;">
+                        <div class="card-body table-responsive">
+                            <table class="table table-hover">
+                                <thead class="text-warning">
+                                    <th>Number</th>
+                                    <th>Place Name</th>
+                                    <th>Description</th>
+                                    <th>Category</th>
+                                </thead>
+                                <tbody>
+                                    <tr  *ngFor="let card of this.products; let i = index " 
+                                     style="cursor: pointer;">
+                                        <td>{{i+1}}</td>
+                                        <td>{{card.title}} </td>
+                                        <td> {{card.shortDescription}} </td>
+                                        <td>{{card.category}} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                      </div> 
+                    </div>
+                    </div>
         </div>
     </div>
 </div>

@@ -21,6 +21,8 @@ export class UserDataComponent implements OnInit {
 
   constructor(private serv:ErrorServService,private ipfs:IpfsService,private eth:EthercontractService) { }
 
+  shoRev = true;
+  shoPro = false;
   editForm(){
     this.serv.editDetails();
   }
@@ -30,8 +32,9 @@ export class UserDataComponent implements OnInit {
       return new Array(length);
     }
   }
-
+products= [];
   ngOnInit(): void {
+   
     var name = localStorage.getItem('userData');
     if(name){
       var arr = JSON.parse(name);
@@ -53,15 +56,13 @@ setTimeout(() => {
     this.obs = this.dataSource.connect();
     //user all reviews
   }
-  console.log(this.ipfs.userAllReview)
   if(this.ipfs.userAllReview.length == 0){
    
     this.ipfs.getUserReviews().then(data=>{
-      console.log(data)
+ 
     })
   }
   this.ipfs.userReviews.subscribe(data=>{
-    console.log(data)
     this.allreviews = data;
     for(var i=0;i<this.allreviews.length;i++){
       if(!this.allreviews[i].productImage){
@@ -74,7 +75,17 @@ setTimeout(() => {
     //user all data
   })
 
-}, 1500);
+  if(this.ipfs.userAllProducts.length != 0){
+    this.ipfs.userAllProducts = this.products;
+  }
+  else{
+    this.ipfs.getUserProdcts().then(data=>{
+      this.products = data;
+      console.log(this.products)
+    })
+  }
+
+}, 200);
    
   this.ipfs.username('sec').then(data=>{
     this.name = data.title;
@@ -88,8 +99,14 @@ setTimeout(() => {
 
 } 
 
-
-
+viewReview(){
+this.shoRev = true;
+this.shoPro = false;
+}
+viewProduct(){
+  this.shoRev = false;
+  this.shoPro = true;
+}
 
   cutPoint(){
     this.eth.getReward().then(data=>{

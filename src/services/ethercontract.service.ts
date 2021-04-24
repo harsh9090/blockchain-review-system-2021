@@ -86,7 +86,6 @@ export class EthercontractService {
       this.account = data2.fromAccount
     }).catch(e=>{
       console.log(e)
-      // this.error.openDialog('you are not logged in to matamask')
     });
     var promises =await new Promise((resolve, reject) => {
       var acc=this.account
@@ -114,8 +113,7 @@ export class EthercontractService {
       this.account = data2.fromAccount
     }).catch(e=>{
       console.log(e)
-      // this.error.openDialog('you are not logged in to matamask')
-    });
+     });
     var promises =await new Promise((resolve, reject) => {
       var acc=this.account
       let paymentContract = TruffleContract(tokenAbi);
@@ -127,6 +125,7 @@ export class EthercontractService {
         }).then(function(status) {
           console.log(status)
          var data = this.makeid()
+         console.log(data)
          console.log(data)
           return data;
         }).catch(function(error){
@@ -453,6 +452,40 @@ makeid() {
           }).catch(function(error){
             this.error.openDialog('There is a problem in adding details');
             return reject('AddProduct');
+          });
+      });
+      return promises;
+    }
+
+    async getUserProductAll(){
+      await this.getAccountInfo().then((data2:any)=>{
+        this.account = data2.fromAccount
+      }).catch(e=>{
+      });
+      var promises =await new Promise((resolve, reject) => {
+        var acc=this.account
+        let paymentContract = TruffleContract(tokenAbi);
+        paymentContract.setProvider(this.web3Provider);
+        paymentContract.deployed().then(function(instance) {
+            return instance.getAllProductsUploadedByUser({
+              from: acc
+            });
+          }).then(function(status) {
+            var product = [];
+            status.forEach(element => {
+              var result = "";
+            for(var i = 0; i < element.length; ++i){
+              result+= (String.fromCharCode(element[i]));
+            }
+            product.push(result);
+            });
+            if(product) {
+              return resolve(product);
+            }
+              return resolve(status);
+          }).catch(function(error){
+            this.error.openDialog('There is a problem in getting details');
+            return reject('viewUserProduct');
           });
       });
       return promises;

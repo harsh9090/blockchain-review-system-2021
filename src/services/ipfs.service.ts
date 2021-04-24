@@ -241,6 +241,7 @@ userAllReview = [];
            return null;
          }
      await this.GetData(file[i]).then((data2) => {
+       console.log(data2)
        var final = JSON.parse(data2)
        data.push(final)
       });
@@ -257,6 +258,30 @@ await this.userReviews.next(data);
 return await data;
 
 }
+userAllProducts = [];
+  async getUserProdcts() {
+    var data = [];
+    await this.ethcontract.getUserProductAll().then(async (file: any) => {
+      if(file.length == 0){
+        data = null;
+        return null;
+      }
+       for (var i = 0; i < file.length; i++){
+     await this.GetData(file[i]).then((data2) => {
+       data.push(data2)
+      });
+    }
+    this.userAllProducts = data;
+    return await data;
+});
+this.userAllProducts = data;
+return await data;
+
+}
+
+
+
+
 userInfo;
   async getUser(str: string){
     await this.ethcontract.getUserDetail(str).then(async data => {
