@@ -39,26 +39,29 @@ export class UserDataComponent implements OnInit {
       if(arr.productImage)
       this.image = arr. productImage;
     }
-    console.log(this.ipfs.userAllReview)
-    if(this.ipfs.userAllReview){
-      var data = this.ipfs.userAllReview
-      this.allreviews = data;
-      for(var i=0;i<this.allreviews.length;i++){
-        if(!this.allreviews[i].productImage){
-          this.allreviews[i].productImage = '../../../assets/img/im1.jpg';
-        }
+setTimeout(() => {
+  if(this.ipfs.userAllReview.length != 0){
+    var data = this.ipfs.userAllReview
+    this.allreviews = data;
+    for(var i=0;i<this.allreviews.length;i++){
+      if(!this.allreviews[i].productImage){
+        this.allreviews[i].productImage = '../../../assets/img/im1.jpg';
       }
-      this.dataSource = new MatTableDataSource<any>(data);
-      this.dataSource.paginator = this.paginator;
-      this.obs = this.dataSource.connect();
-      //user all reviews
     }
-  this.ipfs.username('sec').then(data=>{
-    this.name = data.title;
-    if(data.productImage)
-    this.image = data.productImage;
-  })
+    this.dataSource = new MatTableDataSource<any>(data);
+    this.dataSource.paginator = this.paginator;
+    this.obs = this.dataSource.connect();
+    //user all reviews
+  }
+  console.log(this.ipfs.userAllReview)
+  if(this.ipfs.userAllReview.length == 0){
+   
+    this.ipfs.getUserReviews().then(data=>{
+      console.log(data)
+    })
+  }
   this.ipfs.userReviews.subscribe(data=>{
+    console.log(data)
     this.allreviews = data;
     for(var i=0;i<this.allreviews.length;i++){
       if(!this.allreviews[i].productImage){
@@ -71,17 +74,29 @@ export class UserDataComponent implements OnInit {
     //user all data
   })
 
+}, 1500);
+   
+  this.ipfs.username('sec').then(data=>{
+    this.name = data.title;
+    if(data.productImage)
+    this.image = data.productImage;
+  })
+ 
   this.eth.getPoints().then((data:number)=>{
     this.userPoint = data;
   })
 
-  } 
+} 
+
+
+
+
   cutPoint(){
-    console.log("click")
     this.eth.getReward().then(data=>{
-      console.log(data)
     })
   }
+
+
   userPoint:number=0;
   datavalue;
   showReview(card){

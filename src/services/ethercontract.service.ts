@@ -423,15 +423,10 @@ makeid() {
       return promises;
     }
 
-    async getUserReviewAll(str:string){
+    async getUserReviewAll(){
       await this.getAccountInfo().then((data2:any)=>{
         this.account = data2.fromAccount
       }).catch(e=>{
-        if(str!='main'){
-        if(e=='Account'){
-          this.error.openDialog('You are not logged in to system')
-          }
-        }
       });
       var promises =await new Promise((resolve, reject) => {
         var acc=this.account

@@ -2,6 +2,7 @@ pragma solidity ^0.5.16;
 contract MyContract{
     
     struct reviewFile{
+        uint noOfReviews;
         uint rating; // should be a number between 0 to 100
         string reviewFile_hash;
     }
@@ -23,6 +24,7 @@ contract MyContract{
     mapping(string => review[]) reviewsByProduct; //mapping from product to user to review
     mapping(address => string[]) reviewerToProduct; //mapping from reviewer to product which is reviewed by reviewer
     mapping(address => string[]) reviewerToReview; //store reviews which are given by reviewer
+    mapping(address => string[]) ownerToProduct; //store products which are uploaded by owner
     uint ipfs_length=46;
     mapping(address => uint) points;
     uint balanceRequiredForProductOwner;
@@ -132,6 +134,7 @@ contract MyContract{
         products.push(_product_name);
         product_hash[_product_name]=_ipfs_hash;
         addProductHashToLatest5(_ipfs_hash);
+        ownerToProduct[msg.sender].push(_ipfs_hash);
         totalProduct++;
     }
     
@@ -146,6 +149,19 @@ contract MyContract{
     
     function getLatest5Products() public view returns(byte[46][5] memory){
         return latest5Products;
+    }
+    
+    function getAllProductsUploadedByUser() public view returns(byte[46][] memory){
+        address sender = msg.sender;
+        string[] memory temp = ownerToProduct[sender];
+        uint length=temp.length;
+        byte[46][] memory productsOfUser = new byte[46][](length);
+        for(uint i=0;i<length;i++){
+            bytes memory b = bytes(temp[i]);
+            for(uint j=0;j<46;j++)
+                productsOfUser[i][j] = b[j];
+        }
+        return productsOfUser;
     }
     
     function checkIfAlreadyReviewed(string memory _product_name) public view returns(bool){
@@ -181,7 +197,7 @@ contract MyContract{
         uint current_rating = reviewFileByProduct[_product_name].rating;
         uint length=reviewsByProduct[_product_name].length;
         uint updated_rating = (current_rating*length + _rating)/(length+1);
-        reviewFile memory temp = reviewFile(updated_rating,_reviewFile_hash);
+        reviewFile memory temp = reviewFile(reviewFileByProduct[_product_name].noOfReviews+1,updated_rating,_reviewFile_hash);
         reviewFileByProduct[_product_name]=temp;
         reviewsByProduct[_product_name].push(review(msg.sender,_review_hash));
         addReviewHashToLatest5(_review_hash);

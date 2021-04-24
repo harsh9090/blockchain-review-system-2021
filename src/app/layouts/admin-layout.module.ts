@@ -1,5 +1,3 @@
-import { IpfsService } from '../../services/ipfs.service';
-import { EthercontractService } from './../../services/ethercontract.service';
 import { ProductsTableComponent } from '../layouts/show-all-products/products-table/products-table.component';
 import { ShowAllProductsComponent } from '../layouts/show-all-products/show-all-products.component';
 import { NgModule } from '@angular/core';

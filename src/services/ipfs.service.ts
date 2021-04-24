@@ -133,7 +133,7 @@ export class IpfsService {
           await  this.ethcontract.addReview(prname, rating, hash1, hash2).then(result => {
             this.error.openDialog('Review Added Successfully')
             this.getLastReviews();
-            this.userAllReview();
+            this.getUserReviews();
               this.router.navigate(['dashboard']);
             return result;
             }).catch(error => {
@@ -156,7 +156,7 @@ export class IpfsService {
             this.ethcontract.addReview(prname, rating, hash1, hash2).then(result => {
               this.error.openDialog('Review Added Successfully')
               this.getLastReviews();
-              this.userAllReview();
+              this.getUserReviews();
               this.router.navigate(['dashboard']); 
               return result;
             }).catch(error => {
@@ -228,10 +228,10 @@ export class IpfsService {
       return this.userResult;
   }
   userReviews = new Subject<any>();
-userAllReview;
-  async getUserReviews(str) {
+userAllReview = [];
+  async getUserReviews() {
     var data = [];
-    await this.ethcontract.getUserReviewAll(str).then(async (file: any) => {
+    await this.ethcontract.getUserReviewAll().then(async (file: any) => {
       if (file[0] == "  "){
         return null;
       }
@@ -245,13 +245,17 @@ userAllReview;
        data.push(final)
       });
     }
+    this.userAllReview = data;
     await this.userReviews.next(data);
     return await data;
   }
 });
+
 this.userAllReview = data;
-this.userReviews.next(data);
+
+await this.userReviews.next(data);
 return await data;
+
 }
 userInfo;
   async getUser(str: string){
