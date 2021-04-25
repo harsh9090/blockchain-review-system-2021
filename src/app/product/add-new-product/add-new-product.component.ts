@@ -10,7 +10,6 @@ import { ImageCropDialogComponent } from '../image-crop-dialog/image-crop-dialog
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { IpfsService } from 'services/ipfs.service';
-import { ErrorServService } from 'services/error-serv.service';
 
 @Component({
   selector: 'app-add-new-product',
@@ -29,19 +28,9 @@ export class AddNewProductComponent implements OnInit {
     private dialog: MatDialog,
     private snackbar: MatSnackBar,
     private ipfs:IpfsService,
-    private router:Router,
-    private error : ErrorServService
+    private router:Router
   ) {}
   ngOnInit(): void {
-
-    setTimeout(() => {
-      var name = localStorage.getItem('userData');
-      if(!name){
-        this.error.openDialog('Please create your profile!');
-        this.router.navigate(['/dashboard'])
-      }
-    }, 5000);
-
     this.createForm();
 this.ipfs.getProduct()  
 this.length = 0;
