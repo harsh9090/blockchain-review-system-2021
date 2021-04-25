@@ -6,8 +6,12 @@
                     <div class="profile mr-3"><img src="{{image}}" alt="..." width="130" class="rounded mb-2 img-thumbnail"><a (click)="editForm()" class="btn btn-outline-dark btn-sm btn-block">Edit profile</a></div>
                     <div class="media-body mb-5 text-white">
                         <h4 class="mt-0 mb-0" style="color: white; font-weight: 600; font-size: large;">{{this.name}}</h4>
-                        <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>__</p>
-                    </div>
+                        <nav><h4 style="color:white;">Total Points: - {{userPoint}}</h4>
+                        </nav>
+                        <article align=right>
+                            <a *ngIf="shoRev" class="btn btn-dark example_e" (click)="cutPoint()">Reedem Points</a>
+                        </article>
+                        </div>
                 </div>
             </div>
             <div class="px-4 py-3">   
@@ -15,13 +19,14 @@
             <br><Br>
             <div class="py-4 px-4">
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h3 class="mb-0">Recent Reviews</h3> 
+                    <h3 class="mb-0"><a *ngIf="shoRev" class="btn btn-dark ">Recent Reviews</a><a (click)="viewReview()" *ngIf="!shoRev" class="btn btn-outline-dark ">Recent Reviews</a> 
+                        <a *ngIf="shoPro" class="btn btn-dark">Added Products</a><a (click)="viewProduct()" *ngIf="!shoPro" class="btn btn-outline-dark">Added Products</a></h3> 
                 </div>
-                <div class="flex-container" style="justify-content: center;">
+                <div *ngIf="shoRev">
+                <div  class="flex-container" style="justify-content: center;">
                 <div class="row mt-5 ml-2" style="width:fit-content;min-width: 40vw;justify-content: center;">
                     <div class="col-lg-16"  *ngFor='let card of obs | async   |slice:((paginator.pageIndex)*paginator.pageSize):((paginator.pageIndex+1)*paginator.pageSize);let i = index' style="height: 280px;margin-bottom: 15px;">
                   
-                        <!-- CUSTOM BLOCKQUOTE -->
                   
                         <blockquote class="blockquote blockquote-custom bg-white pt-4 pl-4 pr-4 shadow rounded">
                             <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
@@ -43,9 +48,34 @@
                   
                     </div>
                   </div> 
-                  </div>
+                </div>
                   <mat-paginator #paginator [pageSizeOptions]="[5,10]"></mat-paginator>
-            </div>
+                  </div>
+                  <div *ngIf="shoPro">
+                    <div  class="flex-container" style="justify-content: center;">
+                        <div class="card-body table-responsive">
+                            <table class="table table-hover">
+                                <thead class="text-warning">
+                                    <th>Number</th>
+                                    <th>Place Name</th>
+                                    <th>Description</th>
+                                    <th>Category</th>
+                                </thead>
+                                <tbody>
+                                    <tr  *ngFor="let card of this.products; let i = index " 
+                                    (click)="showProductDetail(card.title)"
+                                     style="cursor: pointer;">
+                                        <td>{{i+1}}</td>
+                                        <td>{{card.title}} </td>
+                                        <td> {{card.shortDescription}} </td>
+                                        <td>{{card.category}} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                      </div> 
+                    </div>
+                    </div>
         </div>
     </div>
 </div>

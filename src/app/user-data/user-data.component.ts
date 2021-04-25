@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ErrorServService } from 'services/error-serv.service';
 import { EthercontractService } from 'services/ethercontract.service';
@@ -19,8 +20,10 @@ export class UserDataComponent implements OnInit {
   obs: Observable<any>;
   dataSource: MatTableDataSource<any>;
 
-  constructor(private serv:ErrorServService,private ipfs:IpfsService,private eth:EthercontractService) { }
+  constructor(private serv:ErrorServService,private ipfs:IpfsService,private eth:EthercontractService,private router:Router) { }
 
+  shoRev = true;
+  shoPro = false;
   editForm(){
     this.serv.editDetails();
   }
@@ -30,8 +33,9 @@ export class UserDataComponent implements OnInit {
       return new Array(length);
     }
   }
-
+products= [];
   ngOnInit(): void {
+   
     var name = localStorage.getItem('userData');
     if(name){
       var arr = JSON.parse(name);
@@ -39,24 +43,26 @@ export class UserDataComponent implements OnInit {
       if(arr.productImage)
       this.image = arr. productImage;
     }
-    if(this.ipfs.userAllReview){
-      var data = this.ipfs.userAllReview
-      this.allreviews = data;
-      for(var i=0;i<this.allreviews.length;i++){
-        if(!this.allreviews[i].productImage){
-          this.allreviews[i].productImage = '../../../assets/img/im1.jpg';
-        }
+setTimeout(() => {
+  if(this.ipfs.userAllReview.length != 0){
+    var data = this.ipfs.userAllReview
+    this.allreviews = data;
+    for(var i=0;i<this.allreviews.length;i++){
+      if(!this.allreviews[i].productImage){
+        this.allreviews[i].productImage = '../../../assets/img/im1.jpg';
       }
-      this.dataSource = new MatTableDataSource<any>(data);
-      this.dataSource.paginator = this.paginator;
-      this.obs = this.dataSource.connect();
-      //user all reviews
     }
-  this.ipfs.username('sec').then(data=>{
-    this.name = data.title;
-    if(data.productImage)
-    this.image = data.productImage;
-  })
+    this.dataSource = new MatTableDataSource<any>(data);
+    this.dataSource.paginator = this.paginator;
+    this.obs = this.dataSource.connect();
+    //user all reviews
+  }
+  if(this.ipfs.userAllReview.length == 0){
+   
+    this.ipfs.getUserReviews().then(data=>{
+ 
+    })
+  }
   this.ipfs.userReviews.subscribe(data=>{
     this.allreviews = data;
     for(var i=0;i<this.allreviews.length;i++){
@@ -70,12 +76,49 @@ export class UserDataComponent implements OnInit {
     //user all data
   })
 
-  this.eth.getPoints().then(data=>{
-    console.log(data)
+  if(this.ipfs.userAllProducts.length != 0){
+    this.products = this.ipfs.userAllProducts
+  }
+  else{
+    this.ipfs.getUserProdcts().then(data=>{
+      this.products = data;
+    })
+  }
+
+}, 200);
+   
+  this.ipfs.username('sec').then(data=>{
+    this.name = data.title;
+    if(data.productImage)
+    this.image = data.productImage;
+  })
+ 
+  this.eth.getPoints().then((data:number)=>{
+    this.userPoint = data;
   })
 
+} 
+showProductDetail(str){
+  this.router.navigate(['/view-product'],{queryParams:{name:str}})
+}
+viewReview(){
+this.shoRev = true;
+this.shoPro = false;
+}
+viewProduct(){
+  this.shoRev = false;
+  this.shoPro = true;
+}
 
-  } 
+  cutPoint(){
+    console.log('cut')
+    // this.eth.getReward().then(data=>{
+
+    // })
+  }
+
+
+  userPoint:number=0;
   datavalue;
   showReview(card){
     var data;

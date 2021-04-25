@@ -86,7 +86,6 @@ export class EthercontractService {
       this.account = data2.fromAccount
     }).catch(e=>{
       console.log(e)
-      // this.error.openDialog('you are not logged in to matamask')
     });
     var promises =await new Promise((resolve, reject) => {
       var acc=this.account
@@ -109,7 +108,44 @@ export class EthercontractService {
     return promises;
   }
 
+  async getReward(){
+    await this.getAccountInfo().then((data2:any)=>{
+      this.account = data2.fromAccount
+    }).catch(e=>{
+      console.log(e)
+     });
+    var promises =await new Promise((resolve, reject) => {
+      var acc=this.account
+      let paymentContract = TruffleContract(tokenAbi);
+      paymentContract.setProvider(this.web3Provider);
+      paymentContract.deployed().then(function(instance) {
+          return instance.redeemPrice({
+            from: acc
+          });
+        }).then(function(status) {
+          console.log(status)
+         var data = this.makeid()
+       
+         console.log(data)
+          return resolve(data);
+        }).catch(function(error){
+          this.error.openDialog('There is a problem in getting rewards');
+          this.route.navigate(['/add-product']);
+          return reject('AddProduct');
+        });
+    });
+    return promises;
+  }
 
+makeid() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < 5; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
 
   async addDetails(data:any,title:string) {
     await this.getAccountInfo().then((data2:any)=>{
@@ -179,8 +215,6 @@ export class EthercontractService {
           })
         }).then(function(status) {
           if(status) {
-            err.openDialog('Review Added Successfully')
-            route.navigate(['show-products']);  
             return resolve('success');
           }
         }).catch(function(error){
@@ -388,15 +422,10 @@ export class EthercontractService {
       return promises;
     }
 
-    async getUserReviewAll(str:string){
+    async getUserReviewAll(){
       await this.getAccountInfo().then((data2:any)=>{
         this.account = data2.fromAccount
       }).catch(e=>{
-        if(str!='main'){
-        if(e=='Account'){
-          this.error.openDialog('You are not logged in to system')
-          }
-        }
       });
       var promises =await new Promise((resolve, reject) => {
         var acc=this.account
@@ -423,6 +452,40 @@ export class EthercontractService {
           }).catch(function(error){
             this.error.openDialog('There is a problem in adding details');
             return reject('AddProduct');
+          });
+      });
+      return promises;
+    }
+
+    async getUserProductAll(){
+      await this.getAccountInfo().then((data2:any)=>{
+        this.account = data2.fromAccount
+      }).catch(e=>{
+      });
+      var promises =await new Promise((resolve, reject) => {
+        var acc=this.account
+        let paymentContract = TruffleContract(tokenAbi);
+        paymentContract.setProvider(this.web3Provider);
+        paymentContract.deployed().then(function(instance) {
+            return instance.getAllProductsUploadedByUser({
+              from: acc
+            });
+          }).then(function(status) {
+            var product = [];
+            status.forEach(element => {
+              var result = "";
+            for(var i = 0; i < element.length; ++i){
+              result+= (String.fromCharCode(element[i]));
+            }
+            product.push(result);
+            });
+            if(product) {
+              return resolve(product);
+            }
+              return resolve(status);
+          }).catch(function(error){
+            this.error.openDialog('There is a problem in getting details');
+            return reject('viewUserProduct');
           });
       });
       return promises;
