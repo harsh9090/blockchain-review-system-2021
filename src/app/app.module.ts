@@ -40,6 +40,7 @@ import { Error404Component } from './error404/error404.component';
 import { ReviewShowComponent } from './review-show/review-show.component';
 import { UserDataComponent } from './user-data/user-data.component';
 import { AddDetailsComponent } from './user-data/add-details/add-details.component';
+import { GiftsComponent } from './gifts/gifts.component';
 
 @NgModule({
   imports: [
@@ -83,6 +84,7 @@ import { AddDetailsComponent } from './user-data/add-details/add-details.compone
     ReviewShowComponent,
     UserDataComponent,
     AddDetailsComponent,
+    GiftsComponent,
 
   ],
   providers: [ EthercontractService, IpfsService],

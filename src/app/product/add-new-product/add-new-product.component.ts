@@ -35,7 +35,7 @@ export class AddNewProductComponent implements OnInit {
   ngOnInit(): void {
 
     setTimeout(() => {
-      var name = localStorage.getItem('userData');
+      var name = JSON.parse(localStorage.getItem('userData'));
       if(!name){
         this.error.openDialog('Please create your profile!');
         this.router.navigate(['/dashboard'])

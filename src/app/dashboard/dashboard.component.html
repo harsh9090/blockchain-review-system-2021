@@ -64,7 +64,7 @@
                             <tr *ngFor="let card of this.products; let i = index " (click)="viewProduct(i);" style="cursor: pointer;">
                                 <td>{{i+1}}</td>
                                 <td>{{card.title}}</td>
-                                <td>{{card.shortDescription}}</td>
+                                <td>{{card.shortDescription.length>8 ? (card.shortDescription | slice:0:15)+ '...': (card.shortDescription)}} </td>
                                 <td>{{card.category}}</td>
                             </tr>
                         </tbody>
@@ -89,7 +89,7 @@
                               <th>product</th>   
                           </thead>
                           <tbody >
-                            <tr *ngFor="let card of this.reviews; let i = index" (click)="viewReview(i);">
+                            <tr *ngFor="let card of this.reviews; let i = index" (click)="viewReview(i);" style="cursor: pointer;">
                                 <td>{{i+1}}</td>
                                 <td>{{card.username}}</td>
                                 <td>{{card.productName}}</td>
