@@ -82,6 +82,7 @@ export class EthercontractService {
 
 
   async getPoints(){
+   
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
     }).catch(e=>{
@@ -108,7 +109,11 @@ export class EthercontractService {
     return promises;
   }
 
-  async getReward(){
+  async getReward(data){
+    if(data>100){
+      var data2 = this.makeid()
+      this.error.opengift(data2);
+    }
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
     }).catch(e=>{
@@ -123,11 +128,7 @@ export class EthercontractService {
             from: acc
           });
         }).then(function(status) {
-          console.log(status)
-         var data = this.makeid()
-       
-         console.log(data)
-          return resolve(data);
+          return resolve(status);
         }).catch(function(error){
           this.error.openDialog('There is a problem in getting rewards');
           this.route.navigate(['/add-product']);
@@ -141,7 +142,7 @@ makeid() {
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-  for (var i = 0; i < 5; i++)
+  for (var i = 0; i < 15; i++)
     text += possible.charAt(Math.floor(Math.random() * possible.length));
 
   return text;

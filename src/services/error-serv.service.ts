@@ -1,6 +1,7 @@
 import {  Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Error404Component } from 'app/error404/error404.component';
+import { GiftsComponent } from 'app/gifts/gifts.component';
 import { AddDetailsComponent } from 'app/user-data/add-details/add-details.component';
 import { ReviewShowComponent } from '../app/review-show/review-show.component'
 @Injectable({
@@ -31,6 +32,16 @@ export class ErrorServService {
     const dialogRef = this.dialog.open(Error404Component,{
       height:'200px',
       width:'400px',
+      data:{name:data}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+  async opengift(data:string) {
+    const dialogRef = this.dialog.open(GiftsComponent,{
+      height:'450px',
+      width:'700px',
       data:{name:data}
     });
 
