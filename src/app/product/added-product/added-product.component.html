@@ -1,8 +1,10 @@
-<div
-  class="container"
-  fxFlex
-  fxLayout="column"
-  fxLayoutAlign="space-around none">
+
+<div style="height: 10vh;"></div>
+
+  <div class="container">
+  <div  fxflex fxlayout="column" fxlayoutalign="none" class="container1"
+  style="flex: 1 1 0%;box-sizing: border-box;flex-direction: column;display: flex;
+  place-content: space-evenly;">
   <h3>Place Details > <b>Add new Place</b></h3>
   <div *ngIf = "load && !stop" class="spinner">
     <mat-spinner strokeWidth='2' diameter='110'></mat-spinner>
@@ -46,5 +48,6 @@
       </table>
     </div>
     <br>
+  </div>
     </div>
 </div>
