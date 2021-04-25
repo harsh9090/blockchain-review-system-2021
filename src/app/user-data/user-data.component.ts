@@ -85,7 +85,7 @@ setTimeout(() => {
     })
   }
 
-}, 200);
+}, 500);
    
   this.ipfs.username('sec').then(data=>{
     this.name = data.title;
