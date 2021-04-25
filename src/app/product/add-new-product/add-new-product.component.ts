@@ -30,7 +30,7 @@ export class AddNewProductComponent implements OnInit {
     private snackbar: MatSnackBar,
     private ipfs:IpfsService,
     private router:Router,
-    private error : ErrorServService
+    private error:ErrorServService
   ) {}
   ngOnInit(): void {
 

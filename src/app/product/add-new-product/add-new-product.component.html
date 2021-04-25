@@ -1,4 +1,4 @@
-<div class="container" style="margin-bottom: 100px;" id="top">
+<div class="container" style="margin-bottom: 100px;min-height: 100vh;" id="top">
   <div class="card">
     <div class="card-header card-header-danger">
         <div class="card-icon card-header-success">
@@ -13,8 +13,8 @@
     <div>
       <h3>Please wait... <br> It will take couple of seconds...<br> Adding the Place...</h3>
     </div>       
-  </div>
-  <br>
+  </div> 
+  <br>  
   <form *ngIf = "!show && !resProduct"
     #form="ngForm"
     (ngSubmit)="save(form.value)"
