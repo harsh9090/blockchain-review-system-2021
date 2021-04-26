@@ -45,6 +45,7 @@ allData;
 
 ngOnInit(){
   this.subscribe= this.ipfs.product.subscribe(dat=>{
+    this.show = false;
     this.allData = dat;
     var res = dat;
     this.dataSource = new MatTableDataSource(res);
@@ -70,10 +71,9 @@ ngOnInit(){
 
   ngAfterViewInit(): void { 
     setInterval(() =>{
-      this.show = false;
         this.dataSource.paginator = this.paginator; // For pagination
          this.dataSource.sort = this.sort; // For sort
-    }, 5500);
+    }, 500);
 
   }
 
