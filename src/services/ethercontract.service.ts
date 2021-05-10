@@ -110,10 +110,13 @@ export class EthercontractService {
   }
 
   async getReward(data){
-    if(data>100){
-      var data2 = this.makeid()
-      this.error.opengift(data2);
+    if(data<100){
+      this.error.openDialog("You don't have enough points")
+      return null;
     }
+    var sh = this.error;
+    var id =  this.makeid();
+    var route = this.route
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
     }).catch(e=>{
@@ -128,10 +131,11 @@ export class EthercontractService {
             from: acc
           });
         }).then(function(status) {
+          sh.opengift(id);
           return resolve(status);
         }).catch(function(error){
-          this.error.openDialog('There is a problem in getting rewards');
-          this.route.navigate(['/add-product']);
+          sh.openDialog('There is a problem in getting rewards');
+          route.navigate(['/add-product']);
           return reject('AddProduct');
         });
     });

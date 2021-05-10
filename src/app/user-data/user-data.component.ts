@@ -111,7 +111,6 @@ viewProduct(){
 }
 
   cutPoint(){
-    console.log('cut')
     this.eth.getReward(this.userPoint).then(data=>{
     })
   }
