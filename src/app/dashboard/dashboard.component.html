@@ -29,9 +29,9 @@
                       <div class="ct-chart" id="websiteViewsChart"></div>
                   </div>
                   <div class="card-body">
-                      <h4 class="card-title">Added Products</h4>
+                      <h4 class="card-title">Added Places</h4>
                       <p class="card-category">
-                        <span class="text-success"> Total Product :- {{totalProducts}} </span>
+                        <span class="text-success"> Total Places :- {{totalProducts}} </span>
                   </div>
                   <div class="card-footer">
                       <div class="stats">
@@ -86,7 +86,7 @@
                           <thead class="text-warning">
                               <th>ID</th>
                               <th>Reviewer</th>
-                              <th>product</th>   
+                              <th>Place</th>   
                           </thead>
                           <tbody >
                             <tr *ngFor="let card of this.reviews; let i = index" (click)="viewReview(i);" style="cursor: pointer;">

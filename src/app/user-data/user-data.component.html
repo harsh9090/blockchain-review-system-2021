@@ -20,7 +20,7 @@
             <div class="py-4 px-4">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <h3 class="mb-0"><a *ngIf="shoRev" class="btn btn-dark ">Recent Reviews</a><a (click)="viewReview()" *ngIf="!shoRev" class="btn btn-outline-dark ">Recent Reviews</a> 
-                        <a *ngIf="shoPro" class="btn btn-dark">Added Products</a><a (click)="viewProduct()" *ngIf="!shoPro" class="btn btn-outline-dark">Added Products</a></h3> 
+                        <a *ngIf="shoPro" class="btn btn-dark">Added Places</a><a (click)="viewProduct()" *ngIf="!shoPro" class="btn btn-outline-dark">Added Places</a></h3> 
                 </div>
                 <div *ngIf="shoRev">
                 <div  class="flex-container" style="justify-content: center;">
@@ -72,6 +72,7 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <div align=center *ngIf="!shProduct"> You have not added any product yet. </div>
                         </div>
                       </div> 
                     </div>

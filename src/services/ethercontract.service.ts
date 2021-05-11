@@ -82,7 +82,8 @@ export class EthercontractService {
 
 
   async getPoints(){
-   
+   var er = this.error;
+   var route = this.route
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
     }).catch(e=>{
@@ -101,8 +102,8 @@ export class EthercontractService {
             return resolve(status);
           }
         }).catch(function(error){
-          this.error.openDialog('There is a problem in adding Review');
-          this.route.navigate(['/add-product']);
+          er.openDialog('There is a problem in adding Review');
+          route.navigate(['/add-product']);
           return reject('AddProduct');
         });
     });
@@ -122,8 +123,10 @@ export class EthercontractService {
     }).catch(e=>{
       console.log(e)
      });
+     console.log('work1')
     var promises =await new Promise((resolve, reject) => {
       var acc=this.account
+      console.log('work2')
       let paymentContract = TruffleContract(tokenAbi);
       paymentContract.setProvider(this.web3Provider);
       paymentContract.deployed().then(function(instance) {
@@ -131,9 +134,11 @@ export class EthercontractService {
             from: acc
           });
         }).then(function(status) {
+          console.log(status+'work')
           sh.opengift(id);
           return resolve(status);
         }).catch(function(error){
+          console.log('error1'+error)
           sh.openDialog('There is a problem in getting rewards');
           route.navigate(['/add-product']);
           return reject('AddProduct');
@@ -153,6 +158,8 @@ makeid() {
 }
 
   async addDetails(data:any,title:string) {
+    var er = this.error;
+    var route = this.route
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
     }).catch(e=>{
@@ -172,8 +179,8 @@ makeid() {
             return resolve({status:true});
           }
         }).catch(function(error){
-          this.error.openDialog('There is a problem in adding Review');
-          this.route.navigate(['/add-product']);
+          er.openDialog('There is a problem in adding Review');
+          route.navigate(['/add-product']);
           return reject('AddProduct');
         });
     });
@@ -258,6 +265,7 @@ makeid() {
   }
 
   async addUser(data:any){
+    var er = this.error
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
     }).catch(e=>{
@@ -274,7 +282,7 @@ makeid() {
         }).then(function(status) {
             return resolve(status);
         }).catch(function(error){
-          this.error.openDialog('There is a problem in adding details');
+          er.openDialog('There is a problem in adding details');
           return reject('AddProduct');
         });
     });
@@ -284,7 +292,7 @@ makeid() {
 
 
   async getUserDetail(str:string){
-    var error = this.error;
+    var er = this.error;
     var open = false;
     await this.getAccountInfo().then((data2:any)=>{
       this.account = data2.fromAccount
@@ -306,12 +314,12 @@ makeid() {
           });
         }).then(function(status) {
           if(!status && str=='sec' && !open){
-            error.editDetails();
+            er.editDetails();
           }
           else
             return resolve(status);
         }).catch(function(error){
-          this.error.openDialog('There is a problem in getting details');
+          er.openDialog('There is a problem in getting details');
           return reject('AddProduct');
         });
     });
@@ -349,6 +357,8 @@ makeid() {
   }
   
   async getProductDetail(prname:string){
+    var er = this.error
+    var route = this.route
     var promises =await new Promise((resolve, reject) => {
       let paymentContract = TruffleContract(tokenAbi);
       paymentContract.setProvider(this.web3Provider);
@@ -359,9 +369,9 @@ makeid() {
             return resolve(status);
           }
         }).catch(function(error){
-          this.error.openDialog(`Sorry for inconvience!
+          er.openDialog(`Sorry for inconvience!
           there is some error in fatching details`);
-        this.route.navigate(['/show-products']);
+        route.navigate(['/show-products']);
           return reject('ProductDetail');
         });
     });
@@ -370,6 +380,8 @@ makeid() {
   }
 
   async getLastProducts(){
+    var er = this.error
+    var route = this.route;
       window.ethereum.autoRefreshOnNetworkChange = false;
       var promises =await new Promise((resolve, reject) => { 
         let paymentContract = TruffleContract(tokenAbi);
@@ -390,14 +402,16 @@ makeid() {
               return resolve(product);
             }
           }).catch(function(error){
-            this.error.openDialog('You Have Already Added Review');
-          this.route.navigate(['/dashboard']);
+            er.openDialog('You Have Already Added Review');
+          route.navigate(['/dashboard']);
             return reject('AllProduct');
           });
       });
       return promises;
     }
     async getLastReviews(){
+      var er = this.error
+      var route = this.route
       window.ethereum.autoRefreshOnNetworkChange = false;
       var promises =await new Promise((resolve, reject) => { 
         let paymentContract = TruffleContract(tokenAbi);
@@ -419,8 +433,8 @@ makeid() {
               return resolve(product);
             }
           }).catch(function(error){
-            this.error.openDialog('You Have Already Added Review');
-          this.route.navigate(['/dashboard']);
+            er.openDialog('You Have Already Added Review');
+          route.navigate(['/dashboard']);
             return reject('AllProduct');
           });
       });
@@ -428,6 +442,7 @@ makeid() {
     }
 
     async getUserReviewAll(){
+      var er = this.error
       await this.getAccountInfo().then((data2:any)=>{
         this.account = data2.fromAccount
       }).catch(e=>{
@@ -455,7 +470,7 @@ makeid() {
             }
               return resolve(status);
           }).catch(function(error){
-            this.error.openDialog('There is a problem in adding details');
+            er.openDialog('There is a problem in adding details');
             return reject('AddProduct');
           });
       });
@@ -463,6 +478,7 @@ makeid() {
     }
 
     async getUserProductAll(){
+      var er = this.error
       await this.getAccountInfo().then((data2:any)=>{
         this.account = data2.fromAccount
       }).catch(e=>{
@@ -489,7 +505,7 @@ makeid() {
             }
               return resolve(status);
           }).catch(function(error){
-            this.error.openDialog('There is a problem in getting details');
+          er.openDialog('There is a problem in getting details');
             return reject('viewUserProduct');
           });
       });
@@ -497,6 +513,8 @@ makeid() {
     }
 
   async getProduct() {
+    var er = this.error
+    var route = this.route
     window.ethereum.autoRefreshOnNetworkChange = false;
     var promises =await new Promise((resolve, reject) => { 
       let paymentContract = TruffleContract(tokenAbi);
@@ -518,8 +536,8 @@ makeid() {
             return resolve(product);
           }
         }).catch(function(error){
-          this.error.openDialog('You Have Already Added Review');
-        this.route.navigate(['/dashboard']);
+          er.openDialog('You Have Already Added Review');
+          route.navigate(['/dashboard']);
           return reject('AllProduct');
         });
     });

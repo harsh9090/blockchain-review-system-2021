@@ -14,6 +14,7 @@ import { IpfsService } from 'services/ipfs.service';
 })
 export class UserDataComponent implements OnInit {
   allreviews: any;
+  shProduct= false;
   name: string;
   image:string="./assets/img/img1.jpg";
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -77,10 +78,14 @@ setTimeout(() => {
   })
 
   if(this.ipfs.userAllProducts.length != 0){
+    this.shProduct = true;
     this.products = this.ipfs.userAllProducts
   }
   else{
     this.ipfs.getUserProdcts().then(data=>{
+      if(data){
+        this.shProduct = true;
+      }
       this.products = data;
     })
   }
@@ -112,6 +117,10 @@ viewProduct(){
 
   cutPoint(){
     this.eth.getReward(this.userPoint).then(data=>{
+      this.eth.getPoints().then((data:number)=>{
+        this.userPoint = data;
+      })
+    
     })
   }
 
