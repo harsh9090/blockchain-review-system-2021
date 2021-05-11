@@ -131,7 +131,7 @@ export class DashboardComponent implements OnInit {
       const dataDailySalesChart: any = {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
           series: [
-              [12, 17, 7, 17, 23, 18, 38]
+              [2, 5, 2, 3, 1, 3, 4]
           ]
       };
 
@@ -140,7 +140,7 @@ export class DashboardComponent implements OnInit {
               tension: 0
           }),
           low: 0,
-          high: 50, 
+          high: 12, 
           chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
       }
 
@@ -156,7 +156,7 @@ export class DashboardComponent implements OnInit {
       var datawebsiteViewsChart = {
         labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
         series: [
-          [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
+          [5, 4, 3, 7, 5, 4, 3, 4, 5, 6, 7, 8]
 
         ]
       };
@@ -165,7 +165,7 @@ export class DashboardComponent implements OnInit {
               showGrid: false
           },
           low: 0,
-          high: 1000,
+          high: 12,
           chartPadding: { top: 0, right: 5, bottom: 0, left: 0}
       };
       var responsiveOptions: any[] = [
