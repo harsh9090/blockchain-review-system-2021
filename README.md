@@ -1,6 +1,6 @@
 # Blockchain-Based Decentralized Review System
 
-A decentralized review system utilizing blockchain technology to ensure transparency, trustworthiness, and data security. Built with Ethereum, IPFS, and Smart Contracts, this system aims to overcome the limitations of traditional centralized review systems.
+A decentralized review system leveraging blockchain technology to provide a secure, transparent, and tamper-proof platform for online reviews. Built with Ethereum, IPFS, and Smart Contracts, this project addresses the limitations of centralized review systems.
 
 ---
 
@@ -12,7 +12,7 @@ A decentralized review system utilizing blockchain technology to ensure transpar
 - [Functionalities](#functionalities)
 - [User Interface](#user-interface)
 - [Technology Stack](#technology-stack)
-- [Installation](#installation)
+- [Setup Instructions](#setup-instructions)
 - [How It Works](#how-it-works)
 - [Future Enhancements](#future-enhancements)
 - [Contributors](#contributors)
@@ -23,71 +23,99 @@ A decentralized review system utilizing blockchain technology to ensure transpar
 
 ## Overview
 
-Traditional review systems are prone to issues such as manipulation, fake reviews, and lack of transparency. Our project addresses these challenges by creating a tamper-proof, transparent, and decentralized review system using blockchain technology.
+Online review systems are often manipulated, leading to a lack of trust and reliability. This project aims to overcome these challenges by using blockchain technology to make reviews immutable, transparent, and trustworthy.
 
 ---
 
 ## Features
 
-- **Decentralized System**: Eliminates central authority, ensuring data integrity and transparency.
-- **Tamper-Proof Storage**: Reviews are stored on IPFS with hashes secured on the Ethereum blockchain.
-- **User Incentives**: Reviewers earn points redeemable for rewards, encouraging authentic reviews.
-- **Transparent Verification**: All transactions and reviews are publicly verifiable on the blockchain.
-- **Flood Control**: Restricts one review per user per product to prevent spamming.
+- **Tamper-Proof Reviews**: Data stored using IPFS and verified through Ethereum ensures immutability.
+- **Decentralized Architecture**: Removes reliance on a central authority, giving users complete control over their data.
+- **User Rewards**: Reviewers earn points for contributions, encouraging participation.
+- **Flood Prevention**: Restricts users to one review per product to ensure authenticity.
+- **Transparent Verification**: All reviews and transactions are publicly verifiable on the blockchain.
 
 ---
 
 ## System Architecture
 
-- **Blockchain**: Ethereum-based smart contracts for managing reviews and transactions.
-- **IPFS**: Decentralized storage system for efficient and cost-effective data handling.
-- **Frontend**: Angular-based web application for a seamless user interface.
+- **Blockchain**: Ethereum serves as the foundation for smart contracts and data verification.
+- **IPFS**: Acts as a decentralized file storage system for product and review data.
+- **Frontend**: Angular-based interface for seamless interaction with the system.
 
 ---
 
 ## Functionalities
 
-1. **Add Product**: Allows product owners to register products with metadata stored on IPFS.
-2. **Add Review**: Users can submit detailed reviews with associated ratings.
-3. **View Reviews**: Fetches and displays reviews securely stored on the blockchain and IPFS.
-4. **User Rewards**: Earn points for leaving reviews, which can be redeemed for benefits.
+1. **Add Product**: Product owners can register products with metadata stored securely.
+2. **Submit Reviews**: Users can add reviews and ratings for registered products.
+3. **View Reviews**: Reviews can be fetched and displayed transparently using blockchain-stored hashes.
+4. **Redeem Points**: Reviewers can convert earned points into rewards.
 
 ---
 
 ## User Interface
 
-### Dashboard
-Overview of added products, reviews, and system statistics.
-
-### Add Places
-Allows product owners to add products to the platform.
-
-### View Places
-Displays all products with filtering options for categories and names.
-
-### Add Review
-Provides an interface for users to add detailed reviews for products.
-
-### User Profile
-Displays user-specific activity, including added products and reviews.
-
-### Redeem Points
-Allows users to redeem accumulated points for rewards.
+- **Dashboard**: Overview of system activities, including added products and reviews.
+- **Add Places**: Enables product owners to add products with metadata.
+- **View Places**: Displays registered products with filtering options.
+- **Add Review**: Interface for users to write detailed reviews.
+- **User Profile**: Summarizes user activity, including added products and reviews.
+- **Redeem Points**: Allows users to redeem accumulated points for rewards.
 
 ---
 
 ## Technology Stack
 
-- **Frontend**: Angular
-- **Blockchain**: Ethereum
-- **Storage**: IPFS
-- **Smart Contracts**: Solidity
+- **Frontend Framework**: Angular for a dynamic user experience.
+- **Blockchain**: Ethereum for secure and immutable transactions.
+- **Storage**: IPFS for decentralized and cost-effective file storage.
+- **Smart Contracts**: Solidity to implement system logic.
 
 ---
 
-## Installation
+## Setup Instructions
+
+### Prerequisites
+
+- Install a package manager (e.g., npm or yarn) for managing dependencies.
+- Install a blockchain development environment (e.g., Truffle, Hardhat, or Remix IDE) to deploy smart contracts.
+- Ensure MetaMask or another Ethereum wallet is configured for testing.
+
+### Steps to Set Up
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/harsh9090/blockchain-review-system-2021.git
-   cd blockchain-review-system-2021
+   - Download or clone this repository to your local system.
+
+2. Install frontend dependencies:
+   - Navigate to the frontend folder and install required dependencies using your package manager.
+
+3. Deploy the smart contract:
+   - Use your preferred blockchain development environment to deploy the smart contract (`MyContract.sol`).
+
+4. Update configuration:
+   - Add the deployed contract address and required API keys to the frontend configuration.
+
+5. Run the application:
+   - Start the development server for the frontend to test the application locally.
+
+---
+
+## How It Works
+
+1. **Product Registration**:
+   - Owners register products by uploading metadata to IPFS. The IPFS hash is stored on the blockchain.
+2. **Review Submission**:
+   - Users add reviews, which are uploaded to IPFS. Their hashes are linked to the product on the blockchain.
+3. **Review Display**:
+   - Stored hashes are queried from the blockchain to fetch reviews from IPFS for display.
+
+---
+
+## Future Enhancements
+
+- **Enhanced Storage Systems**: Explore faster and more efficient decentralized storage options.
+- **AI-Powered Fraud Detection**: Analyze user behavior to identify and mitigate fake reviews.
+- **Language Filtering**: Introduce tools to ensure professional language in reviews.
+
+---
